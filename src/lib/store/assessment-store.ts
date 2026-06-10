@@ -40,6 +40,14 @@ export const useAssessmentStore = create<AssessmentStore>()(
     }),
     {
       name: "ai-fitness-coach-storage",
+      partialize: (state) => ({
+        assessment: state.assessment,
+        currentStep: state.currentStep,
+        generatedPlan: state.generatedPlan,
+      }),
+      onRehydrateStorage: () => (state) => {
+        if (state) state.isGenerating = false;
+      },
     }
   )
 );

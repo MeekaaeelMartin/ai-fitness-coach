@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Dumbbell } from "lucide-react";
+import { FooterCtaLink } from "./footer-cta-link";
 
 function InstagramIcon({ className }: { className?: string }) {
   return (
@@ -78,9 +79,7 @@ export function Footer() {
             <h4 className="mb-4 text-sm font-semibold">Product</h4>
             <ul className="space-y-2 text-sm text-foreground/60">
               <li>
-                <Link href="/assessment" className="hover:text-emerald-400">
-                  Start for Free
-                </Link>
+                <FooterCtaLink />
               </li>
               <li>
                 <a href="/#how-it-works" className="hover:text-emerald-400">

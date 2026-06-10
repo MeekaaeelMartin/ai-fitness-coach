@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -55,9 +55,13 @@ export function AssessmentForm() {
     setIsGenerating,
     isGenerating,
   } = useAssessmentStore();
-  const { getCurrentUser, saveUserPlan } = useAuthStore();
+  const saveUserPlan = useAuthStore((state) => state.saveUserPlan);
 
   const [direction, setDirection] = useState(1);
+
+  useEffect(() => {
+    setIsGenerating(false);
+  }, [setIsGenerating]);
 
   const {
     register,
@@ -157,7 +161,8 @@ export function AssessmentForm() {
     try {
       const plan = await generatePlan(data);
       setGeneratedPlan(plan);
-      const user = getCurrentUser();
+      setIsGenerating(false);
+      const user = useAuthStore.getState().getCurrentUser();
       if (user) {
         saveUserPlan(data, plan);
         router.push("/dashboard");

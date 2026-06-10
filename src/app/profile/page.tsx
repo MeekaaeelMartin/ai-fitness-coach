@@ -17,16 +17,17 @@ import { LevelBadge } from "@/components/dashboard/level-badge";
 export default function ProfilePage() {
   const router = useRouter();
   const hydrated = useAppHydrated();
+  const currentUserId = useAuthStore((state) => state.currentUserId);
   const user = useCurrentUser();
   const logout = useAuthStore((state) => state.logout);
   const subscribe = useAuthStore((state) => state.subscribe);
 
   useEffect(() => {
     if (!hydrated) return;
-    if (!user) router.push("/login");
-  }, [hydrated, user, router]);
+    if (!currentUserId) router.push("/login");
+  }, [hydrated, currentUserId, router]);
 
-  if (!hydrated || !user) {
+  if (!hydrated || !currentUserId || !user) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-emerald-500 border-t-transparent" />

@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { PrimaryCta } from "@/components/ui/primary-cta";
 import { formatZARPerMonth, MONTHLY_PRICE } from "@/lib/utils/currency";
 import { PlanPreview } from "./plan-preview";
 
@@ -63,12 +64,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="mt-8 flex flex-col gap-4 sm:flex-row"
             >
-              <Link href="/assessment">
-                <Button size="lg" className="group w-full min-w-[220px] sm:w-auto">
-                  Start for Free
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </Link>
+              <PrimaryCta className="w-full sm:w-auto" />
               <a href="#pricing">
                 <Button variant="outline" size="lg" className="w-full sm:w-auto">
                   See What&apos;s Included

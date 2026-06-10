@@ -1,10 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { Check, ArrowRight } from "lucide-react";
+import { Check } from "lucide-react";
 import { GlassCard } from "@/components/ui/glass-card";
-import { Button } from "@/components/ui/button";
+import { PrimaryCta } from "@/components/ui/primary-cta";
 import { formatZAR, formatZARPerMonth, MONTHLY_PRICE } from "@/lib/utils/currency";
 
 const included = [
@@ -64,12 +63,9 @@ export function PricingValue() {
                 ))}
               </ul>
 
-              <Link href="/assessment" className="mt-8 block">
-                <Button size="lg" className="group w-full">
-                  Start for Free
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </Link>
+              <div className="mt-8">
+                <PrimaryCta fullWidth />
+              </div>
 
               <p className="mt-4 text-center text-xs text-foreground/40">
                 Join thousands of South Africans already training with us

@@ -1,9 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { PrimaryCta } from "@/components/ui/primary-cta";
 import { formatZARPerMonth, MONTHLY_PRICE } from "@/lib/utils/currency";
 
 export function FinalCta() {
@@ -33,12 +31,7 @@ export function FinalCta() {
           </p>
 
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Link href="/assessment">
-              <Button size="lg" className="group min-w-[240px] text-base">
-                Start for Free
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
+            <PrimaryCta className="min-w-[240px]" />
           </div>
 
           <p className="mt-6 text-sm text-foreground/40">

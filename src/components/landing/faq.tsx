@@ -1,9 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { Accordion } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
+import { PrimaryCta } from "@/components/ui/primary-cta";
 
 const faqItems = [
   {
@@ -60,12 +58,9 @@ export function FAQ() {
           <p className="mt-2 text-foreground/60">
             Start for free. No credit card. Your plan is ready in under a minute.
           </p>
-          <Link href="/assessment" className="mt-6 inline-block">
-            <Button size="lg" className="group">
-              Start for Free
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </Link>
+          <div className="mt-6 inline-block">
+            <PrimaryCta />
+          </div>
         </div>
       </div>
     </section>

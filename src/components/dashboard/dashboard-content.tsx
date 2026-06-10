@@ -63,6 +63,7 @@ function Paywalled({ locked, children }: { locked: boolean; children: React.Reac
 export function DashboardContent() {
   const router = useRouter();
   const hydrated = useAppHydrated();
+  const currentUserId = useAuthStore((state) => state.currentUserId);
   const user = useCurrentUser();
   const saveUserPlan = useAuthStore((state) => state.saveUserPlan);
   const guestPlan = useAssessmentStore((state) => state.generatedPlan);
@@ -75,7 +76,7 @@ export function DashboardContent() {
 
   useEffect(() => {
     if (!hydrated) return;
-    if (!user) {
+    if (!currentUserId) {
       router.push("/login");
       return;
     }
@@ -83,12 +84,12 @@ export function DashboardContent() {
       router.push("/assessment");
       return;
     }
-    if (!user.generatedPlan && guestPlan) {
+    if (user && !user.generatedPlan && guestPlan) {
       saveUserPlan(assessment, guestPlan);
     }
-  }, [hydrated, user, generatedPlan, guestPlan, assessment, router, saveUserPlan]);
+  }, [hydrated, currentUserId, user, generatedPlan, guestPlan, assessment, router, saveUserPlan]);
 
-  if (!hydrated || !user || !generatedPlan) {
+  if (!hydrated || !currentUserId || !user || !generatedPlan) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-emerald-500 border-t-transparent" />
