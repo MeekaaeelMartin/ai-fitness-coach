@@ -44,7 +44,7 @@ export function SubscriptionBanner({ subscription }: SubscriptionBannerProps) {
         <div className="flex items-center gap-3">
           <Clock className="h-5 w-5 text-emerald-400" />
           <div>
-            <p className="text-sm font-medium">Free Trial Active</p>
+            <p className="text-sm font-medium">Free Access Active</p>
             <p className="text-xs text-foreground/50">
               {access.daysRemaining} day{access.daysRemaining === 1 ? "" : "s"} left ·
               Then {formatZARPerMonth(MONTHLY_PRICE)} for full access

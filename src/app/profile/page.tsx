@@ -10,6 +10,7 @@ import { formatZARPerMonth } from "@/lib/utils/currency";
 import { formatDateZA } from "@/lib/utils/date";
 import { GlassCard } from "@/components/ui/glass-card";
 import { Button } from "@/components/ui/button";
+import { LevelBadge } from "@/components/dashboard/level-badge";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -36,6 +37,8 @@ export default function ProfilePage() {
         <h1 className="mb-8 text-3xl font-bold">My Profile</h1>
 
         <div className="space-y-6">
+          <LevelBadge points={user.points ?? 0} />
+
           <GlassCard>
             <div className="flex items-center gap-4">
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 text-xl font-bold text-white">

@@ -70,7 +70,7 @@ export function Header() {
           )}
           <Link href="/assessment" className="hidden sm:block">
             <Button size="sm" className="shadow-lg shadow-emerald-500/20">
-              Start Free Trial
+              Start for Free
             </Button>
           </Link>
           <button
@@ -118,7 +118,7 @@ export function Header() {
           )}
           <Link href="/assessment" onClick={() => setMobileOpen(false)}>
             <Button className="mt-2 w-full" size="sm">
-              Start Free Trial
+              Start for Free
             </Button>
           </Link>
         </nav>

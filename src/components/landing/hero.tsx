@@ -8,7 +8,7 @@ import { TRIAL_DAYS, formatZARPerMonth, MONTHLY_PRICE } from "@/lib/utils/curren
 import { PlanPreview } from "./plan-preview";
 
 const trustPoints = [
-  `${TRIAL_DAYS}-day free trial`,
+  "Start for free",
   "No credit card required",
   "Built for South Africans",
 ];
@@ -54,8 +54,8 @@ export function Hero() {
               className="mt-6 text-lg leading-relaxed text-foreground/70"
             >
               Get a fully personalised workout and meal plan — built around your body,
-              goals, injuries, schedule, and budget. Premium coaching from{" "}
-              {formatZARPerMonth(MONTHLY_PRICE)} after your free trial.
+              goals, injuries, schedule, and budget. Start for free — premium coaching
+              from {formatZARPerMonth(MONTHLY_PRICE)} when you&apos;re ready.
             </motion.p>
 
             <motion.div
@@ -66,7 +66,7 @@ export function Hero() {
             >
               <Link href="/assessment">
                 <Button size="lg" className="group w-full min-w-[220px] sm:w-auto">
-                  Start My Free Trial
+                  Start for Free
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>

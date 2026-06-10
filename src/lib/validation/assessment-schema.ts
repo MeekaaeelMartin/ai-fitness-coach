@@ -68,6 +68,9 @@ const healthSchema = z.object({
   mobilityLimitations: z
     .string()
     .min(1, "Please describe mobility limitations or enter 'None'"),
+  weakMuscleGroups: z
+    .string()
+    .min(1, "Please describe weak muscle groups or enter 'None'"),
   otherHealthConsiderations: z
     .string()
     .min(1, "Please describe health considerations or enter 'None'"),

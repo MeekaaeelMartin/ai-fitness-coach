@@ -58,11 +58,11 @@ export function FAQ() {
         <div className="mt-16 text-center">
           <h3 className="text-xl font-semibold">Still have questions? Your plan is waiting.</h3>
           <p className="mt-2 text-foreground/60">
-            Free assessment · No credit card · Results in under 60 seconds
+            Start for free · No credit card · Results in under 60 seconds
           </p>
           <Link href="/assessment" className="mt-6 inline-block">
             <Button size="lg" className="group">
-              Get My Free Plan Now
+              Start for Free
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </Link>

@@ -27,7 +27,7 @@ export function StickyCta() {
         >
           <Link href="/assessment">
             <Button size="lg" className="group w-full">
-              Start Free Trial
+              Start for Free
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </Link>

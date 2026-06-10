@@ -35,6 +35,7 @@ export function buildAIPrompt(data: AssessmentData): string {
 - Previous Injuries: ${data.previousInjuries}
 - Joint Issues: ${data.jointIssues}
 - Mobility Limitations: ${data.mobilityLimitations}
+- Weak / Underdeveloped Muscle Groups: ${data.weakMuscleGroups}
 - Other Health Considerations: ${data.otherHealthConsiderations}
 
 ### Nutrition Preferences

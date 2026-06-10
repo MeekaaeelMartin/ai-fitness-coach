@@ -9,6 +9,7 @@ export interface PersonalAssessment {
 
 export interface Exercise {
   name: string;
+  alternatives: string[];
   sets: number;
   reps: string;
   rest: string;

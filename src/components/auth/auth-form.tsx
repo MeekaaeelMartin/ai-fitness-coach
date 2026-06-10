@@ -192,7 +192,7 @@ export function AuthForm({ mode }: AuthFormProps) {
             ? "Save your personalised plan and start tracking your progress"
             : mode === "login"
               ? "Log in to access your plan and track workouts"
-              : "Start your 7-day free trial — no payment required"}
+              : "Start for free — no payment required"}
         </p>
       </div>
 

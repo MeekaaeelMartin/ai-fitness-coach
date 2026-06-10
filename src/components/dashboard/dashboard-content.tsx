@@ -26,6 +26,10 @@ import { SubscriptionBanner } from "./subscription-banner";
 import { PaywallOverlay } from "./paywall-overlay";
 import { TodayTracker } from "./today-tracker";
 import { PlanIntegrations } from "./plan-integrations";
+import { LevelBadge } from "./level-badge";
+import { ProfileEditor } from "./profile-editor";
+import { MealPlanner } from "./meal-planner";
+import { ExerciseSelector } from "./exercise-selector";
 import { cn } from "@/lib/utils/cn";
 
 function Paywalled({ locked, children }: { locked: boolean; children: React.ReactNode }) {
@@ -109,11 +113,12 @@ export function DashboardContent() {
           <PlanIntegrations plan={generatedPlan} />
         </motion.div>
 
-        <div className="mb-6">
+        <div className="mb-6 space-y-4">
           <SubscriptionBanner subscription={user.subscription} />
+          <LevelBadge points={user.points ?? 0} />
         </div>
 
-        <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} className="mb-8" />
+        <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} className="mb-8 overflow-x-auto" />
 
         {activeTab === "today" && (
           <Paywalled locked={locked}>
@@ -172,6 +177,8 @@ export function DashboardContent() {
                 </p>
               </GlassCard>
             </div>
+
+            <ProfileEditor assessment={userProfile} />
 
             <GlassCard>
               <h2 className="mb-6 text-lg font-semibold">Personal Assessment</h2>
@@ -245,24 +252,15 @@ export function DashboardContent() {
                   {openWorkout === index && (
                     <div className="border-t border-white/10 px-6 pb-6">
                       <p className="mb-4 mt-4 text-xs text-foreground/50">{workout.notes}</p>
-                      <div className="space-y-4">
-                        {workout.exercises.map((exercise) => (
-                          <div
-                            key={exercise.name}
-                            className="rounded-xl border border-white/10 bg-white/5 p-4"
-                          >
-                            <div className="flex flex-wrap items-center justify-between gap-2">
-                              <h4 className="font-medium">{exercise.name}</h4>
-                              <div className="flex gap-3 text-xs text-foreground/50">
-                                <span>{exercise.sets} sets</span>
-                                <span>{exercise.reps} reps</span>
-                                <span>Rest: {exercise.rest}</span>
-                              </div>
-                            </div>
-                            <p className="mt-2 text-sm text-foreground/60">{exercise.explanation}</p>
-                          </div>
-                        ))}
-                      </div>
+                    <div className="space-y-4">
+                      {workout.exercises.map((exercise) => (
+                        <ExerciseSelector
+                          key={exercise.name}
+                          exercise={exercise}
+                          exerciseKey={`${workout.day}-${exercise.name}`}
+                        />
+                      ))}
+                    </div>
                     </div>
                   )}
                 </GlassCard>
@@ -286,40 +284,23 @@ export function DashboardContent() {
         {activeTab === "nutrition" && (
           <Paywalled locked={locked}>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
-              <div className="grid gap-4 sm:grid-cols-4">
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                 {[
                   { label: "Calories", value: nutritionPlan.calorieTarget, unit: "kcal" },
                   { label: "Protein", value: nutritionPlan.macros.protein, unit: "g" },
                   { label: "Carbs", value: nutritionPlan.macros.carbs, unit: "g" },
                   { label: "Fats", value: nutritionPlan.macros.fats, unit: "g" },
                 ].map((macro) => (
-                  <GlassCard key={macro.label} className="text-center">
-                    <div className="text-2xl font-bold text-emerald-400">
+                  <GlassCard key={macro.label} className="text-center !p-4">
+                    <div className="text-xl font-bold text-emerald-400 sm:text-2xl">
                       {macro.value}
-                      <span className="text-sm font-normal text-foreground/50">{macro.unit}</span>
+                      <span className="text-xs font-normal text-foreground/50 sm:text-sm">{macro.unit}</span>
                     </div>
-                    <div className="mt-1 text-sm text-foreground/50">{macro.label}</div>
+                    <div className="mt-1 text-xs text-foreground/50 sm:text-sm">{macro.label}</div>
                   </GlassCard>
                 ))}
               </div>
-
-              {nutritionPlan.meals.map((meal) => (
-                <GlassCard key={meal.name}>
-                  <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-                    <h3 className="text-lg font-semibold">{meal.name}</h3>
-                    <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-400">
-                      {meal.calories} kcal · P:{meal.protein}g C:{meal.carbs}g F:{meal.fats}g
-                    </span>
-                  </div>
-                  <p className="text-sm text-foreground/70">{meal.foods.join(" · ")}</p>
-                  <p className="mt-2 text-xs text-foreground/50">Portions: {meal.portionSizes}</p>
-                  <div className="mt-3 rounded-lg bg-white/5 p-3">
-                    <p className="text-xs font-medium text-foreground/50">Alternatives</p>
-                    <p className="mt-1 text-sm text-foreground/70">{meal.alternatives.join(" · ")}</p>
-                  </div>
-                </GlassCard>
-              ))}
-
+              <MealPlanner meals={nutritionPlan.meals} />
               <GlassCard>
                 <p className="text-sm text-foreground/70">{nutritionPlan.hydrationNote}</p>
               </GlassCard>
@@ -329,27 +310,36 @@ export function DashboardContent() {
 
         {activeTab === "lifestyle" && (
           <Paywalled locked={locked}>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="grid gap-6 md:grid-cols-3"
-            >
-              {[
-                { title: "Sleep", items: lifestyleRecommendations.sleep, icon: "🌙" },
-                { title: "Hydration", items: lifestyleRecommendations.hydration, icon: "💧" },
-                { title: "Recovery", items: lifestyleRecommendations.recovery, icon: "🧘" },
-              ].map((section) => (
-                <GlassCard key={section.title}>
-                  <h3 className="mb-4 text-lg font-semibold">
-                    {section.icon} {section.title}
-                  </h3>
-                  <ul className="space-y-3">
-                    {section.items.map((item) => (
-                      <li key={item} className="text-sm text-foreground/70">• {item}</li>
-                    ))}
-                  </ul>
-                </GlassCard>
-              ))}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
+              <GlassCard className="border-emerald-500/20 bg-emerald-500/5">
+                <h3 className="font-semibold text-emerald-400">Built for {userProfile.name.split(" ")[0]}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-foreground/70">
+                  Every recommendation below is based on your assessment — your {userProfile.averageSleepHours}h sleep,
+                  {userProfile.stressLevel.replace("-", " ")} stress, {userProfile.dailyWaterIntake}L water intake,
+                  {userProfile.dietaryPreference.replace("-", " ")} diet, and training at{" "}
+                  {userProfile.preferredTrainingTimes.map((t) => t.replace("-", " ")).join(" or ")}.
+                </p>
+              </GlassCard>
+              <div className="grid gap-6 md:grid-cols-3">
+                {[
+                  { title: "Sleep", items: lifestyleRecommendations.sleep, icon: "🌙" },
+                  { title: "Hydration", items: lifestyleRecommendations.hydration, icon: "💧" },
+                  { title: "Recovery", items: lifestyleRecommendations.recovery, icon: "🧘" },
+                ].map((section) => (
+                  <GlassCard key={section.title} className="h-full">
+                    <h3 className="mb-4 text-lg font-semibold">
+                      {section.icon} {section.title}
+                    </h3>
+                    <ul className="space-y-3">
+                      {section.items.map((item) => (
+                        <li key={item} className="text-sm leading-relaxed text-foreground/70">
+                          <span className="text-emerald-400">→</span> {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </GlassCard>
+                ))}
+              </div>
             </motion.div>
           </Paywalled>
         )}

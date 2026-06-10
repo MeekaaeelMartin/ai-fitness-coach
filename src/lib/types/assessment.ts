@@ -55,6 +55,7 @@ export interface AssessmentData {
   previousInjuries: string;
   jointIssues: string;
   mobilityLimitations: string;
+  weakMuscleGroups: string;
   otherHealthConsiderations: string;
   dietaryPreference: DietaryPreference;
   allergies: string;
@@ -96,6 +97,7 @@ export const defaultAssessmentData: AssessmentData = {
   previousInjuries: "",
   jointIssues: "",
   mobilityLimitations: "",
+  weakMuscleGroups: "",
   otherHealthConsiderations: "",
   dietaryPreference: "no-restriction",
   allergies: "",

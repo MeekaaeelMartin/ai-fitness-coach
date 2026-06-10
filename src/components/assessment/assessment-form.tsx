@@ -107,6 +107,7 @@ export function AssessmentForm() {
       "previousInjuries",
       "jointIssues",
       "mobilityLimitations",
+      "weakMuscleGroups",
       "otherHealthConsiderations",
     ],
     [
@@ -418,6 +419,12 @@ export function AssessmentForm() {
                   placeholder="Describe any mobility limitations, or type 'None'"
                   error={errors.mobilityLimitations?.message}
                   {...register("mobilityLimitations")}
+                />
+                <Textarea
+                  label="Weak or Underdeveloped Muscle Groups"
+                  placeholder="e.g. Weak glutes, underdeveloped shoulders, lagging hamstrings — or type 'None'"
+                  error={errors.weakMuscleGroups?.message}
+                  {...register("weakMuscleGroups")}
                 />
                 <Textarea
                   label="Other Health Considerations"

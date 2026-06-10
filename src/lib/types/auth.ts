@@ -14,6 +14,8 @@ export interface Subscription {
 export interface DayProgress {
   workouts: string[];
   meals: string[];
+  customMeals: Record<string, string>;
+  mealSubstitutions: Record<string, string>;
 }
 
 export interface UserProgress {
@@ -30,10 +32,16 @@ export interface UserAccount {
   generatedPlan: GeneratedPlan | null;
   progress: UserProgress;
   subscription: Subscription;
+  points: number;
+  exerciseSelections: Record<string, string>;
 }
 
 export function createDefaultProgress(): UserProgress {
   return { byDate: {} };
+}
+
+export function createEmptyDayProgress(): DayProgress {
+  return { workouts: [], meals: [], customMeals: {}, mealSubstitutions: {} };
 }
 
 export function createTrialSubscription(): Subscription {
