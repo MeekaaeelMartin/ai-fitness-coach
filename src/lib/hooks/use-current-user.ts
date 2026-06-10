@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { useAuthStore } from "@/lib/store/auth-store";
 import type { UserAccount } from "@/lib/types/auth";
 import { createTrialSubscription } from "@/lib/types/auth";
@@ -15,8 +16,9 @@ function normalizeUser(user: UserAccount): UserAccount {
 }
 
 export function useCurrentUser(): UserAccount | null {
-  return useAuthStore((state) => {
-    const user = state.currentUserId ? (state.users[state.currentUserId] ?? null) : null;
-    return user ? normalizeUser(user) : null;
-  });
+  const user = useAuthStore((state) =>
+    state.currentUserId ? (state.users[state.currentUserId] ?? null) : null
+  );
+
+  return useMemo(() => (user ? normalizeUser(user) : null), [user]);
 }

@@ -63,7 +63,7 @@ export function Header() {
               <Link href="/profile" className="hidden sm:block">
                 <Button variant="ghost" size="sm" className="gap-2">
                   <User className="h-4 w-4" />
-                  {user.name.split(" ")[0]}
+                  {(user.name || "Account").split(" ")[0]}
                 </Button>
               </Link>
             </>

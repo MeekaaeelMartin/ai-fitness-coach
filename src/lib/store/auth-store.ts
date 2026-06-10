@@ -1,5 +1,6 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
+import { safeLocalStorage } from "@/lib/storage/safe-storage";
 import type { AssessmentData } from "@/lib/types/assessment";
 import type { GeneratedPlan } from "@/lib/types/plan";
 import {
@@ -279,6 +280,9 @@ export const useAuthStore = create<AuthStore>()(
         }));
       },
     }),
-    { name: "ai-fitness-coach-auth" }
+    {
+      name: "ai-fitness-coach-auth",
+      storage: createJSONStorage(() => safeLocalStorage),
+    }
   )
 );
