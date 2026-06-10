@@ -7,21 +7,21 @@ const results = [
   {
     metric: "87%",
     label: "stick to their plan after 30 days",
-    detail: "vs. 23% with generic apps",
+    detail: "compared to 23% on generic apps",
   },
   {
     metric: "3.2×",
-    label: "faster goal achievement",
-    detail: "with personalized programming",
+    label: "faster progress toward goals",
+    detail: "with a plan built around you",
   },
   {
     metric: "10 min",
-    label: "to your full blueprint",
+    label: "to get your full plan",
     detail: "workouts, meals, and tracking included",
   },
   {
     metric: "100%",
-    label: "tailored to you",
+    label: "built for you",
     detail: "injuries, schedule, diet, and equipment",
   },
 ];
@@ -32,13 +32,13 @@ export function Transformation() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Real Results.{" "}
+            Built Around You,{" "}
             <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-              Not Generic Templates.
+              Not a Template
             </span>
           </h2>
           <p className="mt-4 text-foreground/60">
-            Generic fitness apps fail because they weren&apos;t built for you. We fix that.
+            Most fitness apps give everyone the same programme. We don&apos;t.
           </p>
         </div>
 

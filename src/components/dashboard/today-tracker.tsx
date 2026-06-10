@@ -101,7 +101,7 @@ export function TodayTracker({ plan }: TodayTrackerProps) {
         </GlassCard>
       ) : (
         <GlassCard className="text-center">
-          <p className="text-foreground/60">Rest day — no workout scheduled for {today}</p>
+          <p className="text-foreground/60">Rest day. No workout scheduled for {today}.</p>
         </GlassCard>
       )}
 

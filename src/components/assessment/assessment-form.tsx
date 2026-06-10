@@ -181,11 +181,10 @@ export function AssessmentForm() {
         <div className="py-12">
           <Loader2 className="mx-auto h-12 w-12 animate-spin text-emerald-400" />
           <h2 className="mt-6 text-xl font-semibold">
-            Generating Your Personalized Plan
+            Building Your Plan
           </h2>
           <p className="mt-2 text-sm text-foreground/60">
-            Our AI is analyzing your profile and crafting your custom fitness
-            and nutrition blueprint...
+            We are putting together your workouts and meals based on your answers...
           </p>
           <div className="mx-auto mt-8 max-w-xs">
             <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
@@ -422,7 +421,7 @@ export function AssessmentForm() {
                 />
                 <Textarea
                   label="Weak or Underdeveloped Muscle Groups"
-                  placeholder="e.g. Weak glutes, underdeveloped shoulders, lagging hamstrings — or type 'None'"
+                  placeholder="e.g. Weak glutes, underdeveloped shoulders, lagging hamstrings. Or type 'None'"
                   error={errors.weakMuscleGroups?.message}
                   {...register("weakMuscleGroups")}
                 />

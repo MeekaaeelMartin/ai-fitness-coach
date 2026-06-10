@@ -26,14 +26,14 @@ export function PlanPreview() {
             <div className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
             <div className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
           </div>
-          <span className="ml-2 text-xs text-foreground/40">Your Personalized Plan</span>
+          <span className="ml-2 text-xs text-foreground/40">Your Plan</span>
         </div>
 
         <div className="space-y-4 p-5">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xs text-foreground/50">Welcome back</p>
-              <p className="font-semibold">Alex&apos;s Blueprint</p>
+              <p className="font-semibold">Alex&apos;s Plan</p>
             </div>
             <span className="rounded-full bg-emerald-500/15 px-2.5 py-1 text-xs font-medium text-emerald-400">
               Active
@@ -59,7 +59,7 @@ export function PlanPreview() {
           <div className="rounded-xl border border-white/10 bg-white/5 p-3">
             <p className="mb-2 text-xs font-medium text-emerald-400">Today&apos;s Workout</p>
             <div className="space-y-2">
-              {["Barbell Squat — 4×8", "Romanian Deadlift — 3×10", "Bench Press — 4×8"].map(
+              {["Barbell Squat 4×8", "Romanian Deadlift 3×10", "Bench Press 4×8"].map(
                 (exercise, i) => (
                   <motion.div
                     key={exercise}

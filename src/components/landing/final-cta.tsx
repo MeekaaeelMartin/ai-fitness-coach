@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Timer } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { TRIAL_DAYS, formatZARPerMonth, MONTHLY_PRICE } from "@/lib/utils/currency";
+import { formatZARPerMonth, MONTHLY_PRICE } from "@/lib/utils/currency";
 
 export function FinalCta() {
   return (
@@ -20,21 +20,16 @@ export function FinalCta() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-sm text-emerald-400">
-            <Timer className="h-4 w-4" />
-            Start for free · No credit card needed
-          </div>
-
           <h2 className="text-3xl font-bold tracking-tight sm:text-5xl">
-            Your Body Deserves a Plan{" "}
+            Get a Plan That Fits{" "}
             <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-              Built for You
+              Your Life
             </span>
           </h2>
 
           <p className="mx-auto mt-6 max-w-xl text-lg text-foreground/60">
-            Every day without a personalized plan is another day of wasted effort.
-            Start now — your custom workout and meal blueprint is one assessment away.
+            Answer a few questions and get your workout and meal plan. Start for free.
+            Continue at {formatZARPerMonth(MONTHLY_PRICE)} only if you want to.
           </p>
 
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
@@ -47,7 +42,7 @@ export function FinalCta() {
           </div>
 
           <p className="mt-6 text-sm text-foreground/40">
-            {TRIAL_DAYS} days full access · Then {formatZARPerMonth(MONTHLY_PRICE)} · Cancel anytime
+            No credit card. Cancel anytime.
           </p>
         </motion.div>
       </div>

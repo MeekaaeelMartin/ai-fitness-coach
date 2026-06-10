@@ -8,23 +8,23 @@ const steps = [
   {
     icon: ClipboardList,
     step: "01",
-    title: "Complete a detailed assessment",
+    title: "Tell us about yourself",
     description:
-      "Share your goals, experience, schedule, health history, and nutrition preferences through our comprehensive questionnaire.",
+      "Answer questions about your goals, schedule, health, injuries, and what you like to eat. Takes about 10 minutes.",
   },
   {
     icon: Brain,
     step: "02",
-    title: "AI analyzes your information",
+    title: "We build your plan",
     description:
-      "Our advanced AI engine processes your unique profile to craft a plan that accounts for every detail of your lifestyle.",
+      "Your answers are used to create workouts and meals that fit your equipment, budget, and daily routine.",
   },
   {
     icon: FileCheck,
     step: "03",
-    title: "Receive your personalized blueprint",
+    title: "Follow your plan",
     description:
-      "Get your complete fitness and nutrition blueprint with workouts, meals, lifestyle tips, and progress tracking.",
+      "Get your workouts, meals, lifestyle tips, and progress tracking. Log what you do each day in your dashboard.",
   },
 ];
 
@@ -37,7 +37,7 @@ export function HowItWorks() {
             How It Works
           </h2>
           <p className="mt-4 text-foreground/60">
-            Three simple steps to your personalized fitness transformation
+            Three steps to a plan that actually fits your life
           </p>
         </div>
 

@@ -14,39 +14,39 @@ import { GlassCard } from "@/components/ui/glass-card";
 const benefits = [
   {
     icon: Dumbbell,
-    title: "Personalized Workouts",
+    title: "Workouts for Your Setup",
     description:
-      "Custom exercise programs designed for your equipment, experience level, and specific fitness goals.",
+      "Exercises matched to your equipment, experience, and goals. Swap any movement that does not work for you.",
   },
   {
     icon: Utensils,
-    title: "Personalized Meal Plans",
+    title: "Meals in Your Budget",
     description:
-      "Nutrition plans with exact portions, macros, and meals tailored to your dietary preferences and budget.",
+      "Meal plans with portions and macros based on what you eat, what you avoid, and what you can afford.",
   },
   {
     icon: TrendingUp,
-    title: "Goal Tracking",
+    title: "Track Your Progress",
     description:
-      "Weekly milestones and monthly targets to keep you accountable and measure real progress.",
+      "Log workouts and meals daily. Earn points, hit milestones, and see how you are doing over time.",
   },
   {
     icon: Clock,
-    title: "Lifestyle Adjustments",
+    title: "Fits Your Schedule",
     description:
-      "Plans that fit your schedule, training times, and daily routine — not the other way around.",
+      "Training times and session length based on when you are actually free. Not the other way around.",
   },
   {
     icon: HeartPulse,
-    title: "Injury Considerations",
+    title: "Injury-Aware Training",
     description:
-      "Exercise modifications and precautions based on your injury history and mobility limitations.",
+      "We ask about injuries, joint issues, and weak muscles. Alternatives are built into every workout.",
   },
   {
     icon: Apple,
-    title: "Nutrition Guidance",
+    title: "Flexible Nutrition",
     description:
-      "Expert macro targets, hydration guidelines, and alternative food options for every meal.",
+      "Macro targets, meal alternatives, and a way to log what you actually ate when plans change.",
   },
 ];
 
@@ -56,11 +56,10 @@ export function Benefits() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Everything You Need to Succeed
+            What You Get
           </h2>
           <p className="mt-4 text-foreground/60">
-            A complete coaching experience powered by AI, designed like a premium
-            fitness service
+            Workouts, meals, tracking, and support in one place
           </p>
         </div>
 

@@ -1,112 +1,108 @@
 import type { AssessmentData } from "@/lib/types/assessment";
-import type { LifestyleRecommendations } from "@/lib/types/plan";
 import { FITNESS_GOAL_LABELS } from "@/lib/types/assessment";
+import type { LifestyleRecommendations } from "@/lib/types/plan";
 
 export function buildPersonalizedLifestyle(data: AssessmentData): LifestyleRecommendations {
   const goals = data.fitnessGoals.map((g) => FITNESS_GOAL_LABELS[g].toLowerCase()).join(" and ");
   const trainingTimes = data.preferredTrainingTimes.map((t) => t.replace("-", " ")).join(" or ");
 
   const sleep: string[] = [
-    `You reported averaging ${data.averageSleepHours} hours — aim for ${Math.max(7, Math.ceil(data.averageSleepHours))} hours to support your ${goals} goals.`,
+    `You said you sleep about ${data.averageSleepHours} hours. Aim for ${Math.max(7, Math.ceil(data.averageSleepHours))} hours to support your ${goals} goals.`,
   ];
 
   if (data.preferredTrainingTimes.includes("evening")) {
     sleep.push(
-      "Since you train in the evening, avoid caffeine after 2pm and finish workouts at least 90 minutes before bed so sleep quality isn't affected."
+      "You train in the evening. Try to avoid caffeine after 2pm and finish workouts at least 90 minutes before bed."
     );
   } else if (data.preferredTrainingTimes.includes("early-morning")) {
     sleep.push(
-      "With early-morning sessions, target a consistent bedtime — your body will adapt faster when wake-up times stay within a 30-minute window."
+      "You train early. A consistent bedtime helps. Keep wake-up times within a 30-minute window when you can."
     );
   }
 
   if (data.stressLevel === "high" || data.stressLevel === "very-high") {
     sleep.push(
-      `Your ${data.stressLevel.replace("-", " ")} stress level can disrupt sleep. Try 10 minutes of light stretching or reading before bed — no screens in the last 30 minutes.`
+      `Your stress is ${data.stressLevel.replace("-", " ")}. Try 10 minutes of stretching or reading before bed. No screens in the last 30 minutes.`
     );
   } else {
     sleep.push(
-      "Keep your room cool (around 18°C), dark, and quiet. A consistent wind-down routine will compound your recovery over time."
+      "Keep your room cool (around 18°C), dark, and quiet. A regular wind-down routine makes a difference over time."
     );
   }
 
   if (data.motivationBarriers.toLowerCase().includes("time") || data.motivationBarriers.toLowerCase().includes("busy")) {
     sleep.push(
-      "You mentioned time constraints — protect sleep like an appointment. Even 30 extra minutes nightly will improve workout performance and meal adherence."
+      "You mentioned time is tight. Treat sleep like an appointment. Even 30 extra minutes a night helps training and eating habits."
     );
   }
 
   const hydration: string[] = [
-    `Based on your ${data.dailyWaterIntake}L daily intake, target ${data.dailyWaterIntake + 0.5}L on training days.`,
-    "Start each morning with 500ml of water before coffee or breakfast — especially important in South Africa's warmer months.",
+    `You drink about ${data.dailyWaterIntake}L a day. On training days, aim for ${data.dailyWaterIntake + 0.5}L.`,
+    "Have 500ml of water before coffee or breakfast, especially in warmer weather.",
   ];
 
   if (data.activityLevel === "very-active" || data.daysPerWeek >= 5) {
     hydration.push(
-      `With ${data.daysPerWeek} training days per week, add 500–750ml per session. Consider electrolytes during sessions longer than 45 minutes.`
+      `With ${data.daysPerWeek} training days a week, add 500 to 750ml per session. Consider electrolytes on sessions longer than 45 minutes.`
     );
   }
 
   if (data.fitnessGoals.includes("lose-fat")) {
     hydration.push(
-      "Proper hydration supports fat metabolism and can reduce false hunger signals — drink a glass of water before reaching for snacks."
+      "Drink a glass of water before snacking. Thirst can feel like hunger."
     );
   }
 
   hydration.push(
-    "Carry a bottle during your commute or at your desk. Pale yellow urine is a simple indicator you're on track."
+    "Keep a bottle nearby during the day. Pale yellow urine usually means you are on track."
   );
 
   const recovery: string[] = [];
 
   if (data.previousInjuries.toLowerCase() !== "none") {
     recovery.push(
-      `Injury-aware recovery: given your history (${data.previousInjuries}), prioritise warm-ups and avoid pushing through pain. Ice or heat as appropriate post-session.`
+      `You noted: ${data.previousInjuries}. Warm up properly and do not push through pain. Use ice or heat after sessions as needed.`
     );
   }
 
   if (data.jointIssues.toLowerCase() !== "none") {
     recovery.push(
-      `Joint care: with ${data.jointIssues}, include 5 minutes of joint mobility before every session and gentle movement on rest days.`
+      `Joint issues (${data.jointIssues}): do 5 minutes of mobility before each session. Move gently on rest days.`
     );
   }
 
   if (data.weakMuscleGroups.toLowerCase() !== "none") {
     recovery.push(
-      `Targeted recovery for weak areas (${data.weakMuscleGroups}): prioritise blood flow with light activation work on rest days — band pull-aparts, glute bridges, or wall slides.`
+      `Weak areas (${data.weakMuscleGroups}): light activation work on rest days helps. Try band pull-aparts, glute bridges, or wall slides.`
     );
   }
 
   if (data.stressLevel !== "low") {
     recovery.push(
-      `You shared that ${data.motivationBarriers.slice(0, 80)}${data.motivationBarriers.length > 80 ? "…" : ""} has held you back before. Schedule one non-negotiable rest activity weekly — a walk, prayer, or time with family — to protect your mental recovery.`
+      `You said ${data.motivationBarriers.slice(0, 80)}${data.motivationBarriers.length > 80 ? "..." : ""} has held you back before. Block out one rest activity each week. A walk, prayer, or time with family counts.`
     );
     recovery.push(
-      "Practice 5 minutes of box breathing (4 sec in, 4 hold, 4 out) on high-stress days. Cortisol management directly impacts fat loss and muscle gain."
+      "On stressful days, try 5 minutes of box breathing: 4 seconds in, 4 hold, 4 out."
     );
   } else {
     recovery.push(
-      "Use foam rolling on quads, lats, and upper back 2–3 times per week, especially after lower-body sessions."
+      "Foam roll quads, lats, and upper back 2 to 3 times a week, especially after leg days."
     );
   }
 
   recovery.push(
-    `Schedule ${7 - data.daysPerWeek} full rest day${7 - data.daysPerWeek === 1 ? "" : "s"} per week. Your plan runs ${data.daysPerWeek} days — honour the off days as part of the programme.`
+    `You train ${data.daysPerWeek} days a week. Take ${7 - data.daysPerWeek} full rest day${7 - data.daysPerWeek === 1 ? "" : "s"}. Off days are part of the plan.`
   );
 
   recovery.push(
-    `Eat protein within 2 hours of your ${trainingTimes} sessions. With a ${data.dietaryPreference.replace("-", " ")} diet and ${formatBudget(data.dailyFoodBudget)} daily budget, prep one meal ahead on training days.`
+    `Have protein within 2 hours of your ${trainingTimes} sessions. With a ${data.dietaryPreference.replace("-", " ")} diet and R${data.dailyFoodBudget}/day budget, prep one meal ahead on training days if you can.`
   );
 
   if (data.motivationMeaning.length > 20) {
     recovery.push(
-      `Remember why you started: "${data.motivationMeaning.slice(0, 120)}${data.motivationMeaning.length > 120 ? "…" : ""}" — revisit this on tough days.`
+      `You said achieving this goal means: "${data.motivationMeaning.slice(0, 120)}${data.motivationMeaning.length > 120 ? "..." : ""}". Keep that in mind on hard days.`
     );
   }
 
   return { sleep, hydration, recovery };
-}
-
-function formatBudget(amount: number): string {
-  return `R${amount}`;
 }

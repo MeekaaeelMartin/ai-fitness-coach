@@ -7,7 +7,7 @@ export function planToMarkdown(plan: GeneratedPlan): string {
   const { userProfile: p } = plan;
   const goals = p.fitnessGoals.map((g) => FITNESS_GOAL_LABELS[g]).join(", ");
 
-  let md = `# AI Fitness Coach — ${p.name}'s Plan\n\n`;
+  let md = `# ${p.name}'s Fitness Plan\n\n`;
   md += `*Generated ${formatDateZA(new Date(plan.createdAt))} · South Africa*\n\n`;
   md += `---\n\n`;
 
@@ -25,9 +25,9 @@ export function planToMarkdown(plan: GeneratedPlan): string {
 
   md += `\n## Fitness Plan\n\n${plan.fitnessPlan.weeklySchedule}\n\n`;
   plan.fitnessPlan.dailyWorkouts.forEach((w) => {
-    md += `### ${w.day} — ${w.focus} (${w.duration})\n\n`;
+    md += `### ${w.day}: ${w.focus} (${w.duration})\n\n`;
     w.exercises.forEach((e) => {
-      md += `- **${e.name}** — ${e.sets}×${e.reps}, rest ${e.rest}\n`;
+      md += `- **${e.name}**: ${e.sets}×${e.reps}, rest ${e.rest}\n`;
       md += `  ${e.explanation}\n`;
     });
     md += `\n`;
@@ -106,7 +106,7 @@ export function planToPdfHtml(plan: GeneratedPlan): string {
 <html lang="en-ZA">
 <head>
   <meta charset="UTF-8" />
-  <title>AI Fitness Coach — ${p.name}'s Plan</title>
+  <title>${p.name}'s Fitness Plan</title>
   <style>
     @page { margin: 2cm; }
     * { box-sizing: border-box; }
@@ -158,11 +158,11 @@ export function planToPdfHtml(plan: GeneratedPlan): string {
   <h2>Fitness Plan</h2>
   <p>${plan.fitnessPlan.weeklySchedule}</p>
   ${plan.fitnessPlan.dailyWorkouts.map((w) => `
-    <h3>${w.day} — <span class="badge">${w.focus}</span> · ${w.duration}</h3>
+    <h3>${w.day}: <span class="badge">${w.focus}</span> · ${w.duration}</h3>
     ${w.exercises.map((e) => `
       <div class="exercise">
         <strong>${e.name}</strong>
-        <span class="sets"> — ${e.sets} sets × ${e.reps} · Rest ${e.rest}</span>
+        <span class="sets"> · ${e.sets} sets × ${e.reps} · Rest ${e.rest}</span>
         <p style="margin:4px 0 0;font-size:13px;color:#64748b;">${e.explanation}</p>
       </div>
     `).join("")}

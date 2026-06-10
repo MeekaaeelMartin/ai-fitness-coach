@@ -9,32 +9,32 @@ const faqItems = [
   {
     title: "How is this different from other fitness apps?",
     content:
-      "Unlike generic workout apps, AI Fitness Coach creates a fully personalized plan based on your complete profile — including injuries, equipment access, schedule, dietary preferences, and budget. Every recommendation is tailored specifically to you.",
+      "Most apps give everyone the same workouts. We build your plan from your profile: injuries, equipment, schedule, dietary preferences, and budget. Every recommendation is specific to you.",
   },
   {
     title: "How long does the assessment take?",
     content:
-      "The comprehensive assessment takes approximately 10-15 minutes to complete. We've designed it to be thorough without being overwhelming, with a multi-step format and progress indicator.",
+      "About 10 to 15 minutes. It is a step-by-step form with a progress bar so you always know where you are.",
   },
   {
     title: "Do I need gym equipment?",
     content:
-      "Not at all. During the assessment, you specify your equipment access — from a full commercial gym to bodyweight-only at home. Your plan is built around what you actually have available.",
+      "No. You tell us what you have access to, from a full gym to bodyweight only at home. Your plan is built around that.",
   },
   {
     title: "Can the plan account for injuries?",
     content:
-      "Yes. Our assessment includes detailed health questions about previous injuries, joint issues, and mobility limitations. The AI generates exercise modifications and precautions based on your responses.",
+      "Yes. We ask about previous injuries, joint issues, and mobility limitations. Exercises can be swapped and alternatives are included.",
   },
   {
     title: "How often is my plan updated?",
     content:
-      "Your initial plan includes progressive overload recommendations and adjustment guidelines. As you track progress, the plan adapts with weekly milestones and monthly targets to keep you progressing.",
+      "Your plan includes progressive overload guidance and weekly milestones. As you log progress, you can adjust exercises and meals in your dashboard.",
   },
   {
     title: "Is this a replacement for a personal trainer?",
     content:
-      "AI Fitness Coach provides comprehensive, personalized programming comparable to working with an elite coach. However, we always recommend consulting a physician before starting any new fitness program, especially if you have health conditions.",
+      "It gives you structured programming similar to working with a coach, but it is not medical advice. Speak to your doctor before starting any new fitness programme.",
   },
 ];
 
@@ -47,7 +47,7 @@ export function FAQ() {
             Frequently Asked Questions
           </h2>
           <p className="mt-4 text-foreground/60">
-            Everything you need to know before getting started
+            Common questions before you get started
           </p>
         </div>
 
@@ -56,9 +56,9 @@ export function FAQ() {
         </div>
 
         <div className="mt-16 text-center">
-          <h3 className="text-xl font-semibold">Still have questions? Your plan is waiting.</h3>
+          <h3 className="text-xl font-semibold">Ready to get your plan?</h3>
           <p className="mt-2 text-foreground/60">
-            Start for free · No credit card · Results in under 60 seconds
+            Start for free. No credit card. Your plan is ready in under a minute.
           </p>
           <Link href="/assessment" className="mt-6 inline-block">
             <Button size="lg" className="group">

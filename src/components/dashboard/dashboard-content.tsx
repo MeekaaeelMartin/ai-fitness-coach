@@ -107,7 +107,7 @@ export function DashboardContent() {
               Welcome, {userProfile.name.split(" ")[0]}
             </h1>
             <p className="mt-1 text-foreground/60">
-              Your personalised fitness and nutrition blueprint
+              Your personalised fitness and nutrition plan
             </p>
           </div>
           <PlanIntegrations plan={generatedPlan} />
@@ -314,7 +314,7 @@ export function DashboardContent() {
               <GlassCard className="border-emerald-500/20 bg-emerald-500/5">
                 <h3 className="font-semibold text-emerald-400">Built for {userProfile.name.split(" ")[0]}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-foreground/70">
-                  Every recommendation below is based on your assessment — your {userProfile.averageSleepHours}h sleep,
+                  Every recommendation below is based on your assessment. Your {userProfile.averageSleepHours}h sleep,
                   {userProfile.stressLevel.replace("-", " ")} stress, {userProfile.dailyWaterIntake}L water intake,
                   {userProfile.dietaryPreference.replace("-", " ")} diet, and training at{" "}
                   {userProfile.preferredTrainingTimes.map((t) => t.replace("-", " ")).join(" or ")}.

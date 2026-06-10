@@ -62,19 +62,25 @@ export default function ProfilePage() {
             <div className="rounded-xl border border-white/10 bg-white/5 p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-medium capitalize">{access.status} Plan</p>
+                  <p className="font-medium">
+                    {access.status === "trial"
+                      ? "Free Access"
+                      : access.status === "active"
+                        ? "Pro"
+                        : "Expired"}
+                  </p>
                   <p className="text-sm text-foreground/50">{access.message}</p>
                 </div>
                 {access.status !== "active" && (
                   <Button size="sm" onClick={() => subscribe()}>
                     {access.status === "trial" ? "Upgrade Early" : "Subscribe"}{" "}
-                    — {formatZARPerMonth(MONTHLY_PRICE)}
+                    at {formatZARPerMonth(MONTHLY_PRICE)}
                   </Button>
                 )}
               </div>
               {access.status === "trial" && (
                 <p className="mt-3 text-xs text-foreground/40">
-                  After your 7-day trial: {formatZARPerMonth(MONTHLY_PRICE)} for full access
+                  After your first 7 days: {formatZARPerMonth(MONTHLY_PRICE)} for full access
                 </p>
               )}
             </div>
@@ -87,7 +93,7 @@ export default function ProfilePage() {
                   <Dumbbell className="h-5 w-5 text-emerald-400" />
                   <div>
                     <p className="font-medium">Your Fitness Plan</p>
-                    <p className="text-sm text-foreground/50">Active personalised blueprint</p>
+                    <p className="text-sm text-foreground/50">Active personalised plan</p>
                   </div>
                 </div>
                 <Link href="/dashboard">

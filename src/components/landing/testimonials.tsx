@@ -12,7 +12,7 @@ const testimonials = [
     role: "Lost 9kg in 3 months",
     initials: "AP",
     content:
-      "As a Muslim woman I needed halal meals within my budget. This plan actually uses foods from Checkers and spaza shops — not fancy imported stuff. My family eats the same dinners now.",
+      "I needed halal meals within my budget. The plan uses foods from Checkers and the spaza, not fancy imported stuff. My family eats the same dinners now.",
     color: "from-teal-500 to-emerald-500",
   },
   {
@@ -21,7 +21,7 @@ const testimonials = [
     role: "Down 2 dress sizes",
     initials: "ND",
     content:
-      "I'm a single mom with no time for the gym. Home workouts with resistance bands changed everything. I log my meals on my phone between meetings — so easy.",
+      "Single mom, no time for the gym. Home workouts with resistance bands work for me. I log meals on my phone between meetings.",
     color: "from-emerald-600 to-green-500",
   },
   {
@@ -30,25 +30,25 @@ const testimonials = [
     role: "Gained 6kg muscle",
     initials: "JV",
     content:
-      "My lower back couldn't handle deadlifts anymore. The app swapped them for hip thrusts and I could still progress. Best decision I made this year, honestly.",
+      "My lower back could not handle deadlifts. The app swapped them for hip thrusts and I kept making progress. Best move I made this year.",
     color: "from-blue-500 to-cyan-500",
   },
   {
     name: "Tyrone Williams",
     location: "Port Elizabeth",
-    role: "Coloured — built strength",
+    role: "Built strength",
     initials: "TW",
     content:
-      "Finally a fitness app that gets SA life. R120 a day food budget, training after work, and exercises I can actually do at Planet Fitness. No nonsense.",
+      "Finally something that gets SA life. R120 a day food budget, training after work, exercises I can do at Planet Fitness.",
     color: "from-violet-500 to-purple-500",
   },
   {
     name: "Fatima Hassan",
     location: "Pretoria",
-    role: "Improved energy & fitness",
+    role: "Improved energy and fitness",
     initials: "FH",
     content:
-      "The lifestyle tips feel like they were written for me — sleep, stress, hydration. It knew I train in the evening and adjusted everything. Genuinely personal.",
+      "The lifestyle tips matched my routine. Sleep, stress, hydration. It knew I train in the evening and adjusted around that.",
     color: "from-rose-500 to-pink-500",
   },
   {
@@ -57,7 +57,7 @@ const testimonials = [
     role: "Lost 14kg",
     initials: "SM",
     content:
-      "I was sceptical about AI coaching but the weak muscle group question caught my lagging shoulders. Three months later my bench and posture are both better.",
+      "I was unsure at first but the weak muscle question caught my lagging shoulders. Three months later my bench and posture are both better.",
     color: "from-amber-600 to-orange-500",
   },
   {
@@ -66,7 +66,7 @@ const testimonials = [
     role: "Marathon prep",
     initials: "EB",
     content:
-      "Used this to structure my running and strength days. The calendar export put everything in my Google Calendar. My coach was impressed with the programme.",
+      "Used this to structure my running and strength days. The calendar export put everything in Google Calendar. My coach liked the setup.",
     color: "from-sky-500 to-blue-400",
   },
   {
@@ -75,7 +75,7 @@ const testimonials = [
     role: "Busy professional",
     initials: "ZK",
     content:
-      "Between meetings and fetch I needed something that just works. Log a boerie roll lunch when I have to — the manual meal input is a lifesaver on chaotic days.",
+      "Between meetings and school fetch I needed something simple. I log a boerie roll lunch when I have to. The manual meal input helps on busy days.",
     color: "from-indigo-500 to-violet-500",
   },
   {
@@ -84,7 +84,7 @@ const testimonials = [
     role: "Post-pregnancy fitness",
     initials: "LM",
     content:
-      "After my second child I needed gentle progressions. The exercise alternatives let me skip anything that didn't feel right. I'm at Gold level now and so proud.",
+      "After my second child I needed gentle progressions. I skip exercises that do not feel right and use the alternatives. Gold level now.",
     color: "from-fuchsia-500 to-pink-500",
   },
 ];
@@ -130,13 +130,10 @@ export function Testimonials() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Real South Africans.{" "}
-            <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-              Real Results.
-            </span>
+            What South Africans Are Saying
           </h2>
           <p className="mt-4 text-foreground/60">
-            From Durban to Cape Town — people just like you transforming their fitness
+            From Durban to Cape Town. Real people, real results.
           </p>
         </div>
 
@@ -157,7 +154,6 @@ export function Testimonials() {
           <div
             ref={scrollRef}
             className="flex gap-6 overflow-x-auto scroll-smooth pb-4 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {testimonials.map((t) => (
               <div

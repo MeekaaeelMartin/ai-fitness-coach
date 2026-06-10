@@ -143,7 +143,7 @@ export async function generatePlan(data: AssessmentData): Promise<GeneratedPlan>
     userProfile: data,
     aiPrompt,
     personalAssessment: {
-      summary: `${data.name} is a ${data.age}-year-old ${data.fitnessExperience} trainee in South Africa, focused on ${primaryGoal.toLowerCase()}. With ${data.daysPerWeek} training days, ${data.gymAccess.replace("-", " ")} access, and a daily food budget of R${data.dailyFoodBudget}, we've built a plan around your life — not a generic template.`,
+      summary: `${data.name} is ${data.age}, ${data.fitnessExperience} level, focused on ${primaryGoal.toLowerCase()}. You train ${data.daysPerWeek} days a week with ${data.gymAccess.replace("-", " ")} access and a food budget of R${data.dailyFoodBudget}/day. This plan is built around your life, not a generic template.`,
       strengths: [
         `Clear goal orientation toward ${primaryGoal.toLowerCase()}`,
         `${data.daysPerWeek} days/week commitment shows strong dedication`,
@@ -152,16 +152,16 @@ export async function generatePlan(data: AssessmentData): Promise<GeneratedPlan>
           : "Beginner status allows for rapid initial progress",
         data.motivationWhy.length > 20
           ? "Strong personal motivation identified from your assessment"
-          : "Committed to completing a comprehensive assessment",
+          : "Completed a full fitness assessment",
       ],
       weaknesses: [
         data.weakMuscleGroups.toLowerCase() !== "none"
           ? `Weak areas to address: ${data.weakMuscleGroups}`
           : data.activityLevel === "sedentary"
-            ? "Low baseline activity — gradual progression needed"
+            ? "Low baseline activity. Build up gradually."
             : "Recovery capacity may limit volume increases",
         data.stressLevel === "high" || data.stressLevel === "very-high"
-          ? "Elevated stress may impact recovery and adherence"
+          ? "High stress may affect recovery and sticking to the plan"
           : "Nutrition tracking consistency still developing",
         data.averageSleepHours < 7
           ? `Sleep averaging ${data.averageSleepHours}h may hinder results`
@@ -183,7 +183,7 @@ export async function generatePlan(data: AssessmentData): Promise<GeneratedPlan>
         "Week 1-2: Master form and establish baseline weights",
         "Week 3-4: Add 2.5-5kg or 1-2 reps per set",
         "Week 5-6: Introduce tempo work on final sets",
-        "Week 7-8: Deload — reduce volume by 40%",
+        "Week 7-8: Deload week. Reduce volume by 40%.",
         "Ongoing: Swap exercises as needed and track in your dashboard",
       ],
     },
@@ -209,7 +209,7 @@ export async function generatePlan(data: AssessmentData): Promise<GeneratedPlan>
       adjustmentRecommendations: [
         "If weight loss stalls: reduce calories by 100-150 or add a cardio session",
         "If energy is low: increase carbs by 25-50g on training days",
-        "Can't do an exercise? Swap it in your dashboard — alternatives are built in",
+        "Can't do an exercise? Swap it in your dashboard. Alternatives are built in.",
         "Don't have planned food? Log what you ate manually and pick a close alternative",
       ],
     },

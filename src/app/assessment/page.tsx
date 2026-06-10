@@ -3,7 +3,7 @@ import { AssessmentForm } from "@/components/assessment/assessment-form";
 export const metadata = {
   title: "Fitness Assessment | AI Fitness Coach",
   description:
-    "Complete your personalized fitness assessment to receive your custom workout and meal plan.",
+    "Complete your fitness assessment to get your custom workout and meal plan.",
 };
 
 export default function AssessmentPage() {

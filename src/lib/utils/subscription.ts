@@ -34,7 +34,7 @@ export function getSubscriptionAccess(subscription: Subscription): {
         hasFullAccess: true,
         status: "trial",
         daysRemaining: days,
-        message: `Free trial · ${days} day${days === 1 ? "" : "s"} left`,
+        message: `${days} day${days === 1 ? "" : "s"} of free access left`,
       };
     }
   }
@@ -43,7 +43,7 @@ export function getSubscriptionAccess(subscription: Subscription): {
     hasFullAccess: false,
     status: "expired",
     daysRemaining: 0,
-    message: `Trial ended · Subscribe for ${formatZARPerMonth(MONTHLY_PRICE)}`,
+    message: `Subscribe for ${formatZARPerMonth(MONTHLY_PRICE)} to keep full access`,
   };
 }
 

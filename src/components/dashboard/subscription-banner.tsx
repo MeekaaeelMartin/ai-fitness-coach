@@ -53,7 +53,7 @@ export function SubscriptionBanner({ subscription }: SubscriptionBannerProps) {
         </div>
         <Button size="sm" onClick={handleSubscribe} disabled={loading}>
           <Zap className="h-3.5 w-3.5" />
-          Subscribe Now — {formatZARPerMonth(MONTHLY_PRICE)}
+          Subscribe at {formatZARPerMonth(MONTHLY_PRICE)}
         </Button>
       </GlassCard>
     );
@@ -63,19 +63,19 @@ export function SubscriptionBanner({ subscription }: SubscriptionBannerProps) {
     <GlassCard className="!py-4 !px-5 border-amber-500/30 bg-amber-500/5">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="font-semibold text-amber-400">Your free trial has ended</p>
+          <p className="font-semibold text-amber-400">Your free access period has ended</p>
           <p className="mt-1 text-sm text-foreground/60">
             Subscribe for {formatZARPerMonth(MONTHLY_PRICE)} to keep your full plan,
-            track workouts &amp; meals, and export your blueprint.
+            track workouts and meals, and export your plan.
           </p>
         </div>
         <Button onClick={handleSubscribe} disabled={loading} className="shrink-0">
           <Crown className="h-4 w-4" />
-          Subscribe — {formatZARPerMonth(MONTHLY_PRICE)}
+          Subscribe at {formatZARPerMonth(MONTHLY_PRICE)}
         </Button>
       </div>
       <p className="mt-3 text-xs text-foreground/40">
-        Payment gateway coming soon — click to activate demo subscription
+        Payment gateway coming soon. Click to activate demo subscription.
       </p>
     </GlassCard>
   );

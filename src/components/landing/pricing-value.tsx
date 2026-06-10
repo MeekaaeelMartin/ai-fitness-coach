@@ -2,20 +2,20 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Check, ArrowRight, Zap } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import { GlassCard } from "@/components/ui/glass-card";
 import { Button } from "@/components/ui/button";
-import { formatZAR, formatZARPerMonth, MONTHLY_PRICE, TRIAL_DAYS } from "@/lib/utils/currency";
+import { formatZAR, formatZARPerMonth, MONTHLY_PRICE } from "@/lib/utils/currency";
 
 const included = [
-  "Full personalised workout programme",
-  "Custom meal plan with macros & portions",
-  "Daily workout & meal tracking",
-  "Exercise alternatives & meal substitutions",
-  "Points, levels & achievement tracking",
-  "Injury & weak muscle modifications",
-  "Export to PDF, Notes & Calendar",
-  "Unlimited plan regeneration",
+  "Personalised workout programme",
+  "Custom meal plan with macros and portions",
+  "Daily workout and meal tracking",
+  "Exercise alternatives and meal substitutions",
+  "Points, levels, and achievement tracking",
+  "Injury and weak muscle modifications",
+  "Export to PDF, Notes, and Calendar",
+  "Plan updates when your profile changes",
 ];
 
 export function PricingValue() {
@@ -23,16 +23,11 @@ export function PricingValue() {
     <section id="pricing" className="py-20 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-400">
-            <Zap className="h-3.5 w-3.5" />
-            Built for South Africans
-          </span>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-            Premium Coaching, Priced for Real Life
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            Simple, Honest Pricing
           </h2>
           <p className="mt-4 text-foreground/60">
-            Start for free — explore everything with no commitment.
-            Love it? Continue for just {formatZARPerMonth(MONTHLY_PRICE)}.
+            Start for free. No card needed. Continue for {formatZARPerMonth(MONTHLY_PRICE)} if you want to keep going.
           </p>
         </div>
 
@@ -53,10 +48,10 @@ export function PricingValue() {
                   <span className="text-foreground/50">to begin</span>
                 </div>
                 <p className="mt-2 text-sm text-foreground/60">
-                  Full access for {TRIAL_DAYS} days, then {formatZARPerMonth(MONTHLY_PRICE)}
+                  Then {formatZARPerMonth(MONTHLY_PRICE)} for full access
                 </p>
                 <p className="mt-1 text-xs text-foreground/40">
-                  No credit card · No pressure · Cancel anytime
+                  No credit card. Cancel anytime.
                 </p>
               </div>
 
@@ -77,7 +72,7 @@ export function PricingValue() {
               </Link>
 
               <p className="mt-4 text-center text-xs text-foreground/40">
-                Join thousands of South Africans already on their journey
+                Join thousands of South Africans already training with us
               </p>
             </div>
           </GlassCard>

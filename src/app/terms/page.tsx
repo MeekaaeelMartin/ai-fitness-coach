@@ -29,17 +29,17 @@ export default function TermsPage() {
           <section>
             <h2 className="text-lg font-semibold text-foreground">2. Service Description</h2>
             <p>
-              AI Fitness Coach provides personalised fitness and nutrition planning tools powered by
-              artificial intelligence. Plans are generated based on information you provide and are
-              intended as guidance, not professional medical or dietetic advice.
+              AI Fitness Coach provides personalised fitness and nutrition planning tools.
+              Plans are generated from the information you provide and are intended as guidance,
+              not professional medical or dietetic advice.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-semibold text-foreground">3. Free Access &amp; Subscription</h2>
             <p>
-              New users receive {TRIAL_DAYS} days of free access to explore the full platform.
-              After the free period, continued access to premium features requires a subscription
+              New users get {TRIAL_DAYS} days of full access at no cost.
+              After that, continued access requires a subscription
               of {formatZARPerMonth(MONTHLY_PRICE)}. Pricing may change with reasonable notice.
               Payment processing will be handled by a secure third-party provider when launched.
             </p>

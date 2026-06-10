@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { TRIAL_DAYS, formatZARPerMonth, MONTHLY_PRICE } from "@/lib/utils/currency";
+import { formatZARPerMonth, MONTHLY_PRICE } from "@/lib/utils/currency";
 import { PlanPreview } from "./plan-preview";
 
 const trustPoints = [
@@ -30,8 +30,7 @@ export function Hero() {
               transition={{ duration: 0.5 }}
             >
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-sm font-medium text-emerald-400">
-                <Sparkles className="h-4 w-4" />
-                🇿🇦 Trusted by 10,000+ South Africans
+                🇿🇦 Built for South Africans
               </div>
             </motion.div>
 
@@ -41,9 +40,9 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]"
             >
-              Stop Guessing.{" "}
+              Your Workout and Meal Plan,{" "}
               <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                Start Transforming.
+                Made for You
               </span>
             </motion.h1>
 
@@ -53,9 +52,9 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="mt-6 text-lg leading-relaxed text-foreground/70"
             >
-              Get a fully personalised workout and meal plan — built around your body,
-              goals, injuries, schedule, and budget. Start for free — premium coaching
-              from {formatZARPerMonth(MONTHLY_PRICE)} when you&apos;re ready.
+              A personalised workout and meal plan based on your body, goals, injuries,
+              schedule, and budget. Start for free. Full access from{" "}
+              {formatZARPerMonth(MONTHLY_PRICE)} when you want to continue.
             </motion.p>
 
             <motion.div

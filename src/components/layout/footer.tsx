@@ -55,8 +55,8 @@ export function Footer() {
               </span>
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-foreground/60">
-              Your personal AI-powered fitness coach, built for South Africans.
-              Personalised workouts and meal plans in Rands — start for free.
+              Personalised workouts and meal plans for South Africans.
+              Priced in Rands. Start for free.
             </p>
             <div className="mt-6 flex gap-3">
               {socialLinks.map((social) => (

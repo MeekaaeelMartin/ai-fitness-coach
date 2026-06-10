@@ -56,7 +56,7 @@ export function PlanIntegrations({ plan }: PlanIntegrationsProps) {
   };
 
   const handleEmail = () => {
-    const subject = encodeURIComponent(`My AI Fitness Coach Plan — ${plan.userProfile.name}`);
+    const subject = encodeURIComponent(`My Fitness Plan: ${plan.userProfile.name}`);
     const body = encodeURIComponent(planToMarkdown(plan).slice(0, 2000) + "\n\n[Full plan attached via export]");
     window.open(`mailto:?subject=${subject}&body=${body}`, "_blank");
   };
@@ -65,7 +65,7 @@ export function PlanIntegrations({ plan }: PlanIntegrationsProps) {
     const text = planToMarkdown(plan);
     if (navigator.share) {
       await navigator.share({
-        title: `My Fitness Plan — ${plan.userProfile.name}`,
+        title: `My Fitness Plan: ${plan.userProfile.name}`,
         text: text.slice(0, 500) + "...",
       });
     } else {
