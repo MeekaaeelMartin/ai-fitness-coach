@@ -29,7 +29,7 @@ export function PlanIntegrations({ plan }: PlanIntegrationsProps) {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const name = plan.userProfile.name.replace(/\s+/g, "-").toLowerCase();
+  const name = (plan.userProfile.name || "my-plan").replace(/\s+/g, "-").toLowerCase();
 
   const handlePdf = () => {
     const html = planToPdfHtml(plan);

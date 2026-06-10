@@ -32,7 +32,7 @@ export function TodayTracker({ plan }: TodayTrackerProps) {
   const progress = getDayProgress(dateKey);
 
   const todayWorkout = plan.fitnessPlan.dailyWorkouts.find((w) => w.day === today);
-  const meals = plan.nutritionPlan.meals;
+  const meals = plan.nutritionPlan.meals ?? [];
 
   const totalItems = (todayWorkout?.exercises.length ?? 0) + meals.length;
   const completedItems = progress.workouts.length + progress.meals.length;
@@ -132,7 +132,7 @@ export function TodayTracker({ plan }: TodayTrackerProps) {
                 </div>
 
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {meal.alternatives.map((alt) => (
+                  {(meal.alternatives ?? []).map((alt) => (
                     <button
                       key={alt}
                       type="button"

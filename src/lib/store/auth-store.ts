@@ -12,6 +12,7 @@ import {
 import { activateSubscription } from "@/lib/utils/subscription";
 import { toDateKey } from "@/lib/utils/date";
 import { POINTS } from "@/lib/utils/gamification";
+import { normalizeUser } from "@/lib/utils/normalize-user";
 
 function hashPassword(password: string): string {
   return btoa(password);
@@ -101,10 +102,7 @@ export const useAuthStore = create<AuthStore>()(
       getCurrentUser: () => {
         const { users, currentUserId } = get();
         const user = currentUserId ? users[currentUserId] ?? null : null;
-        if (user && user.points === undefined) {
-          return { ...user, points: 0, exerciseSelections: user.exerciseSelections ?? {} };
-        }
-        return user;
+        return user ? normalizeUser(user) : null;
       },
 
       saveUserPlan: (assessment, plan) => {
@@ -145,7 +143,7 @@ export const useAuthStore = create<AuthStore>()(
         const user = get().getCurrentUser();
         if (!user) return;
 
-        const progress = { ...user.progress.byDate };
+        const progress = { ...(user.progress?.byDate ?? {}) };
         const day = progress[date] ?? createEmptyDayProgress();
         const isCompleting = !day.workouts.includes(exerciseKey);
         const workouts = isCompleting
@@ -168,7 +166,7 @@ export const useAuthStore = create<AuthStore>()(
         const user = get().getCurrentUser();
         if (!user) return;
 
-        const progress = { ...user.progress.byDate };
+        const progress = { ...(user.progress?.byDate ?? {}) };
         const day = progress[date] ?? createEmptyDayProgress();
         const isCompleting = !day.meals.includes(mealName);
         const meals = isCompleting
@@ -191,7 +189,7 @@ export const useAuthStore = create<AuthStore>()(
         const user = get().getCurrentUser();
         if (!user) return;
 
-        const progress = { ...user.progress.byDate };
+        const progress = { ...(user.progress?.byDate ?? {}) };
         const day = progress[date] ?? createEmptyDayProgress();
         const customMeals = { ...day.customMeals, [mealName]: description };
         progress[date] = { ...day, customMeals };
@@ -210,7 +208,7 @@ export const useAuthStore = create<AuthStore>()(
         const user = get().getCurrentUser();
         if (!user) return;
 
-        const progress = { ...user.progress.byDate };
+        const progress = { ...(user.progress?.byDate ?? {}) };
         const day = progress[date] ?? createEmptyDayProgress();
         const mealSubstitutions = { ...day.mealSubstitutions, [mealName]: substitution };
         progress[date] = { ...day, mealSubstitutions };
@@ -242,7 +240,7 @@ export const useAuthStore = create<AuthStore>()(
         const user = get().getCurrentUser();
         const empty = createEmptyDayProgress();
         if (!user) return empty;
-        const day = user.progress.byDate[date];
+        const day = user.progress?.byDate?.[date];
         if (!day) return empty;
         return {
           workouts: day.workouts ?? [],
@@ -283,6 +281,14 @@ export const useAuthStore = create<AuthStore>()(
     {
       name: "ai-fitness-coach-auth",
       storage: createJSONStorage(() => safeLocalStorage),
+      merge: (persisted, current) => {
+        const saved = persisted as Partial<typeof current>;
+        const users = saved.users ?? {};
+        const normalizedUsers = Object.fromEntries(
+          Object.entries(users).map(([id, user]) => [id, normalizeUser(user)])
+        );
+        return { ...current, ...saved, users: normalizedUsers };
+      },
     }
   )
 );

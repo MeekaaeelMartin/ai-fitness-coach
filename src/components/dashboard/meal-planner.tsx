@@ -46,7 +46,7 @@ export function MealPlanner({ meals }: MealPlannerProps) {
             <div className="mt-4">
               <p className="mb-2 text-xs font-medium text-foreground/50">Don&apos;t have this? Pick an alternative</p>
               <div className="flex flex-wrap gap-2">
-                {meal.alternatives.map((alt) => (
+                {(meal.alternatives ?? []).map((alt) => (
                   <button
                     key={alt}
                     type="button"

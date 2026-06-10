@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { safeLocalStorage } from "@/lib/storage/safe-storage";
+import { normalizePlan } from "@/lib/utils/normalize-plan";
 import type { AssessmentData } from "@/lib/types/assessment";
 import { defaultAssessmentData } from "@/lib/types/assessment";
 import type { GeneratedPlan } from "@/lib/types/plan";
@@ -47,11 +48,15 @@ export const useAssessmentStore = create<AssessmentStore>()(
         currentStep: state.currentStep,
         generatedPlan: state.generatedPlan,
       }),
-      merge: (persisted, current) => ({
-        ...current,
-        ...(persisted as Partial<typeof current>),
-        isGenerating: false,
-      }),
+      merge: (persisted, current) => {
+        const saved = persisted as Partial<typeof current>;
+        return {
+          ...current,
+          ...saved,
+          isGenerating: false,
+          generatedPlan: saved.generatedPlan ? normalizePlan(saved.generatedPlan) : null,
+        };
+      },
     }
   )
 );

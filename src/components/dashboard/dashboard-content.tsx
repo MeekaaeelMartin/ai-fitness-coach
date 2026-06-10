@@ -19,8 +19,8 @@ import { useAuthStore } from "@/lib/store/auth-store";
 import { useAssessmentStore } from "@/lib/store/assessment-store";
 import { useAppHydrated } from "@/lib/hooks/use-app-hydrated";
 import { useCurrentUser } from "@/lib/hooks/use-current-user";
-import type { GeneratedPlan } from "@/lib/types/plan";
 import { FITNESS_GOAL_LABELS } from "@/lib/types/assessment";
+import { normalizePlan } from "@/lib/utils/normalize-plan";
 import { getSubscriptionAccess } from "@/lib/utils/subscription";
 import { formatZAR } from "@/lib/utils/currency";
 import { Tabs } from "@/components/ui/tabs";
@@ -34,22 +34,6 @@ import { ProfileEditor } from "./profile-editor";
 import { MealPlanner } from "./meal-planner";
 import { ExerciseSelector } from "./exercise-selector";
 import { cn } from "@/lib/utils/cn";
-
-function normalizePlan(plan: GeneratedPlan): GeneratedPlan {
-  return {
-    ...plan,
-    lifestyleRecommendations: plan.lifestyleRecommendations ?? {
-      sleep: [],
-      hydration: [],
-      recovery: [],
-    },
-    progressTracking: plan.progressTracking ?? {
-      weeklyMilestones: [],
-      monthlyTargets: [],
-      adjustmentRecommendations: [],
-    },
-  };
-}
 
 function Paywalled({ locked, children }: { locked: boolean; children: React.ReactNode }) {
   return (
@@ -122,7 +106,7 @@ export function DashboardContent() {
         >
           <div>
             <h1 className="text-3xl font-bold tracking-tight">
-              Welcome, {userProfile.name.split(" ")[0]}
+              Welcome, {(userProfile.name || user.name || "there").split(" ")[0]}
             </h1>
             <p className="mt-1 text-foreground/60">
               Your personalised fitness and nutrition plan
@@ -181,12 +165,12 @@ export function DashboardContent() {
                   <h2 className="text-lg font-semibold">Goal Summary</h2>
                 </div>
                 <div className="mb-4 flex flex-wrap gap-2">
-                  {userProfile.fitnessGoals.map((goal) => (
+                  {(userProfile.fitnessGoals ?? []).map((goal) => (
                     <span
                       key={goal}
                       className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-400"
                     >
-                      {FITNESS_GOAL_LABELS[goal]}
+                      {FITNESS_GOAL_LABELS[goal] ?? goal}
                     </span>
                   ))}
                 </div>
@@ -330,7 +314,7 @@ export function DashboardContent() {
           <Paywalled locked={locked}>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
               <GlassCard className="border-emerald-500/20 bg-emerald-500/5">
-                <h3 className="font-semibold text-emerald-400">Built for {userProfile.name.split(" ")[0]}</h3>
+                <h3 className="font-semibold text-emerald-400">Built for {(userProfile.name || user.name || "you").split(" ")[0]}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-foreground/70">
                   Every recommendation below is based on your assessment. Your {userProfile.averageSleepHours}h sleep,
                   {userProfile.stressLevel.replace("-", " ")} stress, {userProfile.dailyWaterIntake}L water intake,

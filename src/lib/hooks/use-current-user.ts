@@ -3,17 +3,7 @@
 import { useMemo } from "react";
 import { useAuthStore } from "@/lib/store/auth-store";
 import type { UserAccount } from "@/lib/types/auth";
-import { createTrialSubscription } from "@/lib/types/auth";
-
-function normalizeUser(user: UserAccount): UserAccount {
-  return {
-    ...user,
-    points: user.points ?? 0,
-    exerciseSelections: user.exerciseSelections ?? {},
-    subscription: user.subscription ?? createTrialSubscription(),
-    progress: user.progress ?? { byDate: {} },
-  };
-}
+import { normalizeUser } from "@/lib/utils/normalize-user";
 
 export function useCurrentUser(): UserAccount | null {
   const user = useAuthStore((state) =>

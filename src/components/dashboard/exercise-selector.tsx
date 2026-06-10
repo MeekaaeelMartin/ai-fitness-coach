@@ -12,7 +12,8 @@ interface ExerciseSelectorProps {
 export function ExerciseSelector({ exercise, exerciseKey }: ExerciseSelectorProps) {
   const { getExerciseSelection, setExerciseSelection } = useAuthStore();
   const selected = getExerciseSelection(exerciseKey) ?? exercise.name;
-  const allOptions = [exercise.name, ...exercise.alternatives.filter((a) => a !== exercise.name)];
+  const alternatives = exercise.alternatives ?? [];
+  const allOptions = [exercise.name, ...alternatives.filter((a) => a !== exercise.name)];
 
   return (
     <div className="rounded-xl border border-white/10 bg-white/5 p-4">
