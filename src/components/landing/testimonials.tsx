@@ -89,9 +89,23 @@ const testimonials = [
   },
 ];
 
+const GAP = 24;
+
+function getScrollMetrics(el: HTMLDivElement) {
+  const card = el.firstElementChild as HTMLElement | null;
+  const cardWidth = card?.clientWidth ?? 1;
+  const step = cardWidth + GAP;
+  const visible = Math.max(1, Math.floor((el.clientWidth + GAP) / step));
+  const pageCount = Math.max(1, testimonials.length - visible + 1);
+  const activePage = Math.min(Math.round(el.scrollLeft / step), pageCount - 1);
+
+  return { cardWidth, step, pageCount, activePage };
+}
+
 export function Testimonials() {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activePage, setActivePage] = useState(0);
+  const [pageCount, setPageCount] = useState(1);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
@@ -100,10 +114,9 @@ export function Testimonials() {
     if (!el) return;
     setCanScrollLeft(el.scrollLeft > 10);
     setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
-    const cardWidth = el.firstElementChild?.clientWidth ?? 1;
-    const gap = 24;
-    const index = Math.round(el.scrollLeft / (cardWidth + gap));
-    setActiveIndex(Math.min(index, testimonials.length - 1));
+    const metrics = getScrollMetrics(el);
+    setPageCount(metrics.pageCount);
+    setActivePage(metrics.activePage);
   }, []);
 
   useEffect(() => {
@@ -121,8 +134,8 @@ export function Testimonials() {
   const scroll = (direction: "left" | "right") => {
     const el = scrollRef.current;
     if (!el) return;
-    const cardWidth = el.firstElementChild?.clientWidth ?? 320;
-    el.scrollBy({ left: direction === "left" ? -(cardWidth + 24) : cardWidth + 24, behavior: "smooth" });
+    const { step } = getScrollMetrics(el);
+    el.scrollBy({ left: direction === "left" ? -step : step, behavior: "smooth" });
   };
 
   return (
@@ -202,20 +215,20 @@ export function Testimonials() {
         </div>
 
         <div className="mt-6 flex justify-center gap-2">
-          {testimonials.map((_, i) => (
+          {Array.from({ length: pageCount }).map((_, i) => (
             <button
               key={i}
               type="button"
-              aria-label={`Go to review ${i + 1}`}
+              aria-label={`Go to review page ${i + 1}`}
               onClick={() => {
                 const el = scrollRef.current;
                 if (!el) return;
-                const cardWidth = el.firstElementChild?.clientWidth ?? 320;
-                el.scrollTo({ left: i * (cardWidth + 24), behavior: "smooth" });
+                const { step } = getScrollMetrics(el);
+                el.scrollTo({ left: i * step, behavior: "smooth" });
               }}
               className={cn(
                 "h-2 rounded-full transition-all",
-                i === activeIndex ? "w-6 bg-emerald-400" : "w-2 bg-white/20"
+                i === activePage ? "w-6 bg-emerald-400" : "w-2 bg-white/20"
               )}
             />
           ))}

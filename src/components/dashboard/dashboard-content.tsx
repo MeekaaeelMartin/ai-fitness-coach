@@ -17,6 +17,9 @@ import {
 } from "lucide-react";
 import { useAuthStore } from "@/lib/store/auth-store";
 import { useAssessmentStore } from "@/lib/store/assessment-store";
+import { useAppHydrated } from "@/lib/hooks/use-app-hydrated";
+import { useCurrentUser } from "@/lib/hooks/use-current-user";
+import type { GeneratedPlan } from "@/lib/types/plan";
 import { FITNESS_GOAL_LABELS } from "@/lib/types/assessment";
 import { getSubscriptionAccess } from "@/lib/utils/subscription";
 import { formatZAR } from "@/lib/utils/currency";
@@ -32,6 +35,22 @@ import { MealPlanner } from "./meal-planner";
 import { ExerciseSelector } from "./exercise-selector";
 import { cn } from "@/lib/utils/cn";
 
+function normalizePlan(plan: GeneratedPlan): GeneratedPlan {
+  return {
+    ...plan,
+    lifestyleRecommendations: plan.lifestyleRecommendations ?? {
+      sleep: [],
+      hydration: [],
+      recovery: [],
+    },
+    progressTracking: plan.progressTracking ?? {
+      weeklyMilestones: [],
+      monthlyTargets: [],
+      adjustmentRecommendations: [],
+    },
+  };
+}
+
 function Paywalled({ locked, children }: { locked: boolean; children: React.ReactNode }) {
   return (
     <div className="relative">
@@ -43,18 +62,16 @@ function Paywalled({ locked, children }: { locked: boolean; children: React.Reac
 
 export function DashboardContent() {
   const router = useRouter();
-  const { getCurrentUser, saveUserPlan } = useAuthStore();
-  const { generatedPlan: guestPlan, assessment } = useAssessmentStore();
+  const hydrated = useAppHydrated();
+  const user = useCurrentUser();
+  const saveUserPlan = useAuthStore((state) => state.saveUserPlan);
+  const guestPlan = useAssessmentStore((state) => state.generatedPlan);
+  const assessment = useAssessmentStore((state) => state.assessment);
   const [activeTab, setActiveTab] = useState("today");
   const [openWorkout, setOpenWorkout] = useState<number | null>(0);
-  const [hydrated, setHydrated] = useState(false);
 
-  const user = getCurrentUser();
-  const generatedPlan = user?.generatedPlan ?? guestPlan;
-
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
+  const rawPlan = user?.generatedPlan ?? guestPlan;
+  const generatedPlan = rawPlan ? normalizePlan(rawPlan) : null;
 
   useEffect(() => {
     if (!hydrated) return;

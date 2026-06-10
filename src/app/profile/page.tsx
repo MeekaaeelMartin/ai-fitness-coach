@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { User, Crown, LogOut, Dumbbell, ArrowRight } from "lucide-react";
 import { useAuthStore } from "@/lib/store/auth-store";
+import { useAppHydrated } from "@/lib/hooks/use-app-hydrated";
+import { useCurrentUser } from "@/lib/hooks/use-current-user";
 import { getSubscriptionAccess, MONTHLY_PRICE } from "@/lib/utils/subscription";
 import { formatZARPerMonth } from "@/lib/utils/currency";
 import { formatDateZA } from "@/lib/utils/date";
@@ -14,14 +16,17 @@ import { LevelBadge } from "@/components/dashboard/level-badge";
 
 export default function ProfilePage() {
   const router = useRouter();
-  const { getCurrentUser, logout, subscribe } = useAuthStore();
-  const user = getCurrentUser();
+  const hydrated = useAppHydrated();
+  const user = useCurrentUser();
+  const logout = useAuthStore((state) => state.logout);
+  const subscribe = useAuthStore((state) => state.subscribe);
 
   useEffect(() => {
+    if (!hydrated) return;
     if (!user) router.push("/login");
-  }, [user, router]);
+  }, [hydrated, user, router]);
 
-  if (!user) {
+  if (!hydrated || !user) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-emerald-500 border-t-transparent" />
