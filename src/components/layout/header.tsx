@@ -10,8 +10,8 @@ import { cn } from "@/lib/utils/cn";
 
 const navLinks = [
   { href: "/#how-it-works", label: "How It Works" },
-  { href: "/#benefits", label: "Benefits" },
-  { href: "/#testimonials", label: "Testimonials" },
+  { href: "/#pricing", label: "What's Included" },
+  { href: "/#testimonials", label: "Results" },
   { href: "/#faq", label: "FAQ" },
 ];
 
@@ -49,7 +49,9 @@ export function Header() {
         <div className="flex items-center gap-2">
           <ThemeToggle />
           <Link href="/assessment" className="hidden sm:block">
-            <Button size="sm">Create My Plan</Button>
+            <Button size="sm" className="shadow-lg shadow-emerald-500/20">
+              Get My Free Plan
+            </Button>
           </Link>
           <button
             type="button"
@@ -82,7 +84,7 @@ export function Header() {
             ))}
           <Link href="/assessment" onClick={() => setMobileOpen(false)}>
             <Button className="mt-2 w-full" size="sm">
-              Create My Plan
+              Get My Free Plan
             </Button>
           </Link>
         </nav>

@@ -1,0 +1,19 @@
+---
+description: Push changes to GitHub after completing work to trigger Netlify redeploy
+alwaysApply: true
+---
+
+# Netlify Auto-Deploy
+
+This project is deployed on Netlify from `main` on GitHub (`MeekaaeelMartin/ai-fitness-coach`). Netlify redeploys automatically on every push.
+
+After completing requested code changes:
+
+1. Run `git status` and `git diff` to review changes
+2. Stage and commit with a clear message describing the change
+3. Push to `origin main` with `git push origin main`
+4. Confirm the push succeeded so Netlify starts a new deploy
+
+Do not skip the push unless the user explicitly asks not to deploy.
+
+Never commit secrets (`.env`, API keys, tokens).
