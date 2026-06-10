@@ -101,7 +101,7 @@ export const defaultAssessmentData: AssessmentData = {
   allergies: "",
   foodsDisliked: "",
   foodsEnjoyed: "",
-  dailyFoodBudget: 50,
+  dailyFoodBudget: 120,
   mealsPerDay: 3,
   averageSleepHours: 7,
   dailyWaterIntake: 2,

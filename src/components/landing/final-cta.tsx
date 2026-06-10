@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Timer } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { TRIAL_DAYS, formatZARPerMonth, MONTHLY_PRICE } from "@/lib/utils/currency";
 
 export function FinalCta() {
   return (
@@ -21,7 +22,7 @@ export function FinalCta() {
         >
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-sm text-emerald-400">
             <Timer className="h-4 w-4" />
-            Takes less than 10 minutes
+            {TRIAL_DAYS}-day free trial · No credit card
           </div>
 
           <h2 className="text-3xl font-bold tracking-tight sm:text-5xl">
@@ -39,14 +40,14 @@ export function FinalCta() {
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link href="/assessment">
               <Button size="lg" className="group min-w-[240px] text-base">
-                Get My Free Plan Now
+                Start My Free Trial
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
           </div>
 
           <p className="mt-6 text-sm text-foreground/40">
-            Free · No credit card · Instant results
+            {TRIAL_DAYS} days free · Then {formatZARPerMonth(MONTHLY_PRICE)} · Cancel anytime
           </p>
         </motion.div>
       </div>

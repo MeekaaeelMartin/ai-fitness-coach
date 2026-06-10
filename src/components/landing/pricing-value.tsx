@@ -2,25 +2,26 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Check, ArrowRight, Zap } from "lucide-react";
+import { Check, ArrowRight, Zap, Clock } from "lucide-react";
 import { GlassCard } from "@/components/ui/glass-card";
 import { Button } from "@/components/ui/button";
+import { formatZAR, formatZARPerMonth, MONTHLY_PRICE, TRIAL_DAYS } from "@/lib/utils/currency";
 
 const included = [
-  "Full personalized workout program",
+  "Full personalised workout programme",
   "Custom meal plan with macros & portions",
+  "Daily workout & meal tracking",
   "Injury & mobility modifications",
   "Progressive overload roadmap",
   "Weekly milestones & monthly targets",
-  "Lifestyle & recovery recommendations",
-  "Downloadable PDF plan",
+  "Export to PDF, Notes & Calendar",
   "Unlimited plan regeneration",
 ];
 
 const comparisons = [
-  { label: "Personal Trainer", price: "$150–300/mo", highlight: false },
-  { label: "Nutrition Coach", price: "$100–200/mo", highlight: false },
-  { label: "AI Fitness Coach", price: "Free to start", highlight: true },
+  { label: "SA Personal Trainer", price: "R800–2,500/mo", highlight: false },
+  { label: "Nutrition Coach", price: "R500–1,500/mo", highlight: false },
+  { label: "AI Fitness Coach", price: `${TRIAL_DAYS} days free`, highlight: true },
 ];
 
 export function PricingValue() {
@@ -30,17 +31,14 @@ export function PricingValue() {
         <div className="mx-auto max-w-2xl text-center">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-400">
             <Zap className="h-3.5 w-3.5" />
-            Premium coaching. Zero guesswork.
+            Built for South Africans
           </span>
           <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-            Everything a $500/mo Coach Gives You —{" "}
-            <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-              Personalized by AI
-            </span>
+            Premium Coaching at a Fraction of the Cost
           </h2>
           <p className="mt-4 text-foreground/60">
-            Stop paying for generic programs. Get a blueprint built around your body,
-            schedule, and goals.
+            Try everything free for {TRIAL_DAYS} days. Then just {formatZARPerMonth(MONTHLY_PRICE)} —
+            less than a single personal training session.
           </p>
         </div>
 
@@ -77,13 +75,19 @@ export function PricingValue() {
 
             <div className="relative">
               <div className="text-center">
-                <p className="text-sm text-foreground/50">Your complete plan includes</p>
-                <div className="mt-2 flex items-baseline justify-center gap-1">
-                  <span className="text-5xl font-bold text-emerald-400">$0</span>
-                  <span className="text-foreground/50">to start</span>
+                <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-semibold text-emerald-400">
+                  <Clock className="h-3.5 w-3.5" />
+                  {TRIAL_DAYS}-day free trial
                 </div>
+                <div className="flex items-baseline justify-center gap-2">
+                  <span className="text-5xl font-bold text-emerald-400">{formatZAR(0)}</span>
+                  <span className="text-foreground/50">for {TRIAL_DAYS} days</span>
+                </div>
+                <p className="mt-2 text-sm text-foreground/60">
+                  Then <strong className="text-foreground">{formatZARPerMonth(MONTHLY_PRICE)}</strong> for full access
+                </p>
                 <p className="mt-1 text-xs text-foreground/40">
-                  No credit card · No commitment
+                  No credit card required to start
                 </p>
               </div>
 
@@ -98,13 +102,13 @@ export function PricingValue() {
 
               <Link href="/assessment" className="mt-8 block">
                 <Button size="lg" className="group w-full">
-                  Get My Free Plan Now
+                  Start My {TRIAL_DAYS}-Day Free Trial
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>
 
               <p className="mt-4 text-center text-xs text-foreground/40">
-                Join 10,000+ people who stopped guessing and started progressing
+                Join 10,000+ South Africans transforming their fitness
               </p>
             </div>
           </GlassCard>

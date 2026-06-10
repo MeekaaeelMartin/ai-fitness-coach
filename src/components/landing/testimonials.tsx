@@ -10,7 +10,7 @@ const testimonials = [
     role: "Lost 12kg in 4 months",
     initials: "SM",
     content:
-      "I cancelled my $200/month trainer after this. The meal plan fits my budget, the workouts fit my schedule, and I actually stick to it.",
+      "I cancelled my R2,000/month trainer after this. The meal plan fits my budget, the workouts fit my schedule, and I actually stick to it.",
     rating: 5,
     color: "from-emerald-500 to-teal-500",
   },

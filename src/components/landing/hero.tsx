@@ -4,12 +4,13 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { TRIAL_DAYS, formatZARPerMonth, MONTHLY_PRICE } from "@/lib/utils/currency";
 import { PlanPreview } from "./plan-preview";
 
 const trustPoints = [
+  `${TRIAL_DAYS}-day free trial`,
   "No credit card required",
-  "Ready in under 60 seconds",
-  "100% personalized to you",
+  "Built for South Africans",
 ];
 
 export function Hero() {
@@ -30,7 +31,7 @@ export function Hero() {
             >
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-sm font-medium text-emerald-400">
                 <Sparkles className="h-4 w-4" />
-                Join 10,000+ people transforming their fitness
+                🇿🇦 Trusted by 10,000+ South Africans
               </div>
             </motion.div>
 
@@ -52,9 +53,9 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="mt-6 text-lg leading-relaxed text-foreground/70"
             >
-              Get a fully personalized workout and meal plan — built around your body,
-              goals, injuries, schedule, and diet. The kind of coaching that costs
-              $500/month, delivered in minutes.
+              Get a fully personalised workout and meal plan — built around your body,
+              goals, injuries, schedule, and budget. Premium coaching from{" "}
+              {formatZARPerMonth(MONTHLY_PRICE)} after your free trial.
             </motion.p>
 
             <motion.div
@@ -65,7 +66,7 @@ export function Hero() {
             >
               <Link href="/assessment">
                 <Button size="lg" className="group w-full min-w-[220px] sm:w-auto">
-                  Get My Free Plan Now
+                  Start My Free Trial
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>

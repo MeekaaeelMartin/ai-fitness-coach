@@ -2,15 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { Dumbbell, Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Dumbbell, Menu, X, User } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "@/components/ui/button";
+import { useAuthStore } from "@/lib/store/auth-store";
 import { cn } from "@/lib/utils/cn";
 
 const navLinks = [
   { href: "/#how-it-works", label: "How It Works" },
-  { href: "/#pricing", label: "What's Included" },
+  { href: "/#pricing", label: "Pricing" },
   { href: "/#testimonials", label: "Results" },
   { href: "/#faq", label: "FAQ" },
 ];
@@ -18,7 +19,12 @@ const navLinks = [
 export function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const { getCurrentUser } = useAuthStore();
+  const user = getCurrentUser();
   const isLanding = pathname === "/";
+
+  useEffect(() => setMounted(true), []);
 
   return (
     <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-background/80 backdrop-blur-xl">
@@ -48,9 +54,23 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
+          {mounted && user ? (
+            <Link href="/profile" className="hidden sm:block">
+              <Button variant="ghost" size="sm" className="gap-2">
+                <User className="h-4 w-4" />
+                {user.name.split(" ")[0]}
+              </Button>
+            </Link>
+          ) : (
+            <Link href="/login" className="hidden sm:block">
+              <Button variant="ghost" size="sm">
+                Log In
+              </Button>
+            </Link>
+          )}
           <Link href="/assessment" className="hidden sm:block">
             <Button size="sm" className="shadow-lg shadow-emerald-500/20">
-              Get My Free Plan
+              Start Free Trial
             </Button>
           </Link>
           <button
@@ -67,7 +87,7 @@ export function Header() {
       <div
         className={cn(
           "overflow-hidden border-t border-white/10 bg-background/95 backdrop-blur-xl transition-all duration-300 md:hidden",
-          mobileOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+          mobileOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
         )}
       >
         <nav className="flex flex-col gap-1 p-4">
@@ -82,9 +102,23 @@ export function Header() {
                 {link.label}
               </a>
             ))}
+          {mounted && user ? (
+            <Link href="/profile" onClick={() => setMobileOpen(false)}>
+              <Button variant="ghost" className="mt-2 w-full justify-start" size="sm">
+                <User className="h-4 w-4" />
+                My Profile
+              </Button>
+            </Link>
+          ) : (
+            <Link href="/login" onClick={() => setMobileOpen(false)}>
+              <Button variant="ghost" className="mt-2 w-full" size="sm">
+                Log In
+              </Button>
+            </Link>
+          )}
           <Link href="/assessment" onClick={() => setMobileOpen(false)}>
             <Button className="mt-2 w-full" size="sm">
-              Get My Free Plan
+              Start Free Trial
             </Button>
           </Link>
         </nav>

@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { useAssessmentStore } from "@/lib/store/assessment-store";
+import { useAuthStore } from "@/lib/store/auth-store";
 import {
   assessmentSchema,
   type AssessmentFormData,
@@ -54,6 +55,7 @@ export function AssessmentForm() {
     setIsGenerating,
     isGenerating,
   } = useAssessmentStore();
+  const { getCurrentUser, saveUserPlan } = useAuthStore();
 
   const [direction, setDirection] = useState(1);
 
@@ -154,7 +156,13 @@ export function AssessmentForm() {
     try {
       const plan = await generatePlan(data);
       setGeneratedPlan(plan);
-      router.push("/dashboard");
+      const user = getCurrentUser();
+      if (user) {
+        saveUserPlan(data, plan);
+        router.push("/dashboard");
+      } else {
+        router.push("/signup?from=assessment");
+      }
     } catch {
       setIsGenerating(false);
     }
@@ -460,9 +468,9 @@ export function AssessmentForm() {
                 />
                 <div className="grid gap-5 sm:grid-cols-2">
                   <Input
-                    label="Daily Food Budget ($)"
+                    label="Daily Food Budget (R)"
                     type="number"
-                    min={10}
+                    min={30}
                     error={errors.dailyFoodBudget?.message}
                     {...register("dailyFoodBudget", { valueAsNumber: true })}
                   />

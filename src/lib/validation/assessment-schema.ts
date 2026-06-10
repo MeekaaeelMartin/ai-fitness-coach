@@ -88,7 +88,7 @@ const nutritionSchema = z.object({
   allergies: z.string().min(1, "Please list allergies or enter 'None'"),
   foodsDisliked: z.string().min(1, "Please list disliked foods or enter 'None'"),
   foodsEnjoyed: z.string().min(1, "Please list foods you enjoy"),
-  dailyFoodBudget: numberField(10, 500, "Minimum budget is $10/day", "Please enter a realistic daily budget"),
+  dailyFoodBudget: numberField(30, 2000, "Minimum budget is R30/day", "Please enter a realistic daily budget"),
   mealsPerDay: numberField(2, 6, "Minimum 2 meals per day", "Maximum 6 meals per day"),
 });
 

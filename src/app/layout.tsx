@@ -16,9 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI Fitness Coach | Personalized Workout & Meal Plans",
+  title: "AI Fitness Coach | Personalised Workout & Meal Plans for South Africa",
   description:
-    "Get a fully personalized workout and meal plan tailored specifically to your body, goals, lifestyle, and preferences. Your personal AI fitness coach.",
+    "Get a fully personalised workout and meal plan in Rands, tailored to your body, goals, and budget. 7-day free trial. From R500/month.",
   keywords: [
     "AI fitness coach",
     "personalized workout plan",

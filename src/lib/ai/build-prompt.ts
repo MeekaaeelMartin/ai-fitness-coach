@@ -42,7 +42,7 @@ export function buildAIPrompt(data: AssessmentData): string {
 - Allergies: ${data.allergies}
 - Foods Disliked: ${data.foodsDisliked}
 - Foods Enjoyed: ${data.foodsEnjoyed}
-- Daily Food Budget: $${data.dailyFoodBudget}
+- Daily Food Budget: R${data.dailyFoodBudget} (South African Rand)
 - Meals Per Day: ${data.mealsPerDay}
 
 ### Lifestyle
