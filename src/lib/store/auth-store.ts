@@ -13,6 +13,12 @@ import { activateSubscription } from "@/lib/utils/subscription";
 import { toDateKey } from "@/lib/utils/date";
 import { POINTS } from "@/lib/utils/gamification";
 import { normalizeUser } from "@/lib/utils/normalize-user";
+import { syncUserToRegistry } from "@/lib/registry/sync-client";
+
+function syncUser(get: () => { getCurrentUser: () => UserAccount | null }) {
+  const user = get().getCurrentUser();
+  if (user) syncUserToRegistry(user);
+}
 
 function hashPassword(password: string): string {
   return btoa(password);
@@ -84,6 +90,7 @@ export const useAuthStore = create<AuthStore>()(
           users: { ...state.users, [id]: user },
           currentUserId: id,
         }));
+        syncUser(get);
         return { success: true };
       },
 
@@ -94,6 +101,7 @@ export const useAuthStore = create<AuthStore>()(
           return { success: false, error: "Invalid email or password" };
         }
         set({ currentUserId: user.id });
+        syncUser(get);
         return { success: true };
       },
 
@@ -119,6 +127,7 @@ export const useAuthStore = create<AuthStore>()(
             },
           },
         }));
+        syncUser(get);
       },
 
       updateAssessment: (data) => {
@@ -160,6 +169,7 @@ export const useAuthStore = create<AuthStore>()(
             [user.id]: { ...user, progress: { byDate: progress }, points },
           },
         }));
+        syncUser(get);
       },
 
       toggleMeal: (mealName, date = toDateKey()) => {
@@ -183,6 +193,7 @@ export const useAuthStore = create<AuthStore>()(
             [user.id]: { ...user, progress: { byDate: progress }, points },
           },
         }));
+        syncUser(get);
       },
 
       setCustomMeal: (mealName, description, date = toDateKey()) => {
@@ -264,6 +275,7 @@ export const useAuthStore = create<AuthStore>()(
             [user.id]: { ...user, subscription: activateSubscription(user.subscription) },
           },
         }));
+        syncUser(get);
         return { success: true };
       },
 
@@ -276,6 +288,7 @@ export const useAuthStore = create<AuthStore>()(
             [user.id]: { ...user, name: name.trim() },
           },
         }));
+        syncUser(get);
       },
     }),
     {

@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Dumbbell, Menu, X, User, LayoutDashboard } from "lucide-react";
+import { Dumbbell, Menu, X, User, LayoutDashboard, Shield } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "@/components/ui/button";
 import { useAppHydrated } from "@/lib/hooks/use-app-hydrated";
 import { useCurrentUser } from "@/lib/hooks/use-current-user";
+import { useIsAdmin } from "@/lib/hooks/use-is-admin";
 import { cn } from "@/lib/utils/cn";
 
 const navLinks = [
@@ -22,6 +23,7 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const hydrated = useAppHydrated();
   const user = useCurrentUser();
+  const isAdmin = useIsAdmin();
   const isLanding = pathname === "/";
 
   return (
@@ -54,6 +56,14 @@ export function Header() {
           <ThemeToggle />
           {hydrated && user ? (
             <>
+              {isAdmin && (
+                <Link href="/admin" className="hidden sm:block">
+                  <Button variant="outline" size="sm" className="gap-2 border-emerald-500/30">
+                    <Shield className="h-4 w-4" />
+                    Admin
+                  </Button>
+                </Link>
+              )}
               <Link href="/dashboard" className="hidden sm:block">
                 <Button size="sm" className="gap-2 shadow-lg shadow-emerald-500/20">
                   <LayoutDashboard className="h-4 w-4" />
@@ -112,6 +122,14 @@ export function Header() {
             ))}
           {hydrated && user ? (
             <>
+              {isAdmin && (
+                <Link href="/admin" onClick={() => setMobileOpen(false)}>
+                  <Button variant="outline" className="mt-2 w-full gap-2" size="sm">
+                    <Shield className="h-4 w-4" />
+                    Admin Panel
+                  </Button>
+                </Link>
+              )}
               <Link href="/dashboard" onClick={() => setMobileOpen(false)}>
                 <Button className="mt-2 w-full gap-2" size="sm">
                   <LayoutDashboard className="h-4 w-4" />

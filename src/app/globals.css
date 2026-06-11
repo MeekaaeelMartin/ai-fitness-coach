@@ -96,3 +96,15 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+html.custom-cursor-active,
+html.custom-cursor-active * {
+  cursor: none !important;
+}
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  html.custom-cursor-active,
+  html.custom-cursor-active * {
+    cursor: auto !important;
+  }
+}
