@@ -5,6 +5,7 @@ import { MONTHLY_PRICE } from "@/lib/utils/subscription";
 import { formatZARPerMonth } from "@/lib/utils/currency";
 import { useAuthStore } from "@/lib/store/auth-store";
 import { Button } from "@/components/ui/button";
+import { PaymentTrustBadges } from "@/components/ui/payment-trust-badges";
 
 export function PaywallOverlay() {
   const { subscribe } = useAuthStore();
@@ -17,9 +18,9 @@ export function PaywallOverlay() {
         </div>
         <h3 className="text-lg font-semibold">Get Full Access</h3>
         <p className="mt-2 text-sm text-foreground/60">
-          Your free access period has ended. Subscribe for{" "}
-          {formatZARPerMonth(MONTHLY_PRICE)} to access workouts, meals, tracking,
-          and exports.
+          Your free trial has ended. Subscribe for{" "}
+          {formatZARPerMonth(MONTHLY_PRICE)} to unlock weeks 2–4 of your workout
+          and meal plan, plus tracking and exports.
         </p>
         <Button className="mt-6 w-full" onClick={() => subscribe()}>
           <Crown className="h-4 w-4" />
@@ -28,6 +29,9 @@ export function PaywallOverlay() {
         <p className="mt-3 text-xs text-foreground/40">
           Cancel anytime · Payment gateway coming soon
         </p>
+        <div className="mt-4 flex justify-center">
+          <PaymentTrustBadges compact />
+        </div>
       </div>
     </div>
   );

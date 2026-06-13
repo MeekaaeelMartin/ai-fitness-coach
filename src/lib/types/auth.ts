@@ -1,5 +1,6 @@
 import type { AssessmentData } from "./assessment";
 import type { GeneratedPlan } from "./plan";
+import { TRIAL_DAYS } from "@/lib/utils/currency";
 
 export type SubscriptionStatus = "trial" | "active" | "expired";
 
@@ -47,7 +48,7 @@ export function createEmptyDayProgress(): DayProgress {
 export function createTrialSubscription(): Subscription {
   const now = new Date();
   const trialEnd = new Date(now);
-  trialEnd.setDate(trialEnd.getDate() + 7);
+  trialEnd.setDate(trialEnd.getDate() + TRIAL_DAYS);
 
   return {
     status: "trial",

@@ -1,6 +1,6 @@
 import type { AssessmentData } from "@/lib/types/assessment";
 import { FITNESS_GOAL_LABELS } from "@/lib/types/assessment";
-import type { GeneratedPlan, Meal } from "@/lib/types/plan";
+import type { GeneratedPlan, Meal, PlanWeek } from "@/lib/types/plan";
 import { buildAIPrompt } from "./build-prompt";
 import { getExercisesForPlan } from "./exercise-library";
 import { buildPersonalizedLifestyle } from "./lifestyle-personalizer";
@@ -96,7 +96,66 @@ function buildMeals(data: AssessmentData, calories: number, protein: number, car
   return templates.slice(0, data.mealsPerDay);
 }
 
+const WEEK_MEAL_VARIATIONS = [
+  { breakfast: ["Oats", "Plant protein", "Banana"], lunch: ["Grilled chicken", "Rice", "Salad"], dinner: ["Fish", "Sweet potato", "Greens"] },
+  { breakfast: ["Eggs", "Avocado toast", "Fruit"], lunch: ["Beef stir-fry", "Noodles", "Vegetables"], dinner: ["Chicken curry", "Pap", "Salad"] },
+  { breakfast: ["Smoothie bowl", "Granola", "Berries"], lunch: ["Tuna wrap", "Side salad"], dinner: ["Lentil stew", "Rice", "Roast veg"] },
+  { breakfast: ["Protein oats", "Peanut butter", "Apple"], lunch: ["Pap and stew", "Vegetables"], dinner: ["Grilled steak", "Potato", "Broccoli"] },
+];
+
+function buildWeekMeals(
+  data: AssessmentData,
+  calories: number,
+  protein: number,
+  carbs: number,
+  fats: number,
+  weekIndex: number
+): Meal[] {
+  const base = buildMeals(data, calories, protein, carbs, fats);
+  const variation = WEEK_MEAL_VARIATIONS[weekIndex % WEEK_MEAL_VARIATIONS.length];
+  return base.map((meal, i) => {
+    const foods =
+      i === 0 ? variation.breakfast : i === 1 ? variation.lunch : i === 2 ? variation.dinner : meal.foods;
+    return { ...meal, foods, name: weekIndex > 0 ? `${meal.name} (Week ${weekIndex + 1})` : meal.name };
+  });
+}
+
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+const WEEK_NOTES = [
+  "Warm up 5–10 minutes. Focus on form and establish baseline weights.",
+  "Add 2.5–5kg or 1–2 reps where form allows. Push slightly harder than last week.",
+  "Introduce tempo on final sets. Track your progress in the dashboard.",
+  "Deload week — reduce volume by 30–40%. Focus on recovery and technique.",
+];
+
+function buildWeekWorkouts(
+  data: AssessmentData,
+  focuses: string[],
+  constraints: { previousInjuries: string; jointIssues: string; mobilityLimitations: string; weakMuscleGroups: string },
+  weekIndex: number
+) {
+  const workoutDays = DAYS.slice(0, data.daysPerWeek);
+  const intensityBoost = weekIndex === 1 ? 1 : weekIndex === 2 ? 2 : weekIndex === 3 ? 0 : 0;
+
+  return workoutDays.map((day, index) => {
+    const focus = focuses[(index + weekIndex) % focuses.length];
+    const exercises = getExercisesForPlan(data.gymAccess, focus, constraints).map((ex) => ({
+      ...ex,
+      sets: ex.sets + (weekIndex === 3 ? -1 : weekIndex > 0 ? 0 : 0),
+      reps: weekIndex === 1 ? ex.reps.replace(/\d+/, (m) => String(Number(m) + 1)) : ex.reps,
+      rest: weekIndex === 2 ? ex.rest.replace(/\d+/, (m) => String(Math.max(30, Number(m) - 15))) : ex.rest,
+    }));
+
+    return {
+      day: weekIndex > 0 ? `${day} (W${weekIndex + 1})` : day,
+      focus: weekIndex === 3 ? `${focus} (Deload)` : focus,
+      exercises,
+      duration: `${data.workoutDuration + intensityBoost * 5} min`,
+      notes: WEEK_NOTES[weekIndex] ?? WEEK_NOTES[0],
+    };
+  });
+}
 
 export async function generatePlan(data: AssessmentData): Promise<GeneratedPlan> {
   await new Promise((resolve) => setTimeout(resolve, 2500));
@@ -118,24 +177,15 @@ export async function generatePlan(data: AssessmentData): Promise<GeneratedPlan>
     weakMuscleGroups: data.weakMuscleGroups,
   };
 
-  const workoutDays = DAYS.slice(0, data.daysPerWeek);
-  const dailyWorkouts = workoutDays.map((day, index) => {
-    const focus = focuses[index % focuses.length];
-    return {
-      day,
-      focus,
-      exercises: getExercisesForPlan(data.gymAccess, focus, constraints),
-      duration: `${data.workoutDuration} min`,
-      notes:
-        data.weakMuscleGroups.toLowerCase() !== "none"
-          ? `Extra focus on weak areas: ${data.weakMuscleGroups}. Swap exercises anytime in your dashboard.`
-          : data.previousInjuries.toLowerCase() !== "none"
-            ? `Modified for: ${data.previousInjuries}`
-            : "Warm up 5–10 minutes. Swap any exercise if needed from the alternatives provided.",
-    };
-  });
+  const weeks: PlanWeek[] = Array.from({ length: 4 }, (_, weekIndex) => ({
+    weekNumber: weekIndex + 1,
+    label: `Week ${weekIndex + 1}`,
+    dailyWorkouts: buildWeekWorkouts(data, focuses, constraints, weekIndex),
+    meals: buildWeekMeals(data, calories, protein, carbs, fats, weekIndex),
+  }));
 
-  const meals = buildMeals(data, calories, protein, carbs, fats);
+  const dailyWorkouts = weeks[0].dailyWorkouts;
+  const meals = weeks[0].meals;
 
   return {
     id: crypto.randomUUID(),
@@ -213,5 +263,6 @@ export async function generatePlan(data: AssessmentData): Promise<GeneratedPlan>
         "Don't have planned food? Log what you ate manually and pick a close alternative",
       ],
     },
+    weeks,
   };
 }

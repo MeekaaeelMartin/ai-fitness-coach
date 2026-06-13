@@ -44,10 +44,11 @@ export function SubscriptionBanner({ subscription }: SubscriptionBannerProps) {
         <div className="flex items-center gap-3">
           <Clock className="h-5 w-5 text-emerald-400" />
           <div>
-            <p className="text-sm font-medium">Free Access Active</p>
+            <p className="text-sm font-medium">Free Trial Active</p>
             <p className="text-xs text-foreground/50">
               {access.daysRemaining} day{access.daysRemaining === 1 ? "" : "s"} left ·
-              Then {formatZARPerMonth(MONTHLY_PRICE)} for full access
+              Week 1 workout &amp; meal plan included ·
+              Then {formatZARPerMonth(MONTHLY_PRICE)} for the full 4-week plan
             </p>
           </div>
         </div>
@@ -63,10 +64,10 @@ export function SubscriptionBanner({ subscription }: SubscriptionBannerProps) {
     <GlassCard className="!py-4 !px-5 border-amber-500/30 bg-amber-500/5">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="font-semibold text-amber-400">Your free access period has ended</p>
+          <p className="font-semibold text-amber-400">Your free trial has ended</p>
           <p className="mt-1 text-sm text-foreground/60">
-            Subscribe for {formatZARPerMonth(MONTHLY_PRICE)} to keep your full plan,
-            track workouts and meals, and export your plan.
+            Subscribe for {formatZARPerMonth(MONTHLY_PRICE)} to unlock weeks 2–4 of
+            your workout and meal plan, plus full tracking and exports.
           </p>
         </div>
         <Button onClick={handleSubscribe} disabled={loading} className="shrink-0">

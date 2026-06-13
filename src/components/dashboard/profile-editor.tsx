@@ -114,6 +114,16 @@ export function ProfileEditor({ assessment }: ProfileEditorProps) {
           value={form.daysPerWeek || ""}
           onChange={(e) => setForm({ ...form, daysPerWeek: Number(e.target.value) })}
         />
+        <div className="sm:col-span-2">
+          <label className="mb-1.5 block text-sm font-medium text-foreground/70">Allergies</label>
+          <textarea
+            className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-foreground placeholder:text-foreground/30 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/30"
+            rows={2}
+            placeholder="List any food allergies, or type 'None'"
+            value={form.allergies}
+            onChange={(e) => setForm({ ...form, allergies: e.target.value })}
+          />
+        </div>
       </div>
     </GlassCard>
   );

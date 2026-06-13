@@ -21,7 +21,7 @@ import { useAppHydrated } from "@/lib/hooks/use-app-hydrated";
 import { useCurrentUser } from "@/lib/hooks/use-current-user";
 import { FITNESS_GOAL_LABELS } from "@/lib/types/assessment";
 import { normalizePlan } from "@/lib/utils/normalize-plan";
-import { getSubscriptionAccess } from "@/lib/utils/subscription";
+import { getSubscriptionAccess, filterPlanByAccess } from "@/lib/utils/subscription";
 import { formatZAR } from "@/lib/utils/currency";
 import { Tabs } from "@/components/ui/tabs";
 import { GlassCard } from "@/components/ui/glass-card";
@@ -33,6 +33,8 @@ import { LevelBadge } from "./level-badge";
 import { ProfileEditor } from "./profile-editor";
 import { MealPlanner } from "./meal-planner";
 import { ExerciseSelector } from "./exercise-selector";
+import { UpgradePlanBanner } from "./upgrade-plan-banner";
+import { WorkoutPlanEditor } from "./workout-plan-editor";
 import { cn } from "@/lib/utils/cn";
 
 function Paywalled({ locked, children }: { locked: boolean; children: React.ReactNode }) {
@@ -56,7 +58,7 @@ export function DashboardContent() {
   const [openWorkout, setOpenWorkout] = useState<number | null>(0);
 
   const rawPlan = user?.generatedPlan ?? guestPlan;
-  const generatedPlan = rawPlan ? normalizePlan(rawPlan) : null;
+  const fullPlan = rawPlan ? normalizePlan(rawPlan) : null;
 
   useEffect(() => {
     if (!hydrated) return;
@@ -64,16 +66,16 @@ export function DashboardContent() {
       router.push("/login");
       return;
     }
-    if (!generatedPlan) {
+    if (!fullPlan) {
       router.push("/assessment");
       return;
     }
     if (user && !user.generatedPlan && guestPlan) {
       saveUserPlan(assessment, guestPlan);
     }
-  }, [hydrated, currentUserId, user, generatedPlan, guestPlan, assessment, router, saveUserPlan]);
+  }, [hydrated, currentUserId, user, fullPlan, guestPlan, assessment, router, saveUserPlan]);
 
-  if (!hydrated || !currentUserId || !user || !generatedPlan) {
+  if (!hydrated || !currentUserId || !user || !fullPlan) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-emerald-500 border-t-transparent" />
@@ -82,7 +84,11 @@ export function DashboardContent() {
   }
 
   const access = getSubscriptionAccess(user.subscription);
+  const generatedPlan = filterPlanByAccess(fullPlan, access.accessibleWeeks);
+  const lockedWeeks = fullPlan.weeks ? fullPlan.weeks.length - access.accessibleWeeks : 0;
+  const isPaid = access.hasFullPlan;
   const locked = !access.hasFullAccess;
+  const onTrial = access.status === "trial";
 
   const { userProfile, personalAssessment, fitnessPlan, nutritionPlan, lifestyleRecommendations, progressTracking } =
     generatedPlan;
@@ -117,6 +123,7 @@ export function DashboardContent() {
 
         <div className="mb-6 space-y-4">
           <SubscriptionBanner subscription={user.subscription} />
+          {onTrial && lockedWeeks > 0 && <UpgradePlanBanner lockedWeeks={lockedWeeks} />}
           <LevelBadge points={user.points ?? 0} />
         </div>
 
@@ -148,6 +155,7 @@ export function DashboardContent() {
                     ["Equipment", userProfile.gymAccess.replace("-", " ")],
                     ["Schedule", `${userProfile.daysPerWeek} days/week, ${userProfile.workoutDuration} min`],
                     ["Food Budget", `${formatZAR(userProfile.dailyFoodBudget)}/day`],
+                    ["Allergies", userProfile.allergies || "None"],
                   ].map(([label, value]) => (
                     <div key={label} className="flex justify-between border-b border-white/5 pb-2">
                       <dt className="text-foreground/50">{label}</dt>
@@ -192,7 +200,7 @@ export function DashboardContent() {
                   </h3>
                   <ul className="space-y-2">
                     {personalAssessment.strengths.map((item) => (
-                      <li key={item} className="text-sm text-foreground/70">• {item}</li>
+                      <li key={item} className="text-sm text-foreground/70">&bull; {item}</li>
                     ))}
                   </ul>
                 </div>
@@ -203,7 +211,7 @@ export function DashboardContent() {
                   </h3>
                   <ul className="space-y-2">
                     {personalAssessment.weaknesses.map((item) => (
-                      <li key={item} className="text-sm text-foreground/70">• {item}</li>
+                      <li key={item} className="text-sm text-foreground/70">&bull; {item}</li>
                     ))}
                   </ul>
                 </div>
@@ -214,7 +222,7 @@ export function DashboardContent() {
                   </h3>
                   <ul className="space-y-2">
                     {personalAssessment.keyFocusAreas.map((item) => (
-                      <li key={item} className="text-sm text-foreground/70">• {item}</li>
+                      <li key={item} className="text-sm text-foreground/70">&bull; {item}</li>
                     ))}
                   </ul>
                 </div>
@@ -226,6 +234,8 @@ export function DashboardContent() {
         {activeTab === "workouts" && (
           <Paywalled locked={locked}>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
+              {isPaid && <WorkoutPlanEditor dailyWorkouts={fitnessPlan.dailyWorkouts} />}
+
               <GlassCard>
                 <h2 className="text-lg font-semibold">Weekly Schedule</h2>
                 <p className="mt-2 text-sm text-foreground/70">{fitnessPlan.weeklySchedule}</p>
@@ -241,7 +251,7 @@ export function DashboardContent() {
                     <div>
                       <h3 className="font-semibold">{workout.day}</h3>
                       <p className="text-sm text-emerald-400">
-                        {workout.focus} · {workout.duration}
+                        {workout.focus} &middot; {workout.duration}
                       </p>
                     </div>
                     <ChevronDown
@@ -268,12 +278,25 @@ export function DashboardContent() {
                 </GlassCard>
               ))}
 
+              {onTrial && lockedWeeks > 0 && fullPlan.weeks && (
+                <div className="relative">
+                  <GlassCard className="pointer-events-none select-none opacity-40 blur-[1px]">
+                    <h3 className="font-semibold">{fullPlan.weeks[1]?.label ?? "Week 2"} Preview</h3>
+                    <p className="mt-2 text-sm text-foreground/70">
+                      {fullPlan.weeks[1]?.dailyWorkouts[0]?.focus ?? "Progressive training"} &middot;{" "}
+                      {fullPlan.weeks[1]?.dailyWorkouts.length ?? 0} workout days
+                    </p>
+                  </GlassCard>
+                  <UpgradePlanBanner lockedWeeks={lockedWeeks} variant="overlay" />
+                </div>
+              )}
+
               <GlassCard>
                 <h3 className="mb-4 font-semibold">Progressive Overload</h3>
                 <ul className="space-y-2">
                   {fitnessPlan.progressiveOverload.map((item) => (
                     <li key={item} className="flex gap-2 text-sm text-foreground/70">
-                      <span className="text-emerald-400">→</span>
+                      <span className="text-emerald-400">&rarr;</span>
                       {item}
                     </li>
                   ))}
@@ -324,9 +347,9 @@ export function DashboardContent() {
               </GlassCard>
               <div className="grid gap-6 md:grid-cols-3">
                 {[
-                  { title: "Sleep", items: lifestyleRecommendations.sleep, icon: "🌙" },
-                  { title: "Hydration", items: lifestyleRecommendations.hydration, icon: "💧" },
-                  { title: "Recovery", items: lifestyleRecommendations.recovery, icon: "🧘" },
+                  { title: "Sleep", items: lifestyleRecommendations.sleep, icon: "Moon" },
+                  { title: "Hydration", items: lifestyleRecommendations.hydration, icon: "Water" },
+                  { title: "Recovery", items: lifestyleRecommendations.recovery, icon: "Rest" },
                 ].map((section) => (
                   <GlassCard key={section.title} className="h-full">
                     <h3 className="mb-4 text-lg font-semibold">
@@ -335,7 +358,7 @@ export function DashboardContent() {
                     <ul className="space-y-3">
                       {section.items.map((item) => (
                         <li key={item} className="text-sm leading-relaxed text-foreground/70">
-                          <span className="text-emerald-400">→</span> {item}
+                          <span className="text-emerald-400">&rarr;</span> {item}
                         </li>
                       ))}
                     </ul>
@@ -370,7 +393,7 @@ export function DashboardContent() {
                 <h3 className="mb-4 font-semibold">Monthly Targets</h3>
                 <ul className="space-y-2">
                   {progressTracking.monthlyTargets.map((target) => (
-                    <li key={target} className="text-sm text-foreground/70">• {target}</li>
+                    <li key={target} className="text-sm text-foreground/70">&bull; {target}</li>
                   ))}
                 </ul>
               </GlassCard>
@@ -380,7 +403,7 @@ export function DashboardContent() {
                 <ul className="space-y-2">
                   {progressTracking.adjustmentRecommendations.map((rec) => (
                     <li key={rec} className="flex gap-2 text-sm text-foreground/70">
-                      <span className="text-emerald-400">→</span>
+                      <span className="text-emerald-400">&rarr;</span>
                       {rec}
                     </li>
                   ))}

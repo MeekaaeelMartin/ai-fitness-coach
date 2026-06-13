@@ -50,6 +50,11 @@ interface AuthStore {
   getExerciseSelection: (exerciseKey: string) => string | undefined;
   subscribe: () => { success: boolean; error?: string };
   updateProfile: (name: string) => void;
+  updateExerciseInPlan: (
+    workoutDay: string,
+    exerciseName: string,
+    updates: Partial<{ sets: number; reps: string; rest: string }>
+  ) => void;
 }
 
 type DayProgressReturn = {
@@ -286,6 +291,44 @@ export const useAuthStore = create<AuthStore>()(
           users: {
             ...state.users,
             [user.id]: { ...user, name: name.trim() },
+          },
+        }));
+        syncUser(get);
+      },
+
+      updateExerciseInPlan: (workoutDay, exerciseName, updates) => {
+        const user = get().getCurrentUser();
+        if (!user?.generatedPlan) return;
+
+        const patchExercises = (workouts: typeof user.generatedPlan.fitnessPlan.dailyWorkouts) =>
+          workouts.map((workout) =>
+            workout.day === workoutDay
+              ? {
+                  ...workout,
+                  exercises: workout.exercises.map((ex) =>
+                    ex.name === exerciseName ? { ...ex, ...updates } : ex
+                  ),
+                }
+              : workout
+          );
+
+        const plan = user.generatedPlan;
+        const updatedPlan = {
+          ...plan,
+          fitnessPlan: {
+            ...plan.fitnessPlan,
+            dailyWorkouts: patchExercises(plan.fitnessPlan.dailyWorkouts),
+          },
+          weeks: plan.weeks?.map((week) => ({
+            ...week,
+            dailyWorkouts: patchExercises(week.dailyWorkouts),
+          })),
+        };
+
+        set((state) => ({
+          users: {
+            ...state.users,
+            [user.id]: { ...user, generatedPlan: updatedPlan },
           },
         }));
         syncUser(get);

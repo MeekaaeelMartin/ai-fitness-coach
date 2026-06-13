@@ -87,7 +87,7 @@ export function SocialPostCreator() {
       <GlassCard>
         <h2 className="text-lg font-semibold">Create Social Post</h2>
         <p className="mt-1 text-sm text-foreground/60">
-          Describe the post you want. Example: &quot;December fitness motivation&quot; or &quot;Welcome post for new users&quot;.
+          Describe the post you want. Each generation picks a random layout and colour variation while keeping the site theme.
         </p>
 
         <div className="mt-6 space-y-4">
@@ -164,9 +164,16 @@ export function SocialPostCreator() {
             </div>
           )}
 
-          <p className="mt-3 text-center text-xs text-foreground/40">
-            Exports at 2× resolution ({POST_DIMENSIONS[format].width * 2} × {POST_DIMENSIONS[format].height * 2}px)
-          </p>
+          {content && (
+            <>
+              <p className="mt-2 text-center text-xs text-foreground/40">
+                Theme: {content.theme.replace(/([A-Z])/g, " $1").trim()} · Template: {content.template}
+              </p>
+              <p className="mt-1 text-center text-xs text-foreground/40">
+                Exports at 2× resolution ({POST_DIMENSIONS[format].width * 2} × {POST_DIMENSIONS[format].height * 2}px)
+              </p>
+            </>
+          )}
         </GlassCard>
 
         {/* Off-screen full-size canvas for crisp HD export */}

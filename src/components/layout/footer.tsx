@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Dumbbell } from "lucide-react";
+import { PaymentTrustBadges } from "@/components/ui/payment-trust-badges";
 import { FooterCtaLink } from "./footer-cta-link";
 
 function InstagramIcon({ className }: { className?: string }) {
@@ -59,6 +60,9 @@ export function Footer() {
               Personalised workouts and meal plans for South Africans.
               Priced in Rands. Start for free.
             </p>
+            <div className="mt-6">
+              <PaymentTrustBadges />
+            </div>
             <div className="mt-6 flex gap-3">
               {socialLinks.map((social) => (
                 <a
@@ -120,6 +124,7 @@ export function Footer() {
           <p className="text-xs text-foreground/50">
             &copy; {new Date().getFullYear()} AI Fitness Coach. All rights reserved. 🇿🇦
           </p>
+          <PaymentTrustBadges compact className="items-center sm:items-end" />
           <p className="text-xs text-foreground/50">
             Not medical advice. Consult a physician before starting any fitness programme.
           </p>

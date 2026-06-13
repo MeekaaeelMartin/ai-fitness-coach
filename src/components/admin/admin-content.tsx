@@ -36,6 +36,7 @@ export function AdminContent() {
   const user = useCurrentUser();
   const isAdmin = useIsAdmin();
   const [tab, setTab] = useState("overview");
+  const [userFilter, setUserFilter] = useState<"all" | "trial" | "active" | "expired">("all");
   const [registry, setRegistry] = useState<UserRegistry | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -128,7 +129,11 @@ export function AdminContent() {
   }
 
   const stats = registry ? registryStats(registry) : null;
-  const users = registry ? Object.values(registry.users).sort((a, b) => b.lastSeenAt.localeCompare(a.lastSeenAt)) : [];
+  const allUsers = registry ? Object.values(registry.users).sort((a, b) => b.lastSeenAt.localeCompare(a.lastSeenAt)) : [];
+  const users =
+    userFilter === "all"
+      ? allUsers
+      : allUsers.filter((u) => u.subscriptionStatus === userFilter);
 
   const tabs = [
     { id: "overview", label: "Overview", icon: <LayoutDashboard className="h-4 w-4" /> },
@@ -164,11 +169,12 @@ export function AdminContent() {
 
         {tab === "overview" && stats && (
           <div className="space-y-6">
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
               {[
                 { label: "Total Users", value: stats.totalUsers, icon: Users, color: "text-emerald-400" },
-                { label: "Subscribed (Paid)", value: stats.subscribed, icon: Crown, color: "text-amber-400" },
-                { label: "On Free Access", value: stats.onTrial, icon: TrendingUp, color: "text-teal-400" },
+                { label: "Paid Members", value: stats.subscribed, icon: Crown, color: "text-amber-400" },
+                { label: "Free Trial", value: stats.onTrial, icon: TrendingUp, color: "text-teal-400" },
+                { label: "Expired", value: stats.expired, icon: Shield, color: "text-foreground/50" },
                 { label: "With Plans", value: stats.withPlan, icon: Dumbbell, color: "text-emerald-400" },
               ].map((item) => (
                 <GlassCard key={item.label} className="!p-5">
@@ -215,16 +221,42 @@ export function AdminContent() {
 
         {tab === "users" && (
           <GlassCard className="overflow-x-auto">
-            <h3 className="mb-4 font-semibold">All Users ({users.length})</h3>
+            <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <h3 className="font-semibold">All Users ({users.length})</h3>
+              <div className="flex flex-wrap gap-2">
+                {(
+                  [
+                    { id: "all", label: "All" },
+                    { id: "trial", label: "Free Trial" },
+                    { id: "active", label: "Paid" },
+                    { id: "expired", label: "Expired" },
+                  ] as const
+                ).map((f) => (
+                  <button
+                    key={f.id}
+                    type="button"
+                    onClick={() => setUserFilter(f.id)}
+                    className={cn(
+                      "rounded-full border px-3 py-1 text-xs font-medium transition-all",
+                      userFilter === f.id
+                        ? "border-emerald-500/50 bg-emerald-500/10 text-emerald-400"
+                        : "border-white/10 bg-white/5 text-foreground/60 hover:border-white/20"
+                    )}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+            </div>
             {users.length === 0 ? (
-              <p className="text-sm text-foreground/50">No users in registry yet.</p>
+              <p className="text-sm text-foreground/50">No users match this filter.</p>
             ) : (
-              <table className="w-full min-w-[720px] text-sm">
+              <table className="w-full min-w-[800px] text-sm">
                 <thead>
                   <tr className="border-b border-white/10 text-left text-foreground/50">
                     <th className="pb-3 pr-4 font-medium">User</th>
                     <th className="pb-3 pr-4 font-medium">Status</th>
-                    <th className="pb-3 pr-4 font-medium">Plan</th>
+                    <th className="pb-3 pr-4 font-medium">Trial / Plan</th>
                     <th className="pb-3 pr-4 font-medium">Progress</th>
                     <th className="pb-3 pr-4 font-medium">Points</th>
                     <th className="pb-3 font-medium">Last Seen</th>
@@ -240,7 +272,15 @@ export function AdminContent() {
                       <td className="py-3 pr-4">
                         <StatusBadge status={u.subscriptionStatus} />
                       </td>
-                      <td className="py-3 pr-4">{u.hasPlan ? "Yes" : "No"}</td>
+                      <td className="py-3 pr-4 text-xs text-foreground/60">
+                        {u.subscriptionStatus === "trial" && u.trialEndsAt ? (
+                          <span>Trial ends {formatDateZA(new Date(u.trialEndsAt))}</span>
+                        ) : u.subscriptionStatus === "active" ? (
+                          <span>Paid · {u.hasPlan ? "Has plan" : "No plan"}</span>
+                        ) : (
+                          <span>{u.hasPlan ? "Plan · expired" : "No plan"}</span>
+                        )}
+                      </td>
                       <td className="py-3 pr-4">
                         <span className="flex items-center gap-3 text-xs text-foreground/60">
                           <span className="flex items-center gap-1">
@@ -276,7 +316,7 @@ function StatusBadge({ status }: { status: RegistryUser["subscriptionStatus"] })
     trial: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
     expired: "bg-white/5 text-foreground/50 border-white/10",
   };
-  const labels = { active: "Paid", trial: "Free Access", expired: "Expired" };
+  const labels = { active: "Paid", trial: "Free Trial", expired: "Expired" };
   return (
     <span className={cn("inline-flex rounded-full border px-2.5 py-0.5 text-xs font-medium", styles[status])}>
       {labels[status]}

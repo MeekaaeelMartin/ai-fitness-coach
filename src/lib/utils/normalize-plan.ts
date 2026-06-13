@@ -67,5 +67,33 @@ export function normalizePlan(plan: GeneratedPlan): GeneratedPlan {
       monthlyTargets: plan.progressTracking?.monthlyTargets ?? [],
       adjustmentRecommendations: plan.progressTracking?.adjustmentRecommendations ?? [],
     },
+    weeks: (plan.weeks ?? []).map((week) => ({
+      weekNumber: week.weekNumber ?? 1,
+      label: week.label ?? "Week 1",
+      dailyWorkouts: (week.dailyWorkouts ?? []).map((workout) => ({
+        day: workout.day ?? "Monday",
+        focus: workout.focus ?? "Training",
+        duration: workout.duration ?? "45 min",
+        notes: workout.notes ?? "",
+        exercises: (workout.exercises ?? []).map((exercise) => ({
+          name: exercise.name ?? "Exercise",
+          alternatives: exercise.alternatives ?? [],
+          sets: exercise.sets ?? 3,
+          reps: exercise.reps ?? "10",
+          rest: exercise.rest ?? "60s",
+          explanation: exercise.explanation ?? "",
+        })),
+      })),
+      meals: (week.meals ?? []).map((meal) => ({
+        name: meal.name ?? "Meal",
+        foods: meal.foods ?? [],
+        portionSizes: meal.portionSizes ?? "",
+        calories: meal.calories ?? 0,
+        protein: meal.protein ?? 0,
+        carbs: meal.carbs ?? 0,
+        fats: meal.fats ?? 0,
+        alternatives: meal.alternatives ?? [],
+      })),
+    })),
   };
 }

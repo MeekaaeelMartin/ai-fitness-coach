@@ -24,6 +24,13 @@ export interface DailyWorkout {
   notes: string;
 }
 
+export interface PlanWeek {
+  weekNumber: number;
+  label: string;
+  dailyWorkouts: DailyWorkout[];
+  meals: Meal[];
+}
+
 export interface FitnessPlan {
   weeklySchedule: string;
   dailyWorkouts: DailyWorkout[];
@@ -74,4 +81,5 @@ export interface GeneratedPlan {
   lifestyleRecommendations: LifestyleRecommendations;
   progressTracking: ProgressTracking;
   aiPrompt: string;
+  weeks?: PlanWeek[];
 }

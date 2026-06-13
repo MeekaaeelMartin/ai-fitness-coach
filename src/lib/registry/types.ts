@@ -7,6 +7,7 @@ export interface RegistryUser {
   createdAt: string;
   subscriptionStatus: "trial" | "active" | "expired";
   subscribedAt?: string;
+  trialEndsAt?: string;
   points: number;
   hasPlan: boolean;
   assessmentComplete: boolean;
@@ -33,8 +34,13 @@ export function userToRegistryEntry(user: UserAccount): RegistryUser {
   const mealsLogged = days.reduce((sum, d) => sum + (d.meals?.length ?? 0), 0);
 
   let subscriptionStatus: RegistryUser["subscriptionStatus"] = "expired";
-  if (user.subscription?.status === "active") subscriptionStatus = "active";
-  else if (user.subscription?.status === "trial") subscriptionStatus = "trial";
+  const now = new Date();
+  if (user.subscription?.status === "active") {
+    subscriptionStatus = "active";
+  } else if (user.subscription?.status === "trial") {
+    const trialEnd = user.subscription.trialEndsAt ? new Date(user.subscription.trialEndsAt) : null;
+    subscriptionStatus = trialEnd && trialEnd > now ? "trial" : "expired";
+  }
 
   return {
     id: user.id,
@@ -43,6 +49,7 @@ export function userToRegistryEntry(user: UserAccount): RegistryUser {
     createdAt: user.createdAt,
     subscriptionStatus,
     subscribedAt: user.subscription?.subscribedAt,
+    trialEndsAt: user.subscription?.trialEndsAt,
     points: user.points ?? 0,
     hasPlan: !!user.generatedPlan,
     assessmentComplete: !!user.assessment,
@@ -60,6 +67,7 @@ export function registryStats(registry: UserRegistry) {
     totalUsers: users.length,
     subscribed: users.filter((u) => u.subscriptionStatus === "active").length,
     onTrial: users.filter((u) => u.subscriptionStatus === "trial").length,
+    expired: users.filter((u) => u.subscriptionStatus === "expired").length,
     withPlan: users.filter((u) => u.hasPlan).length,
     totalWorkoutsLogged: users.reduce((s, u) => s + u.workoutsLogged, 0),
     totalMealsLogged: users.reduce((s, u) => s + u.mealsLogged, 0),
