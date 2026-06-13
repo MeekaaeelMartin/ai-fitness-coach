@@ -10,7 +10,6 @@ import {
   TrendingUp,
   RefreshCw,
   Shield,
-  Sparkles,
   LayoutDashboard,
 } from "lucide-react";
 import { useAppHydrated } from "@/lib/hooks/use-app-hydrated";
@@ -24,7 +23,6 @@ import { GlassCard } from "@/components/ui/glass-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs } from "@/components/ui/tabs";
-import { SocialPostCreator } from "./social-post-creator";
 import { formatDateZA } from "@/lib/utils/date";
 import { cn } from "@/lib/utils/cn";
 
@@ -138,7 +136,6 @@ export function AdminContent() {
   const tabs = [
     { id: "overview", label: "Overview", icon: <LayoutDashboard className="h-4 w-4" /> },
     { id: "users", label: "Users", icon: <Users className="h-4 w-4" /> },
-    { id: "posts", label: "Create Posts", icon: <Sparkles className="h-4 w-4" /> },
   ];
 
   return (
@@ -151,7 +148,7 @@ export function AdminContent() {
               Admin Panel
             </div>
             <h1 className="text-3xl font-bold">Dashboard</h1>
-            <p className="mt-1 text-foreground/60">User analytics, subscriptions, and social content</p>
+            <p className="mt-1 text-foreground/60">User analytics and subscriptions</p>
           </div>
           <Button variant="secondary" size="sm" onClick={() => loadData()} disabled={loading} className="gap-2">
             <RefreshCw className={cn("h-4 w-4", loading && "animate-spin")} />
@@ -304,7 +301,6 @@ export function AdminContent() {
           </GlassCard>
         )}
 
-        {tab === "posts" && <SocialPostCreator />}
       </div>
     </div>
   );
