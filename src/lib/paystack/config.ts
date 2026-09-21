@@ -8,8 +8,9 @@ export function getPaystackPlanCode(): string | undefined {
   return process.env.PAYSTACK_PLAN_CODE;
 }
 
+/** Paystack signs webhooks with the secret key (not a separate whsec). */
 export function getPaystackWebhookSecret(): string | undefined {
-  return process.env.PAYSTACK_WEBHOOK_SECRET;
+  return process.env.PAYSTACK_WEBHOOK_SECRET ?? process.env.PAYSTACK_SECRET_KEY;
 }
 
 export function getSiteUrl(): string {
