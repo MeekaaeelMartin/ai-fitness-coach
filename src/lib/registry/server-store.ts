@@ -4,8 +4,8 @@ import type { RegistryUser, UserRegistry } from "./types";
 import { emptyRegistry } from "./types";
 import { preserveServerBilling } from "@/lib/paystack/billing";
 
-const REGISTRY_KEY = "user-registry";
-const LOCAL_PATH = path.join(process.cwd(), ".data", "user-registry.json");
+const REGISTRY_KEY = "user-registry.json";
+const LOCAL_PATH = path.join(process.cwd(), ".data", REGISTRY_KEY);
 
 async function readLocalRegistry(): Promise<UserRegistry> {
   try {
@@ -21,40 +21,13 @@ async function writeLocalRegistry(registry: UserRegistry): Promise<void> {
   await fs.writeFile(LOCAL_PATH, JSON.stringify(registry, null, 2), "utf-8");
 }
 
-async function readBlobRegistry(): Promise<UserRegistry | null> {
-  try {
-    const { getStore } = await import("@netlify/blobs");
-    const store = getStore({ name: "ai-fitness-registry", consistency: "strong" });
-    const data = await store.get(REGISTRY_KEY, { type: "json" });
-    return (data as UserRegistry | null) ?? null;
-  } catch {
-    return null;
-  }
-}
-
-async function writeBlobRegistry(registry: UserRegistry): Promise<boolean> {
-  try {
-    const { getStore } = await import("@netlify/blobs");
-    const store = getStore({ name: "ai-fitness-registry", consistency: "strong" });
-    await store.setJSON(REGISTRY_KEY, registry);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
 export async function loadRegistry(): Promise<UserRegistry> {
-  const blob = await readBlobRegistry();
-  if (blob) return blob;
   return readLocalRegistry();
 }
 
 export async function saveRegistry(registry: UserRegistry): Promise<void> {
   registry.updatedAt = new Date().toISOString();
-  const savedToBlob = await writeBlobRegistry(registry);
-  if (!savedToBlob) {
-    await writeLocalRegistry(registry);
-  }
+  await writeLocalRegistry(registry);
 }
 
 export async function upsertRegistryUser(entry: RegistryUser): Promise<UserRegistry> {

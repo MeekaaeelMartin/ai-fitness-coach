@@ -102,9 +102,9 @@ console.log(`
 Next steps:
 1. Restart the Next.js dev server so it picks up .env.local
 2. In Paystack Dashboard → Settings → API Keys & Webhooks, add:
-     https://YOUR_PRODUCTION_URL/api/paystack/webhook
-3. On Netlify, set env vars:
+     https://YOUR_DOMAIN/api/paystack/webhook
+3. On Hostinger (hPanel → your Node app → Environment Variables), set:
      PAYSTACK_SECRET_KEY
      PAYSTACK_PLAN_CODE=${plan.plan_code}
-     NEXT_PUBLIC_SITE_URL=https://YOUR_PRODUCTION_URL
+     NEXT_PUBLIC_SITE_URL=https://YOUR_DOMAIN
 `);

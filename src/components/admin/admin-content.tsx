@@ -106,7 +106,7 @@ export function AdminContent() {
             </div>
             <p className="text-sm text-foreground/60">
               Enter your admin key to view user analytics. Set <code className="text-emerald-400">ADMIN_SECRET</code> in
-              Netlify environment variables.
+              your Hostinger environment variables.
             </p>
             <div className="mt-4 space-y-3">
               <Input

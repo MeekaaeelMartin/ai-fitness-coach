@@ -14,11 +14,7 @@ export function getPaystackWebhookSecret(): string | undefined {
 }
 
 export function getSiteUrl(): string {
-  const url =
-    process.env.NEXT_PUBLIC_SITE_URL ??
-    process.env.URL ??
-    process.env.DEPLOY_PRIME_URL ??
-    "http://localhost:3000";
+  const url = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
   return url.replace(/\/$/, "");
 }
 
