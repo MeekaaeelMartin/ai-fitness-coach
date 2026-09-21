@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useAssessmentStore } from "@/lib/store/assessment-store";
 import { useAuthStore } from "@/lib/store/auth-store";
 import {
@@ -16,6 +16,7 @@ import { defaultAssessmentData } from "@/lib/types/assessment";
 import { FITNESS_GOAL_LABELS } from "@/lib/types/assessment";
 import type { FitnessGoal, TrainingTime } from "@/lib/types/assessment";
 import { generatePlan } from "@/lib/ai/generate-plan";
+import { PlanGeneratingLoader } from "./plan-generating-loader";
 import { ProgressIndicator } from "./progress-indicator";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -181,24 +182,7 @@ export function AssessmentForm() {
   };
 
   if (isGenerating) {
-    return (
-      <GlassCard className="mx-auto max-w-lg text-center">
-        <div className="py-12">
-          <Loader2 className="mx-auto h-12 w-12 animate-spin text-emerald-400" />
-          <h2 className="mt-6 text-xl font-semibold">
-            Building Your Plan
-          </h2>
-          <p className="mt-2 text-sm text-foreground/60">
-            We are putting together your workouts and meals based on your answers...
-          </p>
-          <div className="mx-auto mt-8 max-w-xs">
-            <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
-              <div className="h-full animate-pulse rounded-full bg-gradient-to-r from-emerald-500 to-teal-500" style={{ width: "70%" }} />
-            </div>
-          </div>
-        </div>
-      </GlassCard>
-    );
+    return <PlanGeneratingLoader />;
   }
 
   return (

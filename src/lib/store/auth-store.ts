@@ -5,9 +5,11 @@ import type { AssessmentData } from "@/lib/types/assessment";
 import type { GeneratedPlan } from "@/lib/types/plan";
 import {
   type UserAccount,
+  type CustomMealLog,
   createDefaultProgress,
   createTrialSubscription,
   createEmptyDayProgress,
+  normalizeCustomMeal,
 } from "@/lib/types/auth";
 import { applyBillingToSubscription, demoteUnverifiedSubscription, fetchServerBilling } from "@/lib/paystack/sync-client";
 import type { ServerBilling } from "@/lib/paystack/types";
@@ -44,7 +46,12 @@ interface AuthStore {
   updateAssessment: (data: Partial<AssessmentData>) => void;
   toggleWorkout: (exerciseKey: string, date?: string) => void;
   toggleMeal: (mealName: string, date?: string) => void;
-  setCustomMeal: (mealName: string, description: string, date?: string) => void;
+  setCustomMeal: (
+    mealName: string,
+    description: string,
+    date?: string,
+    calories?: number
+  ) => void;
   setMealSubstitution: (mealName: string, substitution: string, date?: string) => void;
   setExerciseSelection: (exerciseKey: string, exerciseName: string) => void;
   getDayProgress: (date?: string) => DayProgressReturn;
@@ -63,7 +70,7 @@ interface AuthStore {
 type DayProgressReturn = {
   workouts: string[];
   meals: string[];
-  customMeals: Record<string, string>;
+  customMeals: Record<string, CustomMealLog>;
   mealSubstitutions: Record<string, string>;
 };
 
@@ -204,13 +211,24 @@ export const useAuthStore = create<AuthStore>()(
         syncUser(get);
       },
 
-      setCustomMeal: (mealName, description, date = toDateKey()) => {
+      setCustomMeal: (mealName, description, date = toDateKey(), calories) => {
         const user = get().getCurrentUser();
         if (!user) return;
 
+        const trimmed = description.trim();
+        if (!trimmed) return;
+
+        const log: CustomMealLog = {
+          description: trimmed,
+          calories:
+            typeof calories === "number" && Number.isFinite(calories) && calories >= 0
+              ? Math.round(calories)
+              : undefined,
+        };
+
         const progress = { ...(user.progress?.byDate ?? {}) };
         const day = progress[date] ?? createEmptyDayProgress();
-        const customMeals = { ...day.customMeals, [mealName]: description };
+        const customMeals = { ...day.customMeals, [mealName]: log };
         progress[date] = { ...day, customMeals };
 
         const points = awardPoints(user, POINTS.CUSTOM_MEAL);
@@ -258,13 +276,24 @@ export const useAuthStore = create<AuthStore>()(
       getDayProgress: (date = toDateKey()): DayProgressReturn => {
         const user = get().getCurrentUser();
         const empty = createEmptyDayProgress();
-        if (!user) return empty;
+        if (!user) {
+          return { workouts: [], meals: [], customMeals: {}, mealSubstitutions: {} };
+        }
         const day = user.progress?.byDate?.[date];
-        if (!day) return empty;
+        if (!day) {
+          return { workouts: [], meals: [], customMeals: {}, mealSubstitutions: {} };
+        }
+
+        const customMeals: Record<string, CustomMealLog> = {};
+        for (const [key, value] of Object.entries(day.customMeals ?? {})) {
+          const normalized = normalizeCustomMeal(value);
+          if (normalized) customMeals[key] = normalized;
+        }
+
         return {
           workouts: day.workouts ?? [],
           meals: day.meals ?? [],
-          customMeals: day.customMeals ?? {},
+          customMeals,
           mealSubstitutions: day.mealSubstitutions ?? {},
         };
       },

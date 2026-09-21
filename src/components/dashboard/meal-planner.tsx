@@ -16,8 +16,10 @@ interface MealPlannerProps {
 
 export function MealPlanner({ meals }: MealPlannerProps) {
   const { getDayProgress, setCustomMeal, setMealSubstitution } = useAuthStore();
-  const progress = getDayProgress(toDateKey());
+  const dateKey = toDateKey();
+  const progress = getDayProgress(dateKey);
   const [customInput, setCustomInput] = useState<Record<string, string>>({});
+  const [calorieInput, setCalorieInput] = useState<Record<string, string>>({});
 
   return (
     <div className="space-y-6">
@@ -36,21 +38,32 @@ export function MealPlanner({ meals }: MealPlannerProps) {
 
             <p className="text-sm text-foreground/70">
               {substitution ? (
-                <span><strong className="text-emerald-400">Your choice:</strong> {substitution}</span>
+                <span>
+                  <strong className="text-emerald-400">Your choice:</strong> {substitution}
+                </span>
               ) : (
                 meal.foods.join(" · ")
               )}
             </p>
             <p className="mt-2 text-xs text-foreground/50">Portions: {meal.portionSizes}</p>
 
+            {custom && (
+              <p className="mt-2 text-xs text-emerald-400">
+                Logged today: {custom.description}
+                {typeof custom.calories === "number" ? ` · ${custom.calories} kcal` : ""}
+              </p>
+            )}
+
             <div className="mt-4">
-              <p className="mb-2 text-xs font-medium text-foreground/50">Don&apos;t have this? Pick an alternative</p>
+              <p className="mb-2 text-xs font-medium text-foreground/50">
+                Don&apos;t have this? Pick an alternative
+              </p>
               <div className="flex flex-wrap gap-2">
                 {(meal.alternatives ?? []).map((alt) => (
                   <button
                     key={alt}
                     type="button"
-                    onClick={() => setMealSubstitution(meal.name, alt)}
+                    onClick={() => setMealSubstitution(meal.name, alt, dateKey)}
                     className={cn(
                       "rounded-lg border px-3 py-1.5 text-xs font-medium transition-all",
                       substitution === alt
@@ -69,22 +82,50 @@ export function MealPlanner({ meals }: MealPlannerProps) {
                 <Plus className="mr-1 inline h-3 w-3" />
                 Log what you actually ate
               </p>
-              <div className="flex flex-col gap-2 sm:flex-row">
+              <div className="flex flex-col gap-2">
                 <Input
                   placeholder="e.g. Chicken wrap from Woolworths"
-                  value={customInput[meal.name] ?? custom ?? ""}
-                  onChange={(e) => setCustomInput({ ...customInput, [meal.name]: e.target.value })}
+                  value={customInput[meal.name] ?? custom?.description ?? ""}
+                  onChange={(e) =>
+                    setCustomInput({ ...customInput, [meal.name]: e.target.value })
+                  }
                 />
-                <Button
-                  size="sm"
-                  className="shrink-0"
-                  onClick={() => {
-                    const val = (customInput[meal.name] ?? "").trim();
-                    if (val) setCustomMeal(meal.name, val);
-                  }}
-                >
-                  Save
-                </Button>
+                <div className="flex flex-col gap-2 sm:flex-row">
+                  <Input
+                    type="number"
+                    min={0}
+                    step={10}
+                    placeholder={`Calories (optional, plan is ${meal.calories} kcal)`}
+                    value={
+                      calorieInput[meal.name] ??
+                      (typeof custom?.calories === "number" ? String(custom.calories) : "")
+                    }
+                    onChange={(e) =>
+                      setCalorieInput({ ...calorieInput, [meal.name]: e.target.value })
+                    }
+                  />
+                  <Button
+                    size="sm"
+                    className="shrink-0"
+                    onClick={() => {
+                      const val = (customInput[meal.name] ?? custom?.description ?? "").trim();
+                      if (!val) return;
+                      const kcalRaw = (
+                        calorieInput[meal.name] ??
+                        (typeof custom?.calories === "number" ? String(custom.calories) : "")
+                      ).trim();
+                      const kcal = kcalRaw ? Number(kcalRaw) : undefined;
+                      setCustomMeal(
+                        meal.name,
+                        val,
+                        dateKey,
+                        Number.isFinite(kcal) ? kcal : undefined
+                      );
+                    }}
+                  >
+                    Save
+                  </Button>
+                </div>
               </div>
             </div>
           </GlassCard>
