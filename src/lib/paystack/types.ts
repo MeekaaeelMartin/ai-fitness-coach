@@ -1,0 +1,41 @@
+export interface PaystackInitializeResponse {
+  status: boolean;
+  message: string;
+  data?: {
+    authorization_url: string;
+    access_code: string;
+    reference: string;
+  };
+}
+
+export interface PaystackVerifyResponse {
+  status: boolean;
+  message: string;
+  data?: {
+    status: string;
+    reference: string;
+    paid_at?: string;
+    customer?: {
+      customer_code?: string;
+      email?: string;
+    };
+    plan?: {
+      plan_code?: string;
+    };
+    metadata?: Record<string, string>;
+  };
+}
+
+export interface PaystackWebhookEvent {
+  event: string;
+  data: Record<string, unknown>;
+}
+
+export interface ServerBilling {
+  subscriptionStatus: "trial" | "active" | "expired";
+  subscribedAt?: string;
+  currentPeriodEnd?: string;
+  trialEndsAt?: string;
+  paystackCustomerCode?: string;
+  paystackSubscriptionCode?: string;
+}

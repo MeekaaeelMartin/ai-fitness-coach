@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import { Crown, Clock, Zap } from "lucide-react";
 import type { Subscription } from "@/lib/types/auth";
 import { getSubscriptionAccess, MONTHLY_PRICE } from "@/lib/utils/subscription";
 import { formatZARPerMonth } from "@/lib/utils/currency";
-import { useAuthStore } from "@/lib/store/auth-store";
+import { useSubscribe } from "@/lib/hooks/use-subscribe";
 import { Button } from "@/components/ui/button";
 import { GlassCard } from "@/components/ui/glass-card";
 
@@ -14,15 +13,8 @@ interface SubscriptionBannerProps {
 }
 
 export function SubscriptionBanner({ subscription }: SubscriptionBannerProps) {
-  const { subscribe } = useAuthStore();
-  const [loading, setLoading] = useState(false);
+  const { startSubscribe, loading, error } = useSubscribe();
   const access = getSubscriptionAccess(subscription);
-
-  const handleSubscribe = () => {
-    setLoading(true);
-    subscribe();
-    setLoading(false);
-  };
 
   if (access.status === "active") {
     return (
@@ -52,7 +44,7 @@ export function SubscriptionBanner({ subscription }: SubscriptionBannerProps) {
             </p>
           </div>
         </div>
-        <Button size="sm" onClick={handleSubscribe} disabled={loading}>
+        <Button size="sm" onClick={() => startSubscribe()} disabled={loading}>
           <Zap className="h-3.5 w-3.5" />
           Subscribe at {formatZARPerMonth(MONTHLY_PRICE)}
         </Button>
@@ -70,14 +62,14 @@ export function SubscriptionBanner({ subscription }: SubscriptionBannerProps) {
             your workout and meal plan, plus full tracking and exports.
           </p>
         </div>
-        <Button onClick={handleSubscribe} disabled={loading} className="shrink-0">
+        <Button onClick={() => startSubscribe()} disabled={loading} className="shrink-0">
           <Crown className="h-4 w-4" />
           Subscribe at {formatZARPerMonth(MONTHLY_PRICE)}
         </Button>
       </div>
-      <p className="mt-3 text-xs text-foreground/40">
-        Payment gateway coming soon. Click to activate demo subscription.
-      </p>
+      {error && (
+        <p className="mt-3 text-xs text-red-400">{error}</p>
+      )}
     </GlassCard>
   );
 }

@@ -3,7 +3,7 @@
 import { Crown, Lock } from "lucide-react";
 import { MONTHLY_PRICE } from "@/lib/utils/subscription";
 import { formatZARPerMonth } from "@/lib/utils/currency";
-import { useAuthStore } from "@/lib/store/auth-store";
+import { useSubscribe } from "@/lib/hooks/use-subscribe";
 import { Button } from "@/components/ui/button";
 import { PaymentTrustBadges } from "@/components/ui/payment-trust-badges";
 
@@ -13,7 +13,7 @@ interface UpgradePlanBannerProps {
 }
 
 export function UpgradePlanBanner({ lockedWeeks = 3, variant = "inline" }: UpgradePlanBannerProps) {
-  const { subscribe } = useAuthStore();
+  const { startSubscribe, loading } = useSubscribe();
 
   if (variant === "overlay") {
     return (
@@ -28,7 +28,7 @@ export function UpgradePlanBanner({ lockedWeeks = 3, variant = "inline" }: Upgra
             {formatZARPerMonth(MONTHLY_PRICE)} to unlock {lockedWeeks} more weeks of
             workouts, meals, and progress tracking.
           </p>
-          <Button className="mt-6 w-full" onClick={() => subscribe()}>
+          <Button className="mt-6 w-full" onClick={() => startSubscribe()} disabled={loading}>
             <Crown className="h-4 w-4" />
             Upgrade to Full Plan
           </Button>
@@ -52,7 +52,7 @@ export function UpgradePlanBanner({ lockedWeeks = 3, variant = "inline" }: Upgra
             4-week workout and meal programme.
           </p>
         </div>
-        <Button onClick={() => subscribe()} className="shrink-0">
+        <Button onClick={() => startSubscribe()} disabled={loading} className="shrink-0">
           <Crown className="h-4 w-4" />
           Upgrade at {formatZARPerMonth(MONTHLY_PRICE)}
         </Button>

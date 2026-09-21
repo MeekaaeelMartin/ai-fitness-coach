@@ -9,7 +9,8 @@ import {
   createTrialSubscription,
   createEmptyDayProgress,
 } from "@/lib/types/auth";
-import { activateSubscription } from "@/lib/utils/subscription";
+import { applyBillingToSubscription, fetchServerBilling } from "@/lib/paystack/sync-client";
+import type { ServerBilling } from "@/lib/paystack/types";
 import { toDateKey } from "@/lib/utils/date";
 import { POINTS } from "@/lib/utils/gamification";
 import { normalizeUser } from "@/lib/utils/normalize-user";
@@ -48,7 +49,9 @@ interface AuthStore {
   setExerciseSelection: (exerciseKey: string, exerciseName: string) => void;
   getDayProgress: (date?: string) => DayProgressReturn;
   getExerciseSelection: (exerciseKey: string) => string | undefined;
-  subscribe: () => { success: boolean; error?: string };
+  subscribe: () => Promise<{ success: boolean; error?: string }>;
+  syncBillingFromServer: () => Promise<void>;
+  applyServerBilling: (billing: ServerBilling) => void;
   updateProfile: (name: string) => void;
   updateExerciseInPlan: (
     workoutDay: string,
@@ -271,17 +274,64 @@ export const useAuthStore = create<AuthStore>()(
         return user?.exerciseSelections?.[exerciseKey];
       },
 
-      subscribe: () => {
+      subscribe: async () => {
         const user = get().getCurrentUser();
         if (!user) return { success: false, error: "Not logged in" };
+
+        try {
+          const response = await fetch("/api/paystack/subscribe", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              userId: user.id,
+              email: user.email,
+              name: user.name,
+            }),
+          });
+
+          const data = (await response.json()) as {
+            authorizationUrl?: string;
+            error?: string;
+          };
+
+          if (!response.ok) {
+            return { success: false, error: data.error ?? "Could not start checkout" };
+          }
+
+          if (data.authorizationUrl) {
+            window.location.href = data.authorizationUrl;
+            return { success: true };
+          }
+
+          return { success: false, error: "No checkout URL returned" };
+        } catch {
+          return { success: false, error: "Could not connect to payment service" };
+        }
+      },
+
+      applyServerBilling: (billing) => {
+        const user = get().getCurrentUser();
+        if (!user) return;
         set((state) => ({
           users: {
             ...state.users,
-            [user.id]: { ...user, subscription: activateSubscription(user.subscription) },
+            [user.id]: {
+              ...user,
+              subscription: applyBillingToSubscription(user.subscription, billing),
+            },
           },
         }));
         syncUser(get);
-        return { success: true };
+      },
+
+      syncBillingFromServer: async () => {
+        const user = get().getCurrentUser();
+        if (!user) return;
+
+        const billing = await fetchServerBilling(user.id, user.email);
+        if (!billing) return;
+
+        get().applyServerBilling(billing);
       },
 
       updateProfile: (name) => {

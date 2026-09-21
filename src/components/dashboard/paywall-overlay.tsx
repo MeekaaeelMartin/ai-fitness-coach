@@ -3,12 +3,12 @@
 import { Crown, Lock } from "lucide-react";
 import { MONTHLY_PRICE } from "@/lib/utils/subscription";
 import { formatZARPerMonth } from "@/lib/utils/currency";
-import { useAuthStore } from "@/lib/store/auth-store";
+import { useSubscribe } from "@/lib/hooks/use-subscribe";
 import { Button } from "@/components/ui/button";
 import { PaymentTrustBadges } from "@/components/ui/payment-trust-badges";
 
 export function PaywallOverlay() {
-  const { subscribe } = useAuthStore();
+  const { startSubscribe, loading, error } = useSubscribe();
 
   return (
     <div className="absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-background/80 backdrop-blur-sm">
@@ -22,13 +22,18 @@ export function PaywallOverlay() {
           {formatZARPerMonth(MONTHLY_PRICE)} to unlock weeks 2–4 of your workout
           and meal plan, plus tracking and exports.
         </p>
-        <Button className="mt-6 w-full" onClick={() => subscribe()}>
+        <Button
+          className="mt-6 w-full"
+          onClick={() => startSubscribe()}
+          disabled={loading}
+        >
           <Crown className="h-4 w-4" />
           Subscribe at {formatZARPerMonth(MONTHLY_PRICE)}
         </Button>
         <p className="mt-3 text-xs text-foreground/40">
-          Cancel anytime · Payment gateway coming soon
+          Secure Paystack checkout · Cancel anytime
         </p>
+        {error && <p className="mt-2 text-xs text-red-400">{error}</p>}
         <div className="mt-4 flex justify-center">
           <PaymentTrustBadges compact />
         </div>

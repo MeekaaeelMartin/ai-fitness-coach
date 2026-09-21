@@ -8,6 +8,9 @@ export interface RegistryUser {
   subscriptionStatus: "trial" | "active" | "expired";
   subscribedAt?: string;
   trialEndsAt?: string;
+  currentPeriodEnd?: string;
+  paystackCustomerCode?: string;
+  paystackSubscriptionCode?: string;
   points: number;
   hasPlan: boolean;
   assessmentComplete: boolean;
@@ -50,6 +53,9 @@ export function userToRegistryEntry(user: UserAccount): RegistryUser {
     subscriptionStatus,
     subscribedAt: user.subscription?.subscribedAt,
     trialEndsAt: user.subscription?.trialEndsAt,
+    currentPeriodEnd: user.subscription?.currentPeriodEnd,
+    paystackCustomerCode: user.subscription?.paystackCustomerCode,
+    paystackSubscriptionCode: user.subscription?.paystackSubscriptionCode,
     points: user.points ?? 0,
     hasPlan: !!user.generatedPlan,
     assessmentComplete: !!user.assessment,

@@ -10,6 +10,8 @@ export interface Subscription {
   trialEndsAt: string;
   subscribedAt?: string;
   currentPeriodEnd?: string;
+  paystackCustomerCode?: string;
+  paystackSubscriptionCode?: string;
 }
 
 export interface DayProgress {

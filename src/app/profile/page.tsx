@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { User, Crown, LogOut, Dumbbell, ArrowRight } from "lucide-react";
+import { useSubscribe } from "@/lib/hooks/use-subscribe";
 import { useAuthStore } from "@/lib/store/auth-store";
 import { useAppHydrated } from "@/lib/hooks/use-app-hydrated";
 import { useCurrentUser } from "@/lib/hooks/use-current-user";
@@ -20,7 +21,7 @@ export default function ProfilePage() {
   const currentUserId = useAuthStore((state) => state.currentUserId);
   const user = useCurrentUser();
   const logout = useAuthStore((state) => state.logout);
-  const subscribe = useAuthStore((state) => state.subscribe);
+  const { startSubscribe, loading: subscribeLoading } = useSubscribe();
 
   useEffect(() => {
     if (!hydrated) return;
@@ -78,7 +79,11 @@ export default function ProfilePage() {
                   <p className="text-sm text-foreground/50">{access.message}</p>
                 </div>
                 {access.status !== "active" && (
-                  <Button size="sm" onClick={() => subscribe()}>
+                  <Button
+                    size="sm"
+                    onClick={() => startSubscribe()}
+                    disabled={subscribeLoading}
+                  >
                     {access.status === "trial" ? "Upgrade Early" : "Subscribe"}{" "}
                     at {formatZARPerMonth(MONTHLY_PRICE)}
                   </Button>

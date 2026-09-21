@@ -1,7 +1,8 @@
 import { promises as fs } from "fs";
 import path from "path";
-import type { UserRegistry } from "./types";
+import type { RegistryUser, UserRegistry } from "./types";
 import { emptyRegistry } from "./types";
+import { preserveServerBilling } from "@/lib/paystack/billing";
 
 const REGISTRY_KEY = "user-registry";
 const LOCAL_PATH = path.join(process.cwd(), ".data", "user-registry.json");
@@ -56,9 +57,52 @@ export async function saveRegistry(registry: UserRegistry): Promise<void> {
   }
 }
 
-export async function upsertRegistryUser(entry: UserRegistry["users"][string]): Promise<UserRegistry> {
+export async function upsertRegistryUser(entry: RegistryUser): Promise<UserRegistry> {
   const registry = await loadRegistry();
-  registry.users[entry.id] = entry;
+  const existing = registry.users[entry.id];
+  registry.users[entry.id] = preserveServerBilling(entry, existing);
   await saveRegistry(registry);
   return registry;
+}
+
+export async function findRegistryUser(
+  userId?: string,
+  email?: string
+): Promise<RegistryUser | null> {
+  const registry = await loadRegistry();
+  if (userId && registry.users[userId]) {
+    return registry.users[userId];
+  }
+  if (email) {
+    const normalized = email.trim().toLowerCase();
+    return Object.values(registry.users).find((user) => user.email === normalized) ?? null;
+  }
+  return null;
+}
+
+export async function updateUserBilling(
+  userId: string,
+  billing: Partial<
+    Pick<
+      RegistryUser,
+      | "subscriptionStatus"
+      | "subscribedAt"
+      | "currentPeriodEnd"
+      | "trialEndsAt"
+      | "paystackCustomerCode"
+      | "paystackSubscriptionCode"
+    >
+  >
+): Promise<RegistryUser | null> {
+  const registry = await loadRegistry();
+  const user = registry.users[userId];
+  if (!user) return null;
+
+  registry.users[userId] = {
+    ...user,
+    ...billing,
+    lastSeenAt: new Date().toISOString(),
+  };
+  await saveRegistry(registry);
+  return registry.users[userId];
 }
