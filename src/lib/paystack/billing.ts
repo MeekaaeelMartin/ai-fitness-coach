@@ -152,7 +152,6 @@ async function handleChargeSuccess(data: Record<string, unknown>): Promise<void>
 
   try {
     const payment = assertSuccessfulPayment(data, { userId, email });
-    if (!payment.customerCode) return;
 
     await activateUserBilling({
       userId: payment.userId,
