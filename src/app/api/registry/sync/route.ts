@@ -1,19 +1,33 @@
 import { NextResponse } from "next/server";
 import type { RegistryUser } from "@/lib/registry/types";
-import { upsertRegistryUser } from "@/lib/registry/server-store";
+import { findRegistryUser, upsertRegistryUser } from "@/lib/registry/server-store";
+import { registryUserToBilling } from "@/lib/paystack/billing";
 
 export const runtime = "nodejs";
 
-/** Billing fields are never accepted from the browser. */
-function stripClientBilling(entry: RegistryUser): RegistryUser {
+/** Only non-billing engagement fields may come from the browser. */
+function clientSafeFields(entry: RegistryUser): RegistryUser {
   return {
-    ...entry,
-    subscriptionStatus:
-      entry.subscriptionStatus === "active" ? "trial" : entry.subscriptionStatus,
+    id: entry.id,
+    email: entry.email.trim().toLowerCase(),
+    name: entry.name || "Member",
+    createdAt: entry.createdAt || new Date().toISOString(),
+    subscriptionStatus: "trial",
+    trialEndsAt: undefined,
     subscribedAt: undefined,
     currentPeriodEnd: undefined,
     paystackCustomerCode: undefined,
     paystackSubscriptionCode: undefined,
+    points: Math.max(0, Math.min(Number(entry.points) || 0, 1_000_000)),
+    hasPlan: Boolean(entry.hasPlan),
+    assessmentComplete: Boolean(entry.assessmentComplete),
+    workoutsLogged: Math.max(0, Number(entry.workoutsLogged) || 0),
+    mealsLogged: Math.max(0, Number(entry.mealsLogged) || 0),
+    daysActive: Math.max(0, Number(entry.daysActive) || 0),
+    lastSeenAt: new Date().toISOString(),
+    fitnessGoals: Array.isArray(entry.fitnessGoals)
+      ? entry.fitnessGoals.slice(0, 20).map(String)
+      : [],
   };
 }
 
@@ -24,15 +38,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Invalid user data" }, { status: 400 });
     }
 
-    await upsertRegistryUser(
-      stripClientBilling({
-        ...entry,
-        email: entry.email.trim().toLowerCase(),
-        lastSeenAt: new Date().toISOString(),
-      })
-    );
+    const safe = clientSafeFields(entry);
+    await upsertRegistryUser(safe);
+    const saved = await findRegistryUser(safe.id, safe.email);
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({
+      ok: true,
+      billing: saved ? registryUserToBilling(saved) : null,
+    });
   } catch {
     return NextResponse.json({ error: "Sync failed" }, { status: 500 });
   }

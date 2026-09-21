@@ -60,7 +60,7 @@ export async function POST(request: Request) {
       subscribedAt: payment.paidAt,
     });
 
-    if (!updated) {
+    if (!updated || updated.subscriptionStatus !== "active") {
       return NextResponse.json({ error: "Could not update subscription" }, { status: 500 });
     }
 

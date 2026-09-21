@@ -24,8 +24,8 @@ export interface ValidatedPayment {
   paidAt: string;
   amount: number;
   currency: string;
-  customerCode?: string;
-  customerEmail?: string;
+  customerCode: string;
+  customerEmail: string;
   userId: string;
   planCode?: string;
 }
@@ -78,8 +78,16 @@ export function assertSuccessfulPayment(
 
   const customer = asRecord(data.customer);
   const customerEmail = readString(customer?.email)?.toLowerCase();
-  if (customerEmail && customerEmail !== expected.email.trim().toLowerCase()) {
+  if (!customerEmail) {
+    throw new PaymentValidationError("Payment is missing customer email");
+  }
+  if (customerEmail !== expected.email.trim().toLowerCase()) {
     throw new PaymentValidationError("Payment email does not match this account");
+  }
+
+  const customerCode = readString(customer?.customer_code);
+  if (!customerCode) {
+    throw new PaymentValidationError("Payment is missing Paystack customer code");
   }
 
   const reference = readString(data.reference);
@@ -94,7 +102,7 @@ export function assertSuccessfulPayment(
     paidAt,
     amount,
     currency,
-    customerCode: readString(customer?.customer_code),
+    customerCode,
     customerEmail,
     userId: metadataUserId,
     planCode: readString(plan?.plan_code) ?? readString(data.plan),

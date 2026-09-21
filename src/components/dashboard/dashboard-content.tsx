@@ -38,12 +38,14 @@ import { WorkoutPlanEditor } from "./workout-plan-editor";
 import { cn } from "@/lib/utils/cn";
 
 function Paywalled({ locked, children }: { locked: boolean; children: React.ReactNode }) {
-  return (
-    <div className="relative">
-      {children}
-      {locked && <PaywallOverlay />}
-    </div>
-  );
+  if (locked) {
+    return (
+      <div className="relative min-h-[240px]">
+        <PaywallOverlay />
+      </div>
+    );
+  }
+  return <>{children}</>;
 }
 
 export function DashboardContent() {

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { findRegistryUser, updateUserBilling } from "@/lib/registry/server-store";
-import { registryUserToBilling } from "@/lib/paystack/billing";
+import { hasPaidProof, registryUserToBilling } from "@/lib/paystack/billing";
 
 export const runtime = "nodejs";
 
@@ -19,13 +19,22 @@ export async function GET(request: Request) {
   }
 
   // Demote illegitimate "active" without Paystack payment proof
-  const hasPaidProof = Boolean(user.paystackCustomerCode || user.paystackSubscriptionCode);
-  if (user.subscriptionStatus === "active" && (!user.subscribedAt || !hasPaidProof)) {
+  if (user.subscriptionStatus === "active" && (!user.subscribedAt || !hasPaidProof(user))) {
     const demoted = await updateUserBilling(user.id, {
       subscriptionStatus: "expired",
       currentPeriodEnd: new Date().toISOString(),
     });
-    user = demoted ?? user;
+    user = demoted ?? { ...user, subscriptionStatus: "expired" };
+  }
+
+  // Expire lapsed trials on read
+  if (user.subscriptionStatus === "trial" && user.trialEndsAt) {
+    if (new Date(user.trialEndsAt) <= new Date()) {
+      const demoted = await updateUserBilling(user.id, {
+        subscriptionStatus: "expired",
+      });
+      user = demoted ?? { ...user, subscriptionStatus: "expired" };
+    }
   }
 
   return NextResponse.json({ billing: registryUserToBilling(user) });

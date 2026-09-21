@@ -10,20 +10,34 @@ export function RegistrySync() {
   const hydrated = useAppHydrated();
   const user = useCurrentUser();
   const syncBillingFromServer = useAuthStore((state) => state.syncBillingFromServer);
+  const applyServerBilling = useAuthStore((state) => state.applyServerBilling);
 
   useEffect(() => {
     if (!hydrated || !user) return;
 
-    syncBillingFromServer();
-    syncUserToRegistry(user);
+    let cancelled = false;
+
+    async function sync() {
+      // Registry sync returns server-owned billing (incl. trialEndsAt)
+      const billingFromSync = await syncUserToRegistry(user!);
+      if (cancelled) return;
+      if (billingFromSync) {
+        applyServerBilling(billingFromSync);
+      }
+      await syncBillingFromServer();
+    }
+
+    sync();
 
     const interval = setInterval(() => {
-      syncBillingFromServer();
-      syncUserToRegistry(user);
+      sync();
     }, 60_000);
 
-    return () => clearInterval(interval);
-  }, [hydrated, user, syncBillingFromServer]);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, [hydrated, user, syncBillingFromServer, applyServerBilling]);
 
   return null;
 }

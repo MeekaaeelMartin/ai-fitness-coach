@@ -1,16 +1,22 @@
 import type { UserAccount } from "@/lib/types/auth";
 import { userToRegistryEntry } from "@/lib/registry/types";
+import type { ServerBilling } from "@/lib/paystack/types";
 
-export async function syncUserToRegistry(user: UserAccount): Promise<void> {
+export async function syncUserToRegistry(
+  user: UserAccount
+): Promise<ServerBilling | null> {
   try {
     const entry = userToRegistryEntry(user);
-    await fetch("/api/registry/sync", {
+    const response = await fetch("/api/registry/sync", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(entry),
     });
+    if (!response.ok) return null;
+    const data = (await response.json()) as { billing?: ServerBilling };
+    return data.billing ?? null;
   } catch {
-    // Non-blocking background sync
+    return null;
   }
 }
 

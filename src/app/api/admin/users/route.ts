@@ -8,10 +8,11 @@ export const runtime = "nodejs";
 function verifyAdmin(request: Request): boolean {
   const email = request.headers.get("x-admin-email")?.trim().toLowerCase();
   const key = request.headers.get("x-admin-key");
-  const secret = process.env.ADMIN_SECRET;
+  const secret = process.env.ADMIN_SECRET?.trim();
 
+  // Fail closed — admin is disabled until ADMIN_SECRET is configured
+  if (!secret) return false;
   if (email !== ADMIN_EMAIL) return false;
-  if (!secret) return true;
   return key === secret;
 }
 

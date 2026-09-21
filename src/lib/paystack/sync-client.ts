@@ -17,6 +17,22 @@ export function applyBillingToSubscription(
   };
 }
 
+/** Clear any client-claimed paid access when server has no billing record. */
+export function demoteUnverifiedSubscription(subscription: Subscription): Subscription {
+  const now = new Date();
+  const trialEnd = subscription.trialEndsAt ? new Date(subscription.trialEndsAt) : null;
+  const trialStillValid = Boolean(trialEnd && trialEnd > now);
+
+  return {
+    ...subscription,
+    status: trialStillValid ? "trial" : "expired",
+    subscribedAt: undefined,
+    currentPeriodEnd: undefined,
+    paystackCustomerCode: undefined,
+    paystackSubscriptionCode: undefined,
+  };
+}
+
 export async function fetchServerBilling(
   userId: string,
   email: string

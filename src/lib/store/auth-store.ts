@@ -9,7 +9,7 @@ import {
   createTrialSubscription,
   createEmptyDayProgress,
 } from "@/lib/types/auth";
-import { applyBillingToSubscription, fetchServerBilling } from "@/lib/paystack/sync-client";
+import { applyBillingToSubscription, demoteUnverifiedSubscription, fetchServerBilling } from "@/lib/paystack/sync-client";
 import type { ServerBilling } from "@/lib/paystack/types";
 import { toDateKey } from "@/lib/utils/date";
 import { POINTS } from "@/lib/utils/gamification";
@@ -329,7 +329,26 @@ export const useAuthStore = create<AuthStore>()(
         if (!user) return;
 
         const billing = await fetchServerBilling(user.id, user.email);
-        if (!billing) return;
+        if (!billing) {
+          // No server record (or lookup failed) — never keep a client-spoofed paid state
+          const claimedPaid =
+            user.subscription.status === "active" ||
+            Boolean(user.subscription.paystackCustomerCode) ||
+            Boolean(user.subscription.paystackSubscriptionCode);
+          if (claimedPaid) {
+            set((state) => ({
+              users: {
+                ...state.users,
+                [user.id]: {
+                  ...user,
+                  subscription: demoteUnverifiedSubscription(user.subscription),
+                },
+              },
+            }));
+            syncUser(get);
+          }
+          return;
+        }
 
         get().applyServerBilling(billing);
       },

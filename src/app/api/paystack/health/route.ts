@@ -1,9 +1,12 @@
 import { NextResponse } from "next/server";
-import { getPaystackDiagnostics } from "@/lib/paystack/config";
+import { isPaystackConfigured } from "@/lib/paystack/config";
 
 export const runtime = "nodejs";
 
-/** Safe config check — no secret values returned. */
+/** Minimal health — does not expose keys, plan codes, or URLs. */
 export async function GET() {
-  return NextResponse.json(getPaystackDiagnostics());
+  return NextResponse.json({
+    ok: true,
+    paystackConfigured: isPaystackConfigured(),
+  });
 }
