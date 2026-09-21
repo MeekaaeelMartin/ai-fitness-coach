@@ -40,17 +40,44 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-foreground">3. Free Access &amp; Subscription</h2>
+            <h2 className="text-lg font-semibold text-foreground">3. Free Trial &amp; Subscription</h2>
             <p>
-              New users get {TRIAL_DAYS} days of full access at no cost.
-              After that, continued access requires a subscription
-              of {formatZARPerMonth(MONTHLY_PRICE)}. Pricing may change with reasonable notice.
-              Payment processing will be handled by a secure third-party provider when launched.
+              New users receive a {TRIAL_DAYS}-day free trial that includes <strong>Week 1</strong> of
+              their workout and meal plan. No card is required to start the trial.
+            </p>
+            <p className="mt-3">
+              Full access to the complete programme (including weeks 2–4 and continued Pro
+              features) requires a paid subscription of {formatZARPerMonth(MONTHLY_PRICE)}.
+              Pricing is in South African Rands and may change with reasonable notice.
+            </p>
+            <p className="mt-3">
+              Payments are processed securely by <strong>Paystack</strong>. By subscribing you also
+              agree to Paystack&apos;s applicable terms. Successful payment unlocks Pro access for
+              the paid billing period.
             </p>
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-foreground">4. User Responsibilities</h2>
+            <h2 className="text-lg font-semibold text-foreground">4. Billing, Cancel &amp; Refunds</h2>
+            <ul className="list-disc space-y-1 pl-5">
+              <li>Subscriptions renew monthly until cancelled.</li>
+              <li>
+                To cancel, email{" "}
+                <a href="mailto:support@aifitnesscoach.co.za" className="text-emerald-400">
+                  support@aifitnesscoach.co.za
+                </a>{" "}
+                from your account email. Access continues until the end of the paid period.
+              </li>
+              <li>
+                Refund requests are considered case-by-case within 7 days of a charge if Pro
+                access was not meaningfully used, subject to Paystack and applicable consumer law.
+              </li>
+              <li>Failed payments may result in suspension of Pro access.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-lg font-semibold text-foreground">5. User Responsibilities</h2>
             <ul className="list-disc space-y-1 pl-5">
               <li>Provide accurate information in your fitness assessment</li>
               <li>Keep your account credentials secure</li>
@@ -60,7 +87,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-foreground">5. Health &amp; Safety Disclaimer</h2>
+            <h2 className="text-lg font-semibold text-foreground">6. Health &amp; Safety Disclaimer</h2>
             <p>
               You participate in any workout or nutrition plan at your own risk. AI Fitness Coach,
               its owners, and affiliates are not liable for any injury, illness, or damages arising
@@ -69,7 +96,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-foreground">6. Intellectual Property</h2>
+            <h2 className="text-lg font-semibold text-foreground">7. Intellectual Property</h2>
             <p>
               All content, branding, and software on this platform are owned by AI Fitness Coach.
               You may download and use your personal plan for individual use only.
@@ -77,15 +104,15 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-foreground">7. Limitation of Liability</h2>
+            <h2 className="text-lg font-semibold text-foreground">8. Limitation of Liability</h2>
             <p>
               To the fullest extent permitted by South African law, our liability is limited to the
-              amount you paid for the service in the preceding 12 months, or R0 during free access.
+              amount you paid for the service in the preceding 12 months, or R0 during free trial access.
             </p>
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-foreground">8. Governing Law</h2>
+            <h2 className="text-lg font-semibold text-foreground">9. Governing Law</h2>
             <p>
               These terms are governed by the laws of the Republic of South Africa. Disputes shall
               be subject to the jurisdiction of South African courts.
@@ -93,7 +120,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-foreground">9. Contact</h2>
+            <h2 className="text-lg font-semibold text-foreground">10. Contact</h2>
             <p>
               Questions? Email{" "}
               <a href="mailto:support@aifitnesscoach.co.za" className="text-emerald-400">

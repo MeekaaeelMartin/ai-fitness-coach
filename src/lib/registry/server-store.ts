@@ -5,11 +5,21 @@ import { emptyRegistry } from "./types";
 import { preserveServerBilling } from "@/lib/paystack/billing";
 
 const REGISTRY_KEY = "user-registry.json";
-const LOCAL_PATH = path.join(process.cwd(), ".data", REGISTRY_KEY);
+
+/** Prefer REGISTRY_DATA_PATH on Hostinger so billing survives redeploys. */
+function getRegistryPath(): string {
+  const custom = process.env.REGISTRY_DATA_PATH?.trim();
+  if (custom) {
+    return path.isAbsolute(custom)
+      ? path.join(custom, REGISTRY_KEY)
+      : path.join(process.cwd(), custom, REGISTRY_KEY);
+  }
+  return path.join(process.cwd(), ".data", REGISTRY_KEY);
+}
 
 async function readLocalRegistry(): Promise<UserRegistry> {
   try {
-    const raw = await fs.readFile(LOCAL_PATH, "utf-8");
+    const raw = await fs.readFile(getRegistryPath(), "utf-8");
     return JSON.parse(raw) as UserRegistry;
   } catch {
     return emptyRegistry();
@@ -17,8 +27,9 @@ async function readLocalRegistry(): Promise<UserRegistry> {
 }
 
 async function writeLocalRegistry(registry: UserRegistry): Promise<void> {
-  await fs.mkdir(path.dirname(LOCAL_PATH), { recursive: true });
-  await fs.writeFile(LOCAL_PATH, JSON.stringify(registry, null, 2), "utf-8");
+  const filePath = getRegistryPath();
+  await fs.mkdir(path.dirname(filePath), { recursive: true });
+  await fs.writeFile(filePath, JSON.stringify(registry, null, 2), "utf-8");
 }
 
 export async function loadRegistry(): Promise<UserRegistry> {

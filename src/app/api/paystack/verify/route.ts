@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { verifyTransaction } from "@/lib/paystack/api";
 import { activateUserBilling } from "@/lib/paystack/billing";
-import { getPaystackDiagnostics, isPaystackConfigured } from "@/lib/paystack/config";
+import { isPaystackConfigured } from "@/lib/paystack/config";
 import {
   assertSuccessfulPayment,
   PaymentValidationError,
@@ -12,10 +12,7 @@ export const runtime = "nodejs";
 export async function POST(request: Request) {
   if (!isPaystackConfigured()) {
     return NextResponse.json(
-      {
-        error: "Paystack is not configured on the server",
-        diagnostics: getPaystackDiagnostics(),
-      },
+      { error: "Paystack is not configured on the server" },
       { status: 503 }
     );
   }

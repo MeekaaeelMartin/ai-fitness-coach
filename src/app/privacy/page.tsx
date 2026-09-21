@@ -22,45 +22,58 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-lg font-semibold text-foreground">1. Introduction</h2>
             <p>
-              AI Fitness Coach (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is committed to protecting your privacy.
-              This policy explains how we collect, use, and safeguard your information when you use our
-              website and services in South Africa, in accordance with the Protection of Personal Information Act (POPIA).
+              AI Fitness Coach (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) operates aifitnesscoach.co.za and is
+              committed to protecting your privacy in line with the Protection of Personal
+              Information Act 4 of 2013 (POPIA).
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-semibold text-foreground">2. Information We Collect</h2>
             <ul className="list-disc pl-5 space-y-1">
-              <li>Account information: name, email address, password</li>
-              <li>Fitness assessment data: age, weight, height, goals, health history, dietary preferences</li>
-              <li>Usage data: workout and meal logs, points, exercise selections</li>
-              <li>Technical data: browser type, device information, IP address</li>
+              <li>Account information: name, email address, and password</li>
+              <li>Fitness assessment data: age, weight, height, goals, health notes, dietary preferences</li>
+              <li>Usage data: workout and meal logs, points, and exercise selections</li>
+              <li>Billing data: subscription status, Paystack customer/subscription references, payment confirmation timestamps</li>
+              <li>Technical data: browser type, device information, and IP address</li>
             </ul>
           </section>
 
           <section>
             <h2 className="text-lg font-semibold text-foreground">3. How We Use Your Information</h2>
-            <p>We use your data to:</p>
             <ul className="list-disc pl-5 space-y-1">
               <li>Generate personalised workout and meal plans</li>
-              <li>Track your progress and award achievement points</li>
-              <li>Improve our services and user experience</li>
-              <li>Communicate important account or service updates</li>
+              <li>Track progress and manage your free trial / paid subscription</li>
+              <li>Process payments and prevent fraud via our payment provider</li>
+              <li>Improve the service and communicate important account updates</li>
             </ul>
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-foreground">4. Data Storage</h2>
+            <h2 className="text-lg font-semibold text-foreground">4. Data Storage &amp; Processors</h2>
             <p>
-              Currently, account and plan data is stored locally in your browser. When we introduce
-              cloud storage, we will update this policy and notify you. We do not sell your personal
-              information to third parties.
+              Your plan and progress may be stored in your browser for speed, while account
+              engagement and billing status are also stored on our servers so we can restore
+              paid access after payment. Payment card details are never stored by us.
+            </p>
+            <p className="mt-3">
+              Payments are processed by <strong>Paystack</strong>, an independent payment service
+              provider. Paystack may process data in jurisdictions outside South Africa under
+              their own privacy terms. We do not sell your personal information.
             </p>
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-foreground">5. Your Rights (POPIA)</h2>
-            <p>Under POPIA, you have the right to:</p>
+            <h2 className="text-lg font-semibold text-foreground">5. Retention</h2>
+            <p>
+              We keep account and billing records for as long as your account is active and for
+              a reasonable period afterwards for legal, tax, and dispute purposes. You may request
+              deletion of personal data subject to those obligations.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-lg font-semibold text-foreground">6. Your Rights (POPIA)</h2>
             <ul className="list-disc pl-5 space-y-1">
               <li>Access the personal information we hold about you</li>
               <li>Request correction or deletion of your data</li>
@@ -70,20 +83,25 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-foreground">6. Health Disclaimer</h2>
+            <h2 className="text-lg font-semibold text-foreground">7. Health Disclaimer</h2>
             <p>
-              Information provided through AI Fitness Coach is for general fitness and wellness purposes
-              only. It is not medical advice. Consult a qualified healthcare professional before starting
-              any exercise or nutrition programme.
+              Information provided through AI Fitness Coach is for general fitness and wellness
+              purposes only. It is not medical advice. Consult a qualified healthcare professional
+              before starting any exercise or nutrition programme.
             </p>
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-foreground">7. Contact</h2>
+            <h2 className="text-lg font-semibold text-foreground">8. Contact</h2>
             <p>
-              For privacy enquiries, contact us at{" "}
+              Privacy enquiries:{" "}
               <a href="mailto:privacy@aifitnesscoach.co.za" className="text-emerald-400">
                 privacy@aifitnesscoach.co.za
+              </a>
+              <br />
+              Support:{" "}
+              <a href="mailto:support@aifitnesscoach.co.za" className="text-emerald-400">
+                support@aifitnesscoach.co.za
               </a>
             </p>
           </section>

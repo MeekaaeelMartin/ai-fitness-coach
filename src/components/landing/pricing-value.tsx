@@ -47,10 +47,10 @@ export function PricingValue() {
                   <span className="text-foreground/50">to begin</span>
                 </div>
                 <p className="mt-2 text-sm text-foreground/60">
-                  Then {formatZARPerMonth(MONTHLY_PRICE)} for full access
+                  Then {formatZARPerMonth(MONTHLY_PRICE)} for the full 4-week plan
                 </p>
                 <p className="mt-1 text-xs text-foreground/40">
-                  No credit card. Cancel anytime.
+                  Free trial includes Week 1 · No card to start · Cancel anytime
                 </p>
               </div>
 

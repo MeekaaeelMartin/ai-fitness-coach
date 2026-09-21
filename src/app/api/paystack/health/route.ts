@@ -1,12 +1,20 @@
 import { NextResponse } from "next/server";
-import { isPaystackConfigured } from "@/lib/paystack/config";
+import { getPaystackSecretKey, isPaystackConfigured } from "@/lib/paystack/config";
 
 export const runtime = "nodejs";
 
-/** Minimal health — does not expose keys, plan codes, or URLs. */
+/** Minimal health — exposes mode so you can confirm live vs test without leaking secrets. */
 export async function GET() {
+  const key = getPaystackSecretKey();
+  const mode = key?.startsWith("sk_live_")
+    ? "live"
+    : key?.startsWith("sk_test_")
+      ? "test"
+      : "none";
+
   return NextResponse.json({
     ok: true,
     paystackConfigured: isPaystackConfigured(),
+    mode,
   });
 }

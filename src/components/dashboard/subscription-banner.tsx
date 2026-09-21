@@ -32,22 +32,25 @@ export function SubscriptionBanner({ subscription }: SubscriptionBannerProps) {
 
   if (access.status === "trial") {
     return (
-      <GlassCard className="!py-3 !px-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-emerald-500/20 bg-emerald-500/5">
-        <div className="flex items-center gap-3">
-          <Clock className="h-5 w-5 text-emerald-400" />
-          <div>
-            <p className="text-sm font-medium">Free Trial Active</p>
-            <p className="text-xs text-foreground/50">
-              {access.daysRemaining} day{access.daysRemaining === 1 ? "" : "s"} left ·
-              Week 1 workout &amp; meal plan included ·
-              Then {formatZARPerMonth(MONTHLY_PRICE)} for the full 4-week plan
-            </p>
+      <GlassCard className="!py-3 !px-5 border-emerald-500/20 bg-emerald-500/5">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-3">
+            <Clock className="h-5 w-5 text-emerald-400" />
+            <div>
+              <p className="text-sm font-medium">Free Trial Active</p>
+              <p className="text-xs text-foreground/50">
+                {access.daysRemaining} day{access.daysRemaining === 1 ? "" : "s"} left ·
+                Week 1 workout &amp; meal plan included ·
+                Then {formatZARPerMonth(MONTHLY_PRICE)} for the full 4-week plan
+              </p>
+            </div>
           </div>
+          <Button size="sm" onClick={() => startSubscribe()} disabled={loading}>
+            <Zap className="h-3.5 w-3.5" />
+            Subscribe at {formatZARPerMonth(MONTHLY_PRICE)}
+          </Button>
         </div>
-        <Button size="sm" onClick={() => startSubscribe()} disabled={loading}>
-          <Zap className="h-3.5 w-3.5" />
-          Subscribe at {formatZARPerMonth(MONTHLY_PRICE)}
-        </Button>
+        {error && <p className="mt-2 text-xs text-red-400">{error}</p>}
       </GlassCard>
     );
   }

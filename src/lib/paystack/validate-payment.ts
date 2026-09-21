@@ -1,4 +1,4 @@
-import { monthlyAmountInCents } from "./config";
+import { getPaystackPlanCode, monthlyAmountInCents } from "./config";
 
 export class PaymentValidationError extends Error {
   constructor(message: string) {
@@ -96,6 +96,13 @@ export function assertSuccessfulPayment(
   }
 
   const plan = asRecord(data.plan);
+  const expectedPlan = getPaystackPlanCode();
+  const paidPlan =
+    readString(plan?.plan_code) ??
+    (typeof data.plan === "string" ? data.plan : undefined);
+  if (expectedPlan && paidPlan && paidPlan !== expectedPlan) {
+    throw new PaymentValidationError("Payment plan does not match this product");
+  }
 
   return {
     reference,
@@ -105,7 +112,7 @@ export function assertSuccessfulPayment(
     customerCode,
     customerEmail,
     userId: metadataUserId,
-    planCode: readString(plan?.plan_code) ?? readString(data.plan),
+    planCode: paidPlan,
   };
 }
 

@@ -13,7 +13,7 @@ interface UpgradePlanBannerProps {
 }
 
 export function UpgradePlanBanner({ lockedWeeks = 3, variant = "inline" }: UpgradePlanBannerProps) {
-  const { startSubscribe, loading } = useSubscribe();
+  const { startSubscribe, loading, error } = useSubscribe();
 
   if (variant === "overlay") {
     return (
@@ -32,6 +32,7 @@ export function UpgradePlanBanner({ lockedWeeks = 3, variant = "inline" }: Upgra
             <Crown className="h-4 w-4" />
             Upgrade to Full Plan
           </Button>
+          {error && <p className="mt-3 text-xs text-red-400">{error}</p>}
           <div className="mt-4 flex justify-center">
             <PaymentTrustBadges compact />
           </div>
@@ -57,6 +58,7 @@ export function UpgradePlanBanner({ lockedWeeks = 3, variant = "inline" }: Upgra
           Upgrade at {formatZARPerMonth(MONTHLY_PRICE)}
         </Button>
       </div>
+      {error && <p className="mt-3 text-xs text-red-400">{error}</p>}
     </div>
   );
 }
