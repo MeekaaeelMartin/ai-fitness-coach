@@ -158,7 +158,7 @@ function buildWeekWorkouts(
 }
 
 export async function generatePlan(data: AssessmentData): Promise<GeneratedPlan> {
-  await new Promise((resolve) => setTimeout(resolve, 2500));
+  await new Promise((resolve) => setTimeout(resolve, 4200));
 
   const aiPrompt = buildAIPrompt(data);
   const calories = calculateCalories(data);
