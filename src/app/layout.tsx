@@ -65,6 +65,9 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
+  verification: {
+    google: "X54tG-lOA0D_C2gB5aCxoTvjE2Vf7BzZ4RjUk2FFdpY",
+  },
   other: {
     "geo.region": "ZA",
     "geo.placename": "South Africa",
