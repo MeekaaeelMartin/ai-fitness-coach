@@ -1,13 +1,16 @@
 import { NextResponse } from "next/server";
 import { initializeSubscriptionCheckout } from "@/lib/paystack/api";
-import { isPaystackConfigured } from "@/lib/paystack/config";
+import { getPaystackDiagnostics, isPaystackConfigured } from "@/lib/paystack/config";
 
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
   if (!isPaystackConfigured()) {
     return NextResponse.json(
-      { error: "Paystack is not configured on the server" },
+      {
+        error: "Paystack is not configured on the server",
+        diagnostics: getPaystackDiagnostics(),
+      },
       { status: 503 }
     );
   }
@@ -34,7 +37,10 @@ export async function POST(request: Request) {
 
     if (!result.status || !result.data?.authorization_url) {
       return NextResponse.json(
-        { error: result.message ?? "Could not start checkout" },
+        {
+          error: result.message ?? "Could not start checkout",
+          diagnostics: getPaystackDiagnostics(),
+        },
         { status: 502 }
       );
     }
@@ -45,6 +51,9 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Checkout failed";
-    return NextResponse.json({ error: message }, { status: 500 });
+    return NextResponse.json(
+      { error: message, diagnostics: getPaystackDiagnostics() },
+      { status: 500 }
+    );
   }
 }
