@@ -6,6 +6,13 @@ import { RegistrySync } from "@/components/providers/registry-sync";
 import { CustomCursor } from "@/components/effects/custom-cursor";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import {
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_NAME,
+  SITE_TAGLINE,
+  SITE_URL,
+} from "@/lib/seo/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,16 +26,49 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI Fitness Coach | Personalised Workout & Meal Plans for South Africa",
-  description:
-    "Get a fully personalised workout and meal plan in Rands, tailored to your body, goals, and budget. Start for free. From R500/month.",
-  keywords: [
-    "AI fitness coach",
-    "personalised workout plan",
-    "meal plan",
-    "fitness assessment",
-    "nutrition plan",
-  ],
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${SITE_NAME} | ${SITE_TAGLINE}`,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  keywords: [...SITE_KEYWORDS],
+  applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  category: "fitness",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_ZA",
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} | Personalised Workout & Meal Plans for South Africa`,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} | AI Personal Trainer for South Africa`,
+    description: SITE_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  other: {
+    "geo.region": "ZA",
+    "geo.placename": "South Africa",
+  },
 };
 
 export default function RootLayout({
@@ -37,7 +77,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} h-full`}>
+    <html lang="en-ZA" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} h-full`}>
+      <head>
+        <link rel="describedby" href="/llms.txt" />
+      </head>
       <body className="min-h-full flex flex-col antialiased">
         <ThemeProvider>
           <AppReadyProvider>

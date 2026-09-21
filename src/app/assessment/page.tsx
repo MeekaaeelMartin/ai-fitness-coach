@@ -1,9 +1,16 @@
+import type { Metadata } from "next";
 import { AssessmentForm } from "@/components/assessment/assessment-form";
 
-export const metadata = {
-  title: "Fitness Assessment | AI Fitness Coach",
+export const metadata: Metadata = {
+  title: "Free Fitness Assessment",
   description:
-    "Complete your fitness assessment to get your custom workout and meal plan.",
+    "Take our free AI fitness assessment and get a personalised workout plan and meal plan for South Africa. Home or gym — built around your goals.",
+  alternates: { canonical: "/assessment" },
+  openGraph: {
+    title: "Free Fitness Assessment | AI Fitness Coach",
+    description:
+      "Get a personalised workout and meal plan tailored to your body, goals, and schedule.",
+  },
 };
 
 export default function AssessmentPage() {

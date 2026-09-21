@@ -1,8 +1,11 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import { AuthForm } from "@/components/auth/auth-form";
 
-export const metadata = {
-  title: "Log In | AI Fitness Coach",
+export const metadata: Metadata = {
+  title: "Log In",
+  description: "Log in to AI Fitness Coach to access your personalised workout and meal plan.",
+  alternates: { canonical: "/login" },
 };
 
 export default function LoginPage() {

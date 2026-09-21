@@ -1,5 +1,11 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import SubscribeCallbackPage from "./page-client";
+
+export const metadata: Metadata = {
+  title: "Payment Confirmation",
+  robots: { index: false, follow: false },
+};
 
 export default function SubscribeCallbackRoute() {
   return (

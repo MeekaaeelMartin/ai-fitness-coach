@@ -1,7 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata = {
-  title: "Privacy Policy | AI Fitness Coach",
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "Privacy Policy for AI Fitness Coach — how we collect, use, and protect your personal and fitness data in South Africa.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {

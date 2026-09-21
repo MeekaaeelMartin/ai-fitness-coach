@@ -1,8 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { formatZARPerMonth, MONTHLY_PRICE, TRIAL_DAYS } from "@/lib/utils/currency";
 
-export const metadata = {
-  title: "Terms & Conditions | AI Fitness Coach",
+export const metadata: Metadata = {
+  title: "Terms & Conditions",
+  description:
+    "Terms and Conditions for AI Fitness Coach — subscription, trials, and use of our AI personal trainer service in South Africa.",
+  alternates: { canonical: "/terms" },
 };
 
 export default function TermsPage() {

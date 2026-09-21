@@ -1,8 +1,9 @@
+import type { Metadata } from "next";
 import { AdminContent } from "@/components/admin/admin-content";
 
-export const metadata = {
-  title: "Admin | AI Fitness Coach",
-  description: "Admin dashboard for AI Fitness Coach",
+export const metadata: Metadata = {
+  title: "Admin",
+  robots: { index: false, follow: false },
 };
 
 export default function AdminPage() {
