@@ -1,6 +1,7 @@
 import type { Subscription } from "@/lib/types/auth";
 import type { ServerBilling } from "@/lib/paystack/types";
 
+/** Server billing always wins — never keep a client-side "active" over server state. */
 export function applyBillingToSubscription(
   subscription: Subscription,
   billing: ServerBilling
@@ -8,12 +9,11 @@ export function applyBillingToSubscription(
   return {
     ...subscription,
     status: billing.subscriptionStatus,
-    subscribedAt: billing.subscribedAt ?? subscription.subscribedAt,
-    currentPeriodEnd: billing.currentPeriodEnd ?? subscription.currentPeriodEnd,
+    subscribedAt: billing.subscribedAt,
+    currentPeriodEnd: billing.currentPeriodEnd,
     trialEndsAt: billing.trialEndsAt ?? subscription.trialEndsAt,
-    paystackCustomerCode: billing.paystackCustomerCode ?? subscription.paystackCustomerCode,
-    paystackSubscriptionCode:
-      billing.paystackSubscriptionCode ?? subscription.paystackSubscriptionCode,
+    paystackCustomerCode: billing.paystackCustomerCode,
+    paystackSubscriptionCode: billing.paystackSubscriptionCode,
   };
 }
 

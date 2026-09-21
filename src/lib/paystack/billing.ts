@@ -5,6 +5,12 @@ import {
   upsertRegistryUser,
 } from "@/lib/registry/server-store";
 import type { ServerBilling } from "./types";
+import {
+  assertSuccessfulPayment,
+  emailFromPaystackPayload,
+  PaymentValidationError,
+  userIdFromPaystackPayload,
+} from "./validate-payment";
 
 function addOneMonth(isoDate?: string): string {
   const date = isoDate ? new Date(isoDate) : new Date();
@@ -41,6 +47,11 @@ export async function activateUserBilling(params: {
   currentPeriodEnd?: string;
   subscribedAt?: string;
 }): Promise<RegistryUser | null> {
+  // Hard requirement: a paid activation must include proof of Paystack customer OR paid timestamp
+  if (!params.subscribedAt) {
+    return null;
+  }
+
   const existing = await findRegistryUser(params.userId, params.email);
   const base: RegistryUser =
     existing ??
@@ -66,8 +77,8 @@ export async function activateUserBilling(params: {
 
   return updateUserBilling(base.id, {
     subscriptionStatus: "active",
-    subscribedAt: params.subscribedAt ?? new Date().toISOString(),
-    currentPeriodEnd: params.currentPeriodEnd ?? addOneMonth(),
+    subscribedAt: params.subscribedAt,
+    currentPeriodEnd: params.currentPeriodEnd ?? addOneMonth(params.subscribedAt),
     paystackCustomerCode: params.paystackCustomerCode ?? base.paystackCustomerCode,
     paystackSubscriptionCode:
       params.paystackSubscriptionCode ?? base.paystackSubscriptionCode,
@@ -105,45 +116,55 @@ export async function handlePaystackWebhookEvent(
 }
 
 async function handleChargeSuccess(data: Record<string, unknown>): Promise<void> {
-  const metadata = asRecord(data.metadata);
-  const userId = readString(metadata?.userId);
-  const customer = asRecord(data.customer);
-  const email = readString(customer?.email);
-  const user = await findRegistryUser(userId, email);
-  if (!user && !userId) return;
+  const userId = userIdFromPaystackPayload(data);
+  const email = emailFromPaystackPayload(data);
+  if (!userId || !email) return;
 
-  await activateUserBilling({
-    userId: userId ?? user!.id,
-    email: email ?? user?.email,
-    paystackCustomerCode: readString(customer?.customer_code),
-    subscribedAt: readString(data.paid_at) ?? new Date().toISOString(),
-    currentPeriodEnd: addOneMonth(readString(data.paid_at)),
-  });
+  try {
+    const payment = assertSuccessfulPayment(data, { userId, email });
+    await activateUserBilling({
+      userId: payment.userId,
+      email,
+      paystackCustomerCode: payment.customerCode,
+      subscribedAt: payment.paidAt,
+      currentPeriodEnd: addOneMonth(payment.paidAt),
+    });
+  } catch (error) {
+    if (error instanceof PaymentValidationError) return;
+    throw error;
+  }
 }
 
+/**
+ * Attach subscription code only — never grant access here.
+ * Access is granted solely by a validated charge.success / verify.
+ */
 async function handleSubscriptionCreate(data: Record<string, unknown>): Promise<void> {
   const customer = asRecord(data.customer);
-  const email = readString(customer?.email);
-  const metadata = asRecord(customer?.metadata);
+  const email = readString(customer?.email)?.toLowerCase();
+  const metadata = asRecord(data.metadata) ?? asRecord(customer?.metadata);
   const userId = readString(metadata?.userId);
   const user = await findRegistryUser(userId, email);
-  if (!user && !userId) return;
+  if (!user) return;
 
-  await activateUserBilling({
-    userId: userId ?? user!.id,
-    email: email ?? user?.email,
-    paystackCustomerCode: readString(customer?.customer_code),
-    paystackSubscriptionCode: readString(data.subscription_code),
+  // Only enrich an already-paid active subscription
+  if (user.subscriptionStatus !== "active" || !user.subscribedAt) return;
+
+  const subscriptionCode = readString(data.subscription_code);
+  if (!subscriptionCode) return;
+
+  await updateUserBilling(user.id, {
+    paystackSubscriptionCode: subscriptionCode,
+    paystackCustomerCode:
+      readString(customer?.customer_code) ?? user.paystackCustomerCode,
     currentPeriodEnd:
-      readString(data.next_payment_date) ??
-      addOneMonth(readString(data.createdAt)),
-    subscribedAt: readString(data.createdAt) ?? new Date().toISOString(),
+      readString(data.next_payment_date) ?? user.currentPeriodEnd ?? addOneMonth(user.subscribedAt),
   });
 }
 
 async function handleSubscriptionEnded(data: Record<string, unknown>): Promise<void> {
   const customer = asRecord(data.customer);
-  const email = readString(customer?.email);
+  const email = readString(customer?.email)?.toLowerCase();
   const user = await findRegistryUser(undefined, email);
   if (!user) return;
   await expireUserBilling(user.id);
@@ -151,7 +172,7 @@ async function handleSubscriptionEnded(data: Record<string, unknown>): Promise<v
 
 async function handlePaymentFailed(data: Record<string, unknown>): Promise<void> {
   const customer = asRecord(data.customer);
-  const email = readString(customer?.email);
+  const email = readString(customer?.email)?.toLowerCase();
   const user = await findRegistryUser(undefined, email);
   if (!user) return;
 
@@ -161,33 +182,63 @@ async function handlePaymentFailed(data: Record<string, unknown>): Promise<void>
   await expireUserBilling(user.id);
 }
 
+function hasPaidProof(user: RegistryUser): boolean {
+  return Boolean(user.paystackCustomerCode || user.paystackSubscriptionCode);
+}
+
+/**
+ * Client sync must never grant paid access.
+ * Billing fields are server-owned (Paystack verify/webhook only).
+ * Active without Paystack proof is treated as illegitimate and demoted.
+ */
 export function preserveServerBilling(
   incoming: RegistryUser,
   existing?: RegistryUser
 ): RegistryUser {
-  const serverManaged = Boolean(
-    existing?.paystackCustomerCode ||
-      existing?.paystackSubscriptionCode ||
-      (existing?.subscriptionStatus === "active" && existing?.subscribedAt)
-  );
+  const preserved: RegistryUser = {
+    ...incoming,
+    // Strip any client-claimed paid status
+    subscriptionStatus:
+      incoming.subscriptionStatus === "active" ? "trial" : incoming.subscriptionStatus,
+    subscribedAt: undefined,
+    currentPeriodEnd: undefined,
+    paystackCustomerCode: undefined,
+    paystackSubscriptionCode: undefined,
+  };
 
-  if (!existing || !serverManaged) {
-    return incoming;
+  if (!existing) {
+    return preserved;
   }
 
-  const preserved: RegistryUser = { ...incoming };
-  if (existing.subscriptionStatus) {
-    preserved.subscriptionStatus = existing.subscriptionStatus;
-  }
-  if (existing.subscribedAt) preserved.subscribedAt = existing.subscribedAt;
-  if (existing.currentPeriodEnd) preserved.currentPeriodEnd = existing.currentPeriodEnd;
-  if (existing.trialEndsAt) preserved.trialEndsAt = existing.trialEndsAt;
-  if (existing.paystackCustomerCode) {
+  const existingIsLegitActive =
+    existing.subscriptionStatus === "active" &&
+    Boolean(existing.subscribedAt) &&
+    hasPaidProof(existing);
+
+  if (existingIsLegitActive) {
+    preserved.subscriptionStatus = "active";
+    preserved.subscribedAt = existing.subscribedAt;
+    preserved.currentPeriodEnd = existing.currentPeriodEnd;
     preserved.paystackCustomerCode = existing.paystackCustomerCode;
-  }
-  if (existing.paystackSubscriptionCode) {
     preserved.paystackSubscriptionCode = existing.paystackSubscriptionCode;
+  } else if (existing.subscriptionStatus === "active" && !hasPaidProof(existing)) {
+    // Close the loophole: demote fake "active" rows that were never paid
+    preserved.subscriptionStatus =
+      preserved.subscriptionStatus === "trial" ? "trial" : "expired";
+  } else if (existing.subscriptionStatus) {
+    preserved.subscriptionStatus = existing.subscriptionStatus;
+    if (existing.subscribedAt) preserved.subscribedAt = existing.subscribedAt;
+    if (existing.currentPeriodEnd) preserved.currentPeriodEnd = existing.currentPeriodEnd;
+    if (existing.paystackCustomerCode) {
+      preserved.paystackCustomerCode = existing.paystackCustomerCode;
+    }
+    if (existing.paystackSubscriptionCode) {
+      preserved.paystackSubscriptionCode = existing.paystackSubscriptionCode;
+    }
   }
+
+  if (existing.trialEndsAt) preserved.trialEndsAt = existing.trialEndsAt;
+
   return preserved;
 }
 

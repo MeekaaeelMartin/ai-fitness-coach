@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { findRegistryUser } from "@/lib/registry/server-store";
+import { findRegistryUser, updateUserBilling } from "@/lib/registry/server-store";
 import { registryUserToBilling } from "@/lib/paystack/billing";
 
 export const runtime = "nodejs";
@@ -13,9 +13,19 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "userId and email are required" }, { status: 400 });
   }
 
-  const user = await findRegistryUser(userId, email);
+  let user = await findRegistryUser(userId, email);
   if (!user || user.email !== email) {
     return NextResponse.json({ billing: null });
+  }
+
+  // Demote illegitimate "active" without Paystack payment proof
+  const hasPaidProof = Boolean(user.paystackCustomerCode || user.paystackSubscriptionCode);
+  if (user.subscriptionStatus === "active" && (!user.subscribedAt || !hasPaidProof)) {
+    const demoted = await updateUserBilling(user.id, {
+      subscriptionStatus: "expired",
+      currentPeriodEnd: new Date().toISOString(),
+    });
+    user = demoted ?? user;
   }
 
   return NextResponse.json({ billing: registryUserToBilling(user) });

@@ -14,7 +14,16 @@ export function getSubscriptionAccess(subscription: Subscription): {
   const now = new Date();
   const totalWeeks = 4;
 
-  if (subscription.status === "active" && subscription.currentPeriodEnd) {
+  // Paid access requires an active period AND Paystack proof (blocks localStorage spoofing)
+  const hasPaidProof = Boolean(
+    subscription.paystackCustomerCode || subscription.paystackSubscriptionCode
+  );
+  if (
+    subscription.status === "active" &&
+    subscription.currentPeriodEnd &&
+    subscription.subscribedAt &&
+    hasPaidProof
+  ) {
     const periodEnd = new Date(subscription.currentPeriodEnd);
     if (periodEnd > now) {
       const days = Math.ceil(
@@ -62,16 +71,9 @@ export function getSubscriptionAccess(subscription: Subscription): {
 }
 
 export function activateSubscription(subscription: Subscription): Subscription {
-  const now = new Date();
-  const periodEnd = new Date(now);
-  periodEnd.setMonth(periodEnd.getMonth() + 1);
-
-  return {
-    ...subscription,
-    status: "active",
-    subscribedAt: now.toISOString(),
-    currentPeriodEnd: periodEnd.toISOString(),
-  };
+  // Deprecated: paid access must come from Paystack verify/webhook only.
+  // Kept as a no-op shape helper for any legacy imports.
+  return { ...subscription };
 }
 
 export function filterPlanByAccess(plan: GeneratedPlan, accessibleWeeks: number): GeneratedPlan {

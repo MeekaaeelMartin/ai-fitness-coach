@@ -14,6 +14,8 @@ export interface PaystackVerifyResponse {
   data?: {
     status: string;
     reference: string;
+    amount?: number;
+    currency?: string;
     paid_at?: string;
     customer?: {
       customer_code?: string;

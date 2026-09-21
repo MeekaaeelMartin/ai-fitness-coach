@@ -1,14 +1,21 @@
 import { NextResponse } from "next/server";
 import { verifyTransaction } from "@/lib/paystack/api";
 import { activateUserBilling } from "@/lib/paystack/billing";
-import { isPaystackConfigured } from "@/lib/paystack/config";
+import { getPaystackDiagnostics, isPaystackConfigured } from "@/lib/paystack/config";
+import {
+  assertSuccessfulPayment,
+  PaymentValidationError,
+} from "@/lib/paystack/validate-payment";
 
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
   if (!isPaystackConfigured()) {
     return NextResponse.json(
-      { error: "Paystack is not configured on the server" },
+      {
+        error: "Paystack is not configured on the server",
+        diagnostics: getPaystackDiagnostics(),
+      },
       { status: 503 }
     );
   }
@@ -33,26 +40,24 @@ export async function POST(request: Request) {
     }
 
     const result = await verifyTransaction(reference);
-    const data = result.data;
-
-    if (!result.status || data?.status !== "success") {
+    if (!result.status || !result.data) {
       return NextResponse.json(
-        { error: result.message ?? "Payment not successful" },
+        { error: result.message ?? "Could not verify payment" },
         { status: 400 }
       );
     }
 
-    const metadata = data.metadata ?? {};
-    if (metadata.userId && metadata.userId !== userId) {
-      return NextResponse.json({ error: "Payment does not match this account" }, { status: 403 });
-    }
+    const payment = assertSuccessfulPayment(
+      result.data as unknown as Record<string, unknown>,
+      { userId, email }
+    );
 
     const updated = await activateUserBilling({
-      userId,
+      userId: payment.userId,
       email,
       name: body.name?.trim(),
-      paystackCustomerCode: data.customer?.customer_code,
-      subscribedAt: data.paid_at ?? new Date().toISOString(),
+      paystackCustomerCode: payment.customerCode,
+      subscribedAt: payment.paidAt,
     });
 
     if (!updated) {
@@ -70,6 +75,9 @@ export async function POST(request: Request) {
       },
     });
   } catch (error) {
+    if (error instanceof PaymentValidationError) {
+      return NextResponse.json({ error: error.message }, { status: 402 });
+    }
     const message = error instanceof Error ? error.message : "Verification failed";
     return NextResponse.json({ error: message }, { status: 500 });
   }

@@ -13,6 +13,7 @@ export default function SubscribeCallbackPage() {
   const searchParams = useSearchParams();
   const user = useCurrentUser();
   const syncBillingFromServer = useAuthStore((state) => state.syncBillingFromServer);
+  const applyServerBilling = useAuthStore((state) => state.applyServerBilling);
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
   const [message, setMessage] = useState("Confirming your payment...");
 
@@ -47,12 +48,24 @@ export default function SubscribeCallbackPage() {
           }),
         });
 
-        const data = (await response.json()) as { error?: string };
+        const data = (await response.json()) as {
+          error?: string;
+          billing?: {
+            subscriptionStatus: "trial" | "active" | "expired";
+            subscribedAt?: string;
+            currentPeriodEnd?: string;
+            trialEndsAt?: string;
+            paystackCustomerCode?: string;
+            paystackSubscriptionCode?: string;
+          };
+        };
 
-        if (!response.ok) {
-          throw new Error(data.error ?? "Payment verification failed");
+        if (!response.ok || !data.billing || data.billing.subscriptionStatus !== "active") {
+          throw new Error(data.error ?? "Payment was not completed");
         }
 
+        // Only unlock from verified server billing — never assume success from the redirect alone
+        applyServerBilling(data.billing);
         await syncBillingFromServer();
 
         if (cancelled) return;
@@ -61,11 +74,13 @@ export default function SubscribeCallbackPage() {
         setTimeout(() => router.replace("/dashboard?subscribed=1"), 2000);
       } catch (error) {
         if (cancelled) return;
+        // Re-sync so a cancelled checkout cannot leave a stale "active" state
+        await syncBillingFromServer();
         setStatus("error");
         setMessage(
           error instanceof Error
             ? error.message
-            : "We could not confirm your payment yet. If you were charged, it should unlock shortly."
+            : "Payment was not completed. No charge was applied."
         );
       }
     }
@@ -74,7 +89,7 @@ export default function SubscribeCallbackPage() {
     return () => {
       cancelled = true;
     };
-  }, [searchParams, user, syncBillingFromServer, router]);
+  }, [searchParams, user, syncBillingFromServer, applyServerBilling, router]);
 
   return (
     <div className="flex min-h-[60vh] items-center justify-center px-4">
@@ -92,7 +107,7 @@ export default function SubscribeCallbackPage() {
             ? "Processing payment"
             : status === "success"
               ? "You're subscribed"
-              : "Payment issue"}
+              : "Payment not completed"}
         </h1>
         <p className="mt-2 text-sm text-foreground/60">{message}</p>
 
