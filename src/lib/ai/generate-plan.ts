@@ -1,6 +1,6 @@
 import type { AssessmentData } from "@/lib/types/assessment";
 import { FITNESS_GOAL_LABELS } from "@/lib/types/assessment";
-import type { GeneratedPlan, Meal, PlanWeek } from "@/lib/types/plan";
+import type { Exercise, GeneratedPlan, Meal, PlanWeek } from "@/lib/types/plan";
 import { buildAIPrompt } from "./build-prompt";
 import { getExercisesForPlan } from "./exercise-library";
 import { buildPersonalizedLifestyle } from "./lifestyle-personalizer";
@@ -123,11 +123,110 @@ function buildWeekMeals(
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 const WEEK_NOTES = [
-  "Warm up 5–10 minutes. Focus on form and establish baseline weights.",
-  "Add 2.5–5kg or 1–2 reps where form allows. Push slightly harder than last week.",
-  "Introduce tempo on final sets. Track your progress in the dashboard.",
-  "Deload week — reduce volume by 30–40%. Focus on recovery and technique.",
+  "Start with the warm-up, then main lifts. Finish with stretches. Focus on form.",
+  "Add 2.5–5kg or 1–2 reps where form allows. Keep warm-up and mobility in every session.",
+  "Introduce tempo on final sets. Do not skip the cool-down stretches.",
+  "Deload week — reduce volume by 30–40%. Keep warm-up and light cardio for recovery.",
 ];
+
+function buildWarmupExercises(data: AssessmentData): Exercise[] {
+  const limitedMobility =
+    data.mobilityLimitations.toLowerCase() !== "none" ||
+    data.jointIssues.toLowerCase() !== "none";
+
+  return [
+    {
+      name: "Dynamic Warm-up Circuit",
+      alternatives: ["March in place", "Arm circles + leg swings", "Jumping jacks (low impact)"],
+      sets: 1,
+      reps: "5–8 min",
+      rest: "—",
+      explanation: limitedMobility
+        ? "Move gently through a pain-free range. Skip any motion that aggravates your joints."
+        : "Raise heart rate and lubricate joints before loading. Keep it easy and controlled.",
+    },
+    {
+      name: limitedMobility ? "Joint Mobility Flow" : "Activation Drills",
+      alternatives: ["Cat-cow", "Hip openers", "Glute bridges", "Band pull-aparts"],
+      sets: 2,
+      reps: "8–10",
+      rest: "30 sec",
+      explanation: limitedMobility
+        ? "Focus on the areas you flagged in your assessment. Slow and smooth beats deep and forced."
+        : "Wake up the muscles you will train. Quality reps, not fatigue.",
+    },
+  ];
+}
+
+function buildCardioFinisher(data: AssessmentData, weekIndex: number): Exercise | null {
+  const wantsCardio =
+    data.fitnessGoals.includes("lose-fat") ||
+    data.fitnessGoals.includes("improve-fitness") ||
+    data.fitnessGoals.includes("athletic-performance") ||
+    data.fitnessGoals.includes("general-health");
+
+  if (!wantsCardio && weekIndex === 3) {
+    return {
+      name: "Easy Recovery Walk / Cycle",
+      alternatives: ["Brisk walk", "Stationary bike", "Light elliptical"],
+      sets: 1,
+      reps: "8–12 min",
+      rest: "—",
+      explanation: "Deload cardio — keep conversation pace. Aids recovery without adding stress.",
+    };
+  }
+
+  if (!wantsCardio) return null;
+
+  if (data.fitnessGoals.includes("lose-fat") || data.fitnessGoals.includes("improve-fitness")) {
+    return {
+      name: weekIndex === 3 ? "Steady-State Cardio (Easy)" : "Cardio Finisher",
+      alternatives: ["Treadmill incline walk", "Cycling", "Rowing", "Shadow boxing"],
+      sets: 1,
+      reps: weekIndex === 3 ? "10–12 min easy" : "8–12 min moderate",
+      rest: "—",
+      explanation:
+        "Keep breathing controlled. You should be able to speak in short sentences. Stop if dizziness or sharp pain occurs.",
+    };
+  }
+
+  return {
+    name: "Conditioning Burst",
+    alternatives: ["Bike intervals", "Skipping (or high knees)", "Shuttle walks"],
+    sets: 4,
+    reps: "30 sec on / 30 sec off",
+    rest: "—",
+    explanation: "Short bursts to raise conditioning without wrecking recovery. Scale intensity down if form breaks.",
+  };
+}
+
+function buildCooldownStretches(data: AssessmentData): Exercise[] {
+  const hipFocus =
+    data.weakMuscleGroups.toLowerCase().includes("glute") ||
+    data.weakMuscleGroups.toLowerCase().includes("hip") ||
+    data.jointIssues.toLowerCase().includes("hip") ||
+    data.jointIssues.toLowerCase().includes("knee");
+
+  return [
+    {
+      name: hipFocus ? "Hip & Hamstring Stretch Series" : "Full-Body Cool-down Stretches",
+      alternatives: ["World's greatest stretch", "Figure-4 stretch", "Couch stretch", "Child's pose"],
+      sets: 1,
+      reps: "45–60 sec each side",
+      rest: "—",
+      explanation:
+        "Hold stretches without bouncing. Breathe slowly. Never force into pain — mild tension is enough.",
+    },
+    {
+      name: "Breathing Reset",
+      alternatives: ["Box breathing 4-4-4-4", "Diaphragmatic breathing", "Lying knees-to-chest"],
+      sets: 1,
+      reps: "2–3 min",
+      rest: "—",
+      explanation: "Downshift your nervous system after training so recovery and sleep improve.",
+    },
+  ];
+}
 
 function buildWeekWorkouts(
   data: AssessmentData,
@@ -137,21 +236,33 @@ function buildWeekWorkouts(
 ) {
   const workoutDays = DAYS.slice(0, data.daysPerWeek);
   const intensityBoost = weekIndex === 1 ? 1 : weekIndex === 2 ? 2 : weekIndex === 3 ? 0 : 0;
+  const warmup = buildWarmupExercises(data);
+  const cooldown = buildCooldownStretches(data);
 
   return workoutDays.map((day, index) => {
     const focus = focuses[(index + weekIndex) % focuses.length];
-    const exercises = getExercisesForPlan(data.gymAccess, focus, constraints).map((ex) => ({
+    const mainLifts = getExercisesForPlan(data.gymAccess, focus, constraints).map((ex) => ({
       ...ex,
-      sets: ex.sets + (weekIndex === 3 ? -1 : weekIndex > 0 ? 0 : 0),
+      sets: Math.max(2, ex.sets + (weekIndex === 3 ? -1 : 0)),
       reps: weekIndex === 1 ? ex.reps.replace(/\d+/, (m) => String(Number(m) + 1)) : ex.reps,
       rest: weekIndex === 2 ? ex.rest.replace(/\d+/, (m) => String(Math.max(30, Number(m) - 15))) : ex.rest,
     }));
+
+    const cardio = buildCardioFinisher(data, weekIndex);
+    const exercises = [
+      ...warmup,
+      ...mainLifts,
+      ...(cardio ? [cardio] : []),
+      ...cooldown,
+    ];
+
+    const baseMinutes = data.workoutDuration + intensityBoost * 5 + 10; // +10 for warm-up/cool-down
 
     return {
       day: weekIndex > 0 ? `${day} (W${weekIndex + 1})` : day,
       focus: weekIndex === 3 ? `${focus} (Deload)` : focus,
       exercises,
-      duration: `${data.workoutDuration + intensityBoost * 5} min`,
+      duration: `${baseMinutes} min`,
       notes: WEEK_NOTES[weekIndex] ?? WEEK_NOTES[0],
     };
   });

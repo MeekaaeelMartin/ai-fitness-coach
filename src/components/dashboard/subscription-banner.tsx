@@ -45,7 +45,12 @@ export function SubscriptionBanner({ subscription }: SubscriptionBannerProps) {
               </p>
             </div>
           </div>
-          <Button size="sm" onClick={() => startSubscribe()} disabled={loading}>
+          <Button
+            size="sm"
+            onClick={() => startSubscribe()}
+            disabled={loading}
+            className="w-full min-h-11 sm:w-auto"
+          >
             <Zap className="h-3.5 w-3.5" />
             Subscribe at {formatZARPerMonth(MONTHLY_PRICE)}
           </Button>

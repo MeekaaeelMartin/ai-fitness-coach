@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Creates a R500/month ZAR Paystack plan and writes .env.local.
+ * Creates a R100/month ZAR Paystack plan and writes .env.local.
  *
  * Usage:
  *   PAYSTACK_SECRET_KEY=sk_test_xxx node scripts/setup-paystack.mjs
@@ -11,7 +11,7 @@
 import { writeFileSync, existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
-const MONTHLY_AMOUNT_CENTS = 500 * 100; // R500
+const MONTHLY_AMOUNT_CENTS = 100 * 100; // R100
 const PLAN_NAME = "AI Fitness Coach — Monthly";
 const ENV_PATH = resolve(process.cwd(), ".env.local");
 

@@ -165,7 +165,7 @@ export const SocialPostCanvas = forwardRef<HTMLDivElement, SocialPostCanvasProps
 
         {theme === "statBlocks" && (
           <div style={{ position: "absolute", top: 80, right: 56, display: "flex", gap: 12 }}>
-            {["7 Days Free", "R500/mo", "🇿🇦"].map((stat) => (
+            {["7 Days Free", "R100/mo", "🇿🇦"].map((stat) => (
               <div
                 key={stat}
                 style={{

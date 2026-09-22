@@ -58,7 +58,7 @@ const HEADLINE_VARIANTS: Record<PostTemplate, string[]> = {
   ],
   pricing: [
     "Start Free. Train Smart.",
-    "R500/Month. Full Access.",
+    "R100/Month. Full Access.",
     "Affordable Fitness in Rands",
   ],
   challenge: [
@@ -88,7 +88,7 @@ function pickTemplate(prompt: string): PostTemplate {
   const p = prompt.toLowerCase();
   if (/welcome|hello|intro|launch|new/.test(p)) return "welcome";
   if (/december|january|february|march|april|may|june|july|august|september|october|november|summer|winter|spring|season|month|holiday|festive|new year/.test(p)) return "seasonal";
-  if (/price|pricing|offer|subscribe|r500|plan|deal|afford/.test(p)) return "pricing";
+  if (/price|pricing|offer|subscribe|r100|r500|plan|deal|afford/.test(p)) return "pricing";
   if (/challenge|30 day|programme|program|transform|goal/.test(p)) return "challenge";
   if (/motivat|tip|mindset|quote|inspire|discipline|consistency/.test(p)) return "motivation";
   return "brand";
@@ -122,7 +122,7 @@ function buildContent(prompt: string, format: PostFormat): GeneratedPostContent 
       headline: pickRandom(HEADLINE_VARIANTS.seasonal).replace("{month}", month),
       subheadline: "Don't wait for Monday. Start today.",
       body: p.length > 10 ? p : `Make ${month} the month you commit. Custom workouts, meals in your budget, and daily tracking.`,
-      footer: "Start for free · From R500/month",
+      footer: "Start for free · From R100/month",
     },
     motivation: {
       badge: "Daily Motivation",
@@ -134,7 +134,7 @@ function buildContent(prompt: string, format: PostFormat): GeneratedPostContent 
     pricing: {
       badge: "Simple Pricing",
       headline: pickRandom(HEADLINE_VARIANTS.pricing),
-      subheadline: "R500/month for full access",
+      subheadline: "R100/month for full access",
       body: "Personalised workouts, meal plans, progress tracking, and exports. Priced in Rands for South Africans.",
       footer: "No credit card to start",
     },

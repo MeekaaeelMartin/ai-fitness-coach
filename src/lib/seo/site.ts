@@ -4,7 +4,7 @@ export const SITE_TAGLINE =
   "Personalised AI workout and meal plans for South Africans";
 
 export const SITE_DESCRIPTION =
-  "Get a personalised AI fitness coach with custom workout plans, meal plans in Rands, and progressive training. Built for South Africa. Start free, then from R500/month.";
+  "Get a personalised AI fitness coach with custom workout plans, meal plans in Rands, and progressive training. Built for South Africa. Start free, then from R100/month.";
 
 export const SITE_KEYWORDS = [
   "AI fitness coach",

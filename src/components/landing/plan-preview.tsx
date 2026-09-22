@@ -50,7 +50,7 @@ export function PlanPreview() {
                 className="rounded-xl border border-white/10 bg-white/5 p-3 text-center"
               >
                 <item.icon className="mx-auto h-4 w-4 text-emerald-400" />
-                <p className="mt-1.5 text-[10px] text-foreground/50">{item.label}</p>
+                <p className="mt-1.5 text-[11px] text-foreground/50 sm:text-xs">{item.label}</p>
                 <p className="text-xs font-semibold">{item.value}</p>
               </motion.div>
             ))}
@@ -86,7 +86,7 @@ export function PlanPreview() {
       <motion.div
         animate={{ y: [0, -8, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -right-4 -bottom-4 rounded-xl border border-white/15 bg-background/90 px-4 py-3 shadow-xl backdrop-blur-md"
+        className="absolute bottom-3 right-3 rounded-xl border border-white/15 bg-background/90 px-3 py-2 shadow-xl backdrop-blur-md sm:-right-4 sm:-bottom-4 sm:px-4 sm:py-3"
       >
         <p className="text-xs text-foreground/50">Avg. results</p>
         <p className="text-lg font-bold text-emerald-400">-8kg in 12 wks</p>

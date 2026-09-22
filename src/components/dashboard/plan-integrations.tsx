@@ -83,8 +83,8 @@ export function PlanIntegrations({ plan }: PlanIntegrationsProps) {
   ];
 
   return (
-    <div className="relative">
-      <Button variant="outline" onClick={() => setOpen(!open)} className="gap-2">
+    <div className="relative w-full sm:w-auto">
+      <Button variant="outline" onClick={() => setOpen(!open)} className="w-full gap-2 sm:w-auto">
         <Download className="h-4 w-4" />
         Export &amp; Share
         <ChevronDown className={cn("h-4 w-4 transition-transform", open && "rotate-180")} />
@@ -93,7 +93,7 @@ export function PlanIntegrations({ plan }: PlanIntegrationsProps) {
       {open && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
-          <div className="absolute right-0 z-50 mt-2 w-72 overflow-hidden rounded-xl border border-white/10 bg-background/95 shadow-2xl backdrop-blur-xl">
+          <div className="absolute left-0 right-auto z-50 mt-2 w-[min(18rem,calc(100vw-2rem))] overflow-hidden rounded-xl border border-white/10 bg-background/95 shadow-2xl backdrop-blur-xl sm:left-auto sm:right-0">
             {actions.map((action) => (
               <button
                 key={action.label}

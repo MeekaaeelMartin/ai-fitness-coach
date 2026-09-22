@@ -65,7 +65,7 @@ export function MealPlanner({ meals }: MealPlannerProps) {
                     type="button"
                     onClick={() => setMealSubstitution(meal.name, alt, dateKey)}
                     className={cn(
-                      "rounded-lg border px-3 py-1.5 text-xs font-medium transition-all",
+                      "min-h-10 rounded-lg border px-3 py-2.5 text-xs font-medium transition-all",
                       substitution === alt
                         ? "border-emerald-500/50 bg-emerald-500/10 text-emerald-400"
                         : "border-white/10 hover:border-white/20"

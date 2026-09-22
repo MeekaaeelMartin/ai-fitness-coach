@@ -1,11 +1,23 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Dumbbell } from "lucide-react";
 import { PaymentTrustBadges } from "@/components/ui/payment-trust-badges";
 import { FooterCtaLink } from "./footer-cta-link";
+import { cn } from "@/lib/utils/cn";
 
 export function Footer() {
+  const pathname = usePathname();
+  const isLanding = pathname === "/";
+
   return (
-    <footer className="border-t border-white/10 bg-background/50">
+    <footer
+      className={cn(
+        "border-t border-white/10 bg-background/50",
+        isLanding && "pb-24 md:pb-0"
+      )}
+    >
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
           <div className="sm:col-span-2">

@@ -19,7 +19,7 @@ export function Tabs({ tabs, activeTab, onTabChange, className }: TabsProps) {
   return (
     <div
       className={cn(
-        "flex gap-1 overflow-x-auto rounded-xl border border-white/10 bg-white/5 p-1 backdrop-blur-sm",
+        "flex gap-1 overflow-x-auto scrollbar-hide snap-x snap-mandatory rounded-xl border border-white/10 bg-white/5 p-1 backdrop-blur-sm",
         className
       )}
     >
@@ -29,14 +29,14 @@ export function Tabs({ tabs, activeTab, onTabChange, className }: TabsProps) {
           type="button"
           onClick={() => onTabChange(tab.id)}
           className={cn(
-            "flex shrink-0 items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-200",
+            "flex min-h-11 shrink-0 snap-start items-center justify-center gap-1.5 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200 sm:gap-2 sm:px-4",
             activeTab === tab.id
               ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/20"
               : "text-foreground/60 hover:bg-white/5 hover:text-foreground"
           )}
         >
           {tab.icon}
-          {tab.label}
+          <span className={cn(tab.icon ? "hidden sm:inline" : undefined)}>{tab.label}</span>
         </button>
       ))}
     </div>

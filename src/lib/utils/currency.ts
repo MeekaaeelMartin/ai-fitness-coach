@@ -4,7 +4,7 @@ export const CURRENCY = {
   locale: "en-ZA",
 } as const;
 
-export const MONTHLY_PRICE = 500;
+export const MONTHLY_PRICE = 100;
 export const TRIAL_DAYS = 7;
 
 export function formatZAR(amount: number): string {

@@ -223,7 +223,7 @@ export function TodayTracker({ plan }: TodayTrackerProps) {
                       type="button"
                       onClick={() => setMealSubstitution(meal.name, alt, selectedDateKey)}
                       className={cn(
-                        "rounded-lg border px-2.5 py-1 text-xs transition-all",
+                        "min-h-10 rounded-lg border px-3 py-2.5 text-xs transition-all",
                         substitution === alt
                           ? "border-emerald-500/50 bg-emerald-500/10 text-emerald-400"
                           : "border-white/10 hover:border-white/20"

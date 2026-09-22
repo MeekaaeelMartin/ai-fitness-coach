@@ -33,8 +33,11 @@ export function Header() {
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/20">
             <Dumbbell className="h-5 w-5 text-white" />
           </div>
-          <span className="text-lg font-bold tracking-tight">
-            AI Fitness<span className="text-emerald-400">Coach</span>
+          <span className="text-base font-bold tracking-tight sm:text-lg">
+            <span className="sm:hidden">AI Fitness</span>
+            <span className="hidden sm:inline">
+              AI Fitness<span className="text-emerald-400">Coach</span>
+            </span>
           </span>
         </Link>
 
@@ -93,7 +96,7 @@ export function Header() {
           )}
           <button
             type="button"
-            className="rounded-lg p-2 md:hidden"
+            className="min-h-11 min-w-11 rounded-lg p-2.5 md:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -115,7 +118,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-sm font-medium text-foreground/70 hover:bg-white/5"
+                className="rounded-lg px-3 py-3.5 text-sm font-medium text-foreground/70 hover:bg-white/5"
               >
                 {link.label}
               </a>

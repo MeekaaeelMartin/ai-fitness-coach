@@ -129,7 +129,7 @@ export function DashboardContent() {
           <LevelBadge points={user.points ?? 0} />
         </div>
 
-        <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} className="mb-8 overflow-x-auto" />
+        <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} className="mb-8" />
 
         {activeTab === "today" && (
           <Paywalled locked={locked}>
@@ -159,9 +159,12 @@ export function DashboardContent() {
                     ["Food Budget", `${formatZAR(userProfile.dailyFoodBudget)}/day`],
                     ["Allergies", userProfile.allergies || "None"],
                   ].map(([label, value]) => (
-                    <div key={label} className="flex justify-between border-b border-white/5 pb-2">
+                    <div
+                      key={label}
+                      className="flex flex-col gap-0.5 border-b border-white/5 pb-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4"
+                    >
                       <dt className="text-foreground/50">{label}</dt>
-                      <dd className="font-medium capitalize">{value}</dd>
+                      <dd className="min-w-0 break-words font-medium capitalize sm:text-right">{value}</dd>
                     </div>
                   ))}
                 </dl>

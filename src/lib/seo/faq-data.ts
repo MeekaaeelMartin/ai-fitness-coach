@@ -32,7 +32,7 @@ export const FAQ_ITEMS = [
   {
     title: "How much does AI Fitness Coach cost in South Africa?",
     content:
-      "You can start for free with a 7-day trial and Week 1 of your plan. Full access continues from R500 per month, priced in Rands with local payment options.",
+      "You can start for free with a 7-day trial and Week 1 of your plan. Full access continues from R100 per month, priced in Rands with local payment options.",
   },
   {
     title: "Who is AI Fitness Coach for?",

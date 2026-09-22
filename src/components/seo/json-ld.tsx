@@ -43,7 +43,7 @@ export function HomeJsonLd() {
     description: SITE_DESCRIPTION,
     offers: {
       "@type": "Offer",
-      price: "500",
+      price: "100",
       priceCurrency: "ZAR",
       description: "Monthly subscription after free trial",
       availability: "https://schema.org/InStock",

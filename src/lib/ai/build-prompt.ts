@@ -68,6 +68,7 @@ Generate a detailed plan with the following sections:
 
 2. **Fitness Plan**
    - Weekly workout schedule overview
+   - Every training day MUST include: (1) warm-up / mobility, (2) main lifts, (3) cardio or conditioning when appropriate for goals, (4) cool-down stretches
    - Daily workouts with specific exercises, sets, reps, rest periods
    - Exercise explanations and form cues
    - Progressive overload recommendations

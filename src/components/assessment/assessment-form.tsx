@@ -537,25 +537,26 @@ export function AssessmentForm() {
           </motion.div>
         </AnimatePresence>
 
-        <div className="mt-8 flex items-center justify-between border-t border-white/10 pt-6">
+        <div className="sticky bottom-0 z-30 -mx-6 mt-8 flex items-center justify-between gap-3 border-t border-white/10 bg-background/95 px-6 py-4 backdrop-blur-xl sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:pt-6 sm:backdrop-blur-none">
           <Button
             type="button"
             variant="ghost"
+            size="lg"
             onClick={handleBack}
             disabled={currentStep === 0}
-            className={cn(currentStep === 0 && "invisible")}
+            className={cn("min-h-11", currentStep === 0 && "invisible")}
           >
             <ArrowLeft className="h-4 w-4" />
             Back
           </Button>
 
           {currentStep < TOTAL_STEPS - 1 ? (
-            <Button type="button" onClick={handleNext}>
+            <Button type="button" size="lg" onClick={handleNext} className="min-h-11 flex-1 sm:flex-none">
               Continue
               <ArrowRight className="h-4 w-4" />
             </Button>
           ) : (
-            <Button type="submit">
+            <Button type="submit" size="lg" className="min-h-11 flex-1 sm:flex-none">
               Generate My Plan
               <ArrowRight className="h-4 w-4" />
             </Button>

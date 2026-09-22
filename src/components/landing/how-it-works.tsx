@@ -50,15 +50,18 @@ export function HowItWorks() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.15 }}
             >
-              <GlassCard hover className="relative h-full">
-                <div className="absolute -top-3 right-6 text-5xl font-bold text-emerald-500/10">
+              <GlassCard hover className="relative h-full overflow-hidden">
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-y-0 right-0 flex w-16 items-start justify-end overflow-hidden pr-4 pt-3 text-5xl font-bold leading-none text-emerald-500/15 select-none"
+                >
                   {step.step}
-                </div>
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/20">
+                </span>
+                <div className="relative mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/20">
                   <step.icon className="h-6 w-6 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-foreground/60">
+                <h3 className="relative text-lg font-semibold">{step.title}</h3>
+                <p className="relative mt-2 text-sm leading-relaxed text-foreground/60">
                   {step.description}
                 </p>
               </GlassCard>

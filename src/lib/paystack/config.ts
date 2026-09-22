@@ -53,7 +53,7 @@ export function getPaystackDiagnostics() {
   };
 }
 
-/** Paystack amounts for ZAR are in cents (e.g. R500 → 50000). */
+/** Paystack amounts for ZAR are in cents (e.g. R100 → 10000). */
 export function monthlyAmountInCents(): number {
   return MONTHLY_PRICE * 100;
 }

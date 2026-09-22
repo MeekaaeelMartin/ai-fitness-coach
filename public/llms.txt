@@ -1,6 +1,6 @@
 # AI Fitness Coach
 
-> Personalised AI fitness coaching for South Africans — custom workout plans, meal plans priced in Rands, injury-aware training, and progress tracking. Start free, then from R500/month.
+> Personalised AI fitness coaching for South Africans — custom workout plans, meal plans priced in Rands, injury-aware training, and progress tracking. Start free, then from R100/month.
 
 AI Fitness Coach helps people in South Africa get a personal trainer-style plan online. Users complete a fitness assessment and receive a personalised workout programme and nutrition plan based on their goals, equipment, schedule, dietary needs (including halal), and budget.
 
