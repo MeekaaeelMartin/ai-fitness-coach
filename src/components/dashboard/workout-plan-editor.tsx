@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Pencil, Save, X } from "lucide-react";
 import type { DailyWorkout, Exercise } from "@/lib/types/plan";
 import { useAuthStore } from "@/lib/store/auth-store";
+import { slugifyExerciseName } from "@/lib/exercises/catalog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { GlassCard } from "@/components/ui/glass-card";
@@ -59,7 +61,12 @@ export function WorkoutPlanEditor({ dailyWorkouts }: WorkoutPlanEditorProps) {
                 return (
                   <div key={key} className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
                     <div className="flex items-start justify-between gap-2">
-                      <p className="text-sm font-medium">{exercise.name}</p>
+                      <Link
+                        href={`/exercise/${slugifyExerciseName(exercise.name)}?from=dashboard`}
+                        className="text-sm font-medium text-emerald-400 hover:underline"
+                      >
+                        {exercise.name}
+                      </Link>
                       {!isEditing && (
                         <Button variant="ghost" size="sm" onClick={() => startEdit(workout.day, exercise)}>
                           <Pencil className="h-3.5 w-3.5" />

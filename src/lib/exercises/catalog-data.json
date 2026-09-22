@@ -1,0 +1,2291 @@
+{
+  "generatedAt": "2026-09-22T11:52:29.451Z",
+  "source": "Curated mappings to free-exercise-db demonstration photos (yuhonas/free-exercise-db)",
+  "exercises": [
+    {
+      "name": "Barbell Squat",
+      "slug": "barbell-squat",
+      "imageId": "Barbell_Squat",
+      "imageFile": "barbell-squat.jpg",
+      "equipment": "barbell",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings",
+        "lower back"
+      ],
+      "summary": "Barbell Squat is a strength movement that primarily targets the quadriceps.",
+      "steps": [
+        "This exercise is best performed inside a squat rack for safety purposes. To begin, first set the bar on a rack to just below shoulder level. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it.",
+        "Hold on to the bar using both arms at each side and lift it off the rack by first pushing with your legs and at the same time straightening your torso.",
+        "Step away from the rack and position your legs using a shoulder width medium stance with the toes slightly pointed out. Keep your head up at all times and also maintain a straight back. This will be your starting position. (Note: For the purposes of this discussion we will use the medium stance described above which targets overall development; however you can choose any of the three stances discussed in the foot stances section).",
+        "Begin to slowly lower the bar by bending the knees and hips as you maintain a straight posture with the head up. Continue down until the angle between the upper leg and the calves becomes slightly less than 90-degrees. Inhale as you perform this portion of the movement. Tip: If you performed the exercise correctly, the front of the knees should make an imaginary straight line with the toes that is perpendicular to the front. If your knees are past that imaginary line (if they are past your toes) then you are placing undue stress on the knee and the exercise has been performed incorrectly.",
+        "Begin to raise the bar as you exhale by pushing the floor with the heel of your foot as you straighten the legs again and go back to the starting position.",
+        "Repeat for the recommended amount of repetitions."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Goblet Squat",
+      "slug": "goblet-squat",
+      "imageId": "Goblet_Squat",
+      "imageFile": "goblet-squat.jpg",
+      "equipment": "kettlebells",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings",
+        "shoulders"
+      ],
+      "summary": "Goblet Squat is a strength movement that primarily targets the quadriceps.",
+      "steps": [
+        "Stand holding a light kettlebell by the horns close to your chest. This will be your starting position.",
+        "Squat down between your legs until your hamstrings are on your calves. Keep your chest and head up and your back straight.",
+        "At the bottom position, pause and use your elbows to push your knees out. Return to the starting position, and repeat for 10-20 repetitions."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Leg Press",
+      "slug": "leg-press",
+      "imageId": "Leg_Press",
+      "imageFile": "leg-press.jpg",
+      "equipment": "machine",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings"
+      ],
+      "summary": "Leg Press is a strength movement that primarily targets the quadriceps.",
+      "steps": [
+        "Using a leg press machine, sit down on the machine and place your legs on the platform directly in front of you at a medium (shoulder width) foot stance. (Note: For the purposes of this discussion we will use the medium stance described above which targets overall development; however you can choose any of the three stances described in the foot positioning section).",
+        "Lower the safety bars holding the weighted platform in place and press the platform all the way up until your legs are fully extended in front of you. Tip: Make sure that you do not lock your knees. Your torso and the legs should make a perfect 90-degree angle. This will be your starting position.",
+        "As you inhale, slowly lower the platform until your upper and lower legs make a 90-degree angle.",
+        "Pushing mainly with the heels of your feet and using the quadriceps go back to the starting position as you exhale.",
+        "Repeat for the recommended amount of repetitions and ensure to lock the safety pins properly once you are done. You do not want that platform falling on you fully loaded."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Box Squat",
+      "slug": "box-squat",
+      "imageId": "Box_Squat",
+      "imageFile": "box-squat.jpg",
+      "equipment": "barbell",
+      "level": "intermediate",
+      "category": "powerlifting",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "adductors",
+        "calves",
+        "glutes",
+        "hamstrings",
+        "lower back"
+      ],
+      "summary": "Box Squat is a powerlifting movement that primarily targets the quadriceps.",
+      "steps": [
+        "The box squat allows you to squat to desired depth and develop explosive strength in the squat movement. Begin in a power rack with a box at the appropriate height behind you. Typically, you would aim for a box height that brings you to a parallel squat, but you can train higher or lower if desired.",
+        "Begin by stepping under the bar and placing it across the back of the shoulders. Squeeze your shoulder blades together and rotate your elbows forward, attempting to bend the bar across your shoulders. Remove the bar from the rack, creating a tight arch in your lower back, and step back into position. Place your feet wider for more emphasis on the back, glutes, adductors, and hamstrings, or closer together for more quad development. Keep your head facing forward.",
+        "With your back, shoulders, and core tight, push your knees and butt out and you begin your descent. Sit back with your hips until you are seated on the box. Ideally, your shins should be perpendicular to the ground. Pause when you reach the box, and relax the hip flexors. Never bounce off of a box.",
+        "Keeping the weight on your heels and pushing your feet and knees out, drive upward off of the box as you lead the movement with your head. Continue upward, maintaining tightness head to toe."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Box Squats",
+      "slug": "box-squats",
+      "imageId": "Box_Squat",
+      "imageFile": "box-squats.jpg",
+      "equipment": "barbell",
+      "level": "intermediate",
+      "category": "powerlifting",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "adductors",
+        "calves",
+        "glutes",
+        "hamstrings",
+        "lower back"
+      ],
+      "summary": "Box Squats is a powerlifting movement that primarily targets the quadriceps.",
+      "steps": [
+        "The box squat allows you to squat to desired depth and develop explosive strength in the squat movement. Begin in a power rack with a box at the appropriate height behind you. Typically, you would aim for a box height that brings you to a parallel squat, but you can train higher or lower if desired.",
+        "Begin by stepping under the bar and placing it across the back of the shoulders. Squeeze your shoulder blades together and rotate your elbows forward, attempting to bend the bar across your shoulders. Remove the bar from the rack, creating a tight arch in your lower back, and step back into position. Place your feet wider for more emphasis on the back, glutes, adductors, and hamstrings, or closer together for more quad development. Keep your head facing forward.",
+        "With your back, shoulders, and core tight, push your knees and butt out and you begin your descent. Sit back with your hips until you are seated on the box. Ideally, your shins should be perpendicular to the ground. Pause when you reach the box, and relax the hip flexors. Never bounce off of a box.",
+        "Keeping the weight on your heels and pushing your feet and knees out, drive upward off of the box as you lead the movement with your head. Continue upward, maintaining tightness head to toe."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Wall Sit",
+      "slug": "wall-sit",
+      "imageId": "Chair_Squat",
+      "imageFile": "wall-sit.jpg",
+      "equipment": "machine",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings"
+      ],
+      "summary": "An isometric squat hold against a wall that builds quad endurance with low joint stress.",
+      "steps": [
+        "Stand with your back flat against a wall and feet about shoulder-width apart.",
+        "Slide down until your thighs are roughly parallel to the floor and knees track over mid-foot.",
+        "Hold with heels planted, core braced, and breathing steady.",
+        "Stand up by driving through your heels when the set ends."
+      ],
+      "tips": [
+        "Keep knees from caving inward.",
+        "If parallel is too hard, sit slightly higher."
+      ]
+    },
+    {
+      "name": "Romanian Deadlift",
+      "slug": "romanian-deadlift",
+      "imageId": "Romanian_Deadlift",
+      "imageFile": "romanian-deadlift.jpg",
+      "equipment": "barbell",
+      "level": "intermediate",
+      "category": "strength",
+      "primaryMuscles": [
+        "hamstrings"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "lower back"
+      ],
+      "summary": "Romanian Deadlift is a strength movement that primarily targets the hamstrings.",
+      "steps": [
+        "Put a barbell in front of you on the ground and grab it using a pronated (palms facing down) grip that a little wider than shoulder width. Tip: Depending on the weight used, you may need wrist wraps to perform the exercise and also a raised platform in order to allow for better range of motion.",
+        "Bend the knees slightly and keep the shins vertical, hips back and back straight. This will be your starting position.",
+        "Keeping your back and arms completely straight at all times, use your hips to lift the bar as you exhale. Tip: The movement should not be fast but steady and under control.",
+        "Once you are standing completely straight up, lower the bar by pushing the hips back, only slightly bending the knees, unlike when squatting. Tip: Take a deep breath at the start of the movement and keep your chest up. Hold your breath as you lower and exhale as you complete the movement.",
+        "Repeat for the recommended amount of repetitions."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Hip Thrust",
+      "slug": "hip-thrust",
+      "imageId": "Barbell_Hip_Thrust",
+      "imageFile": "hip-thrust.jpg",
+      "equipment": "barbell",
+      "level": "intermediate",
+      "category": "powerlifting",
+      "primaryMuscles": [
+        "glutes"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "hamstrings"
+      ],
+      "summary": "Hip Thrust is a powerlifting movement that primarily targets the glutes.",
+      "steps": [
+        "Begin seated on the ground with a bench directly behind you. Have a loaded barbell over your legs. Using a fat bar or having a pad on the bar can greatly reduce the discomfort caused by this exercise.",
+        "Roll the bar so that it is directly above your hips, and lean back against the bench so that your shoulder blades are near the top of it.",
+        "Begin the movement by driving through your feet, extending your hips vertically through the bar. Your weight should be supported by your shoulder blades and your feet. Extend as far as possible, then reverse the motion to return to the starting position."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Glute Bridge",
+      "slug": "glute-bridge",
+      "imageId": "Barbell_Glute_Bridge",
+      "imageFile": "glute-bridge.jpg",
+      "equipment": "barbell",
+      "level": "intermediate",
+      "category": "powerlifting",
+      "primaryMuscles": [
+        "glutes"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "hamstrings"
+      ],
+      "summary": "Glute Bridge is a powerlifting movement that primarily targets the glutes.",
+      "steps": [
+        "Begin seated on the ground with a loaded barbell over your legs. Using a fat bar or having a pad on the bar can greatly reduce the discomfort caused by this exercise. Roll the bar so that it is directly above your hips, and lay down flat on the floor.",
+        "Begin the movement by driving through with your heels, extending your hips vertically through the bar. Your weight should be supported by your upper back and the heels of your feet.",
+        "Extend as far as possible, then reverse the motion to return to the starting position."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Glute bridges",
+      "slug": "glute-bridges",
+      "imageId": "Barbell_Glute_Bridge",
+      "imageFile": "glute-bridges.jpg",
+      "equipment": "barbell",
+      "level": "intermediate",
+      "category": "powerlifting",
+      "primaryMuscles": [
+        "glutes"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "hamstrings"
+      ],
+      "summary": "Glute bridges is a powerlifting movement that primarily targets the glutes.",
+      "steps": [
+        "Begin seated on the ground with a loaded barbell over your legs. Using a fat bar or having a pad on the bar can greatly reduce the discomfort caused by this exercise. Roll the bar so that it is directly above your hips, and lay down flat on the floor.",
+        "Begin the movement by driving through with your heels, extending your hips vertically through the bar. Your weight should be supported by your upper back and the heels of your feet.",
+        "Extend as far as possible, then reverse the motion to return to the starting position."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Cable Pull-Through",
+      "slug": "cable-pull-through",
+      "imageId": "Pull_Through",
+      "imageFile": "cable-pull-through.jpg",
+      "equipment": "cable",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "glutes"
+      ],
+      "secondaryMuscles": [
+        "hamstrings",
+        "lower back"
+      ],
+      "summary": "Cable Pull-Through is a strength movement that primarily targets the glutes.",
+      "steps": [
+        "Begin standing a few feet in front of a low pulley with a rope or handle attached. Face away from the machine, straddling the cable, with your feet set wide apart.",
+        "Begin the movement by reaching through your legs as far as possible, bending at the hips. Keep your knees slightly bent. Keeping your arms straight, extend through the hip to stand straight up. Avoid pulling upward through the shoulders; all of the motion should originate through the hips."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Single-Leg RDL",
+      "slug": "single-leg-rdl",
+      "imageId": "Romanian_Deadlift",
+      "imageFile": "single-leg-rdl.jpg",
+      "equipment": "barbell",
+      "level": "intermediate",
+      "category": "strength",
+      "primaryMuscles": [
+        "hamstrings"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "lower back"
+      ],
+      "summary": "A single-leg hip hinge that trains hamstrings, glutes, and balance.",
+      "steps": [
+        "Stand on one leg holding a dumbbell in the opposite hand (or both hands).",
+        "Hinge at the hips, sending the free leg back while keeping hips square.",
+        "Lower until you feel a strong hamstring stretch, then drive back to standing.",
+        "Switch sides after completing all reps."
+      ],
+      "tips": [
+        "Soft knee on the standing leg.",
+        "Move slowly — balance comes before load."
+      ]
+    },
+    {
+      "name": "Bench Press",
+      "slug": "bench-press",
+      "imageId": "Barbell_Bench_Press_-_Medium_Grip",
+      "imageFile": "bench-press.jpg",
+      "equipment": "barbell",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "shoulders",
+        "triceps"
+      ],
+      "summary": "Bench Press is a strength movement that primarily targets the chest.",
+      "steps": [
+        "Lie back on a flat bench. Using a medium width grip (a grip that creates a 90-degree angle in the middle of the movement between the forearms and the upper arms), lift the bar from the rack and hold it straight over you with your arms locked. This will be your starting position.",
+        "From the starting position, breathe in and begin coming down slowly until the bar touches your middle chest.",
+        "After a brief pause, push the bar back to the starting position as you breathe out. Focus on pushing the bar using your chest muscles. Lock your arms and squeeze your chest in the contracted position at the top of the motion, hold for a second and then start coming down slowly again. Tip: Ideally, lowering the weight should take about twice as long as raising it.",
+        "Repeat the movement for the prescribed amount of repetitions.",
+        "When you are done, place the bar back in the rack."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Dumbbell Bench Press",
+      "slug": "dumbbell-bench-press",
+      "imageId": "Dumbbell_Bench_Press",
+      "imageFile": "dumbbell-bench-press.jpg",
+      "equipment": "dumbbell",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "shoulders",
+        "triceps"
+      ],
+      "summary": "Dumbbell Bench Press is a strength movement that primarily targets the chest.",
+      "steps": [
+        "Lie down on a flat bench with a dumbbell in each hand resting on top of your thighs. The palms of your hands will be facing each other.",
+        "Then, using your thighs to help raise the dumbbells up, lift the dumbbells one at a time so that you can hold them in front of you at shoulder width.",
+        "Once at shoulder width, rotate your wrists forward so that the palms of your hands are facing away from you. The dumbbells should be just to the sides of your chest, with your upper arm and forearm creating a 90 degree angle. Be sure to maintain full control of the dumbbells at all times. This will be your starting position.",
+        "Then, as you breathe out, use your chest to push the dumbbells up. Lock your arms at the top of the lift and squeeze your chest, hold for a second and then begin coming down slowly. Tip: Ideally, lowering the weight should take about twice as long as raising it.",
+        "Repeat the movement for the prescribed amount of repetitions of your training program."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Dumbbell Press",
+      "slug": "dumbbell-press",
+      "imageId": "Dumbbell_Bench_Press",
+      "imageFile": "dumbbell-press.jpg",
+      "equipment": "dumbbell",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "shoulders",
+        "triceps"
+      ],
+      "summary": "Dumbbell Press is a strength movement that primarily targets the chest.",
+      "steps": [
+        "Lie down on a flat bench with a dumbbell in each hand resting on top of your thighs. The palms of your hands will be facing each other.",
+        "Then, using your thighs to help raise the dumbbells up, lift the dumbbells one at a time so that you can hold them in front of you at shoulder width.",
+        "Once at shoulder width, rotate your wrists forward so that the palms of your hands are facing away from you. The dumbbells should be just to the sides of your chest, with your upper arm and forearm creating a 90 degree angle. Be sure to maintain full control of the dumbbells at all times. This will be your starting position.",
+        "Then, as you breathe out, use your chest to push the dumbbells up. Lock your arms at the top of the lift and squeeze your chest, hold for a second and then begin coming down slowly. Tip: Ideally, lowering the weight should take about twice as long as raising it.",
+        "Repeat the movement for the prescribed amount of repetitions of your training program."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Push-ups",
+      "slug": "push-ups",
+      "imageId": "Pushups",
+      "imageFile": "push-ups.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "shoulders",
+        "triceps"
+      ],
+      "summary": "Push-ups is a strength movement that primarily targets the chest.",
+      "steps": [
+        "Lie on the floor face down and place your hands about 36 inches apart while holding your torso up at arms length.",
+        "Next, lower yourself downward until your chest almost touches the floor as you inhale.",
+        "Now breathe out and press your upper body back up to the starting position while squeezing your chest.",
+        "After a brief pause at the top contracted position, you can begin to lower yourself downward again for as many repetitions as needed."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Machine Chest Press",
+      "slug": "machine-chest-press",
+      "imageId": "Leverage_Chest_Press",
+      "imageFile": "machine-chest-press.jpg",
+      "equipment": "machine",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "shoulders",
+        "triceps"
+      ],
+      "summary": "Machine Chest Press is a strength movement that primarily targets the chest.",
+      "steps": [
+        "Load an appropriate weight onto the pins and adjust the seat for your height. The handles should be near the bottom or middle of the pectorals at the beginning of the motion.",
+        "Your chest and head should be up and your shoulder blades retracted. This will be your starting position.",
+        "Press the handles forward by extending through the elbow.",
+        "After a brief pause at the top, return the weight just above the start position, keeping tension on the muscles by not returning the weight to the stops until the set is complete."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Floor Press",
+      "slug": "floor-press",
+      "imageId": "Floor_Press",
+      "imageFile": "floor-press.jpg",
+      "equipment": "barbell",
+      "level": "intermediate",
+      "category": "powerlifting",
+      "primaryMuscles": [
+        "triceps"
+      ],
+      "secondaryMuscles": [
+        "chest",
+        "shoulders"
+      ],
+      "summary": "Floor Press is a powerlifting movement that primarily targets the triceps.",
+      "steps": [
+        "Adjust the j-hooks so they are at the appropriate height to rack the bar. Begin lying on the floor with your head near the end of a power rack. Keeping your shoulder blades pulled together; pull the bar off of the hooks.",
+        "Lower the bar towards the bottom of your chest or upper stomach, squeezing the bar and attempting to pull it apart as you do so. Ensure that you tuck your elbows throughout the movement. Lower the bar until your upper arm contacts the ground and pause, preventing any slamming or bouncing of the weight.",
+        "Press the bar back up as fast as you can, keeping the bar, your wrists, and elbows in line as you do so."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Band Chest Press",
+      "slug": "band-chest-press",
+      "imageId": "Cable_Chest_Press",
+      "imageFile": "band-chest-press.jpg",
+      "equipment": "cable",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "shoulders",
+        "triceps"
+      ],
+      "summary": "Band Chest Press is a strength movement that primarily targets the chest.",
+      "steps": [
+        "Adjust the weight to an appropriate amount and be seated, grasping the handles. Your upper arms should be about 45 degrees to the body, with your head and chest up. The elbows should be bent to about 90 degrees. This will be your starting position.",
+        "Begin by extending through the elbow, pressing the handles together straight in front of you. Keep your shoulder blades retracted as you execute the movement.",
+        "After pausing at full extension, return to th starting position, keeping tension on the cables.",
+        "You can also execute this movement with your back off the pad, at an incline or decline, or alternate hands."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Dumbbell Row",
+      "slug": "dumbbell-row",
+      "imageId": "Bent_Over_Two-Dumbbell_Row",
+      "imageFile": "dumbbell-row.jpg",
+      "equipment": "dumbbell",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "middle back"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "lats",
+        "shoulders"
+      ],
+      "summary": "Dumbbell Row is a strength movement that primarily targets the middle back.",
+      "steps": [
+        "With a dumbbell in each hand (palms facing your torso), bend your knees slightly and bring your torso forward by bending at the waist; as you bend make sure to keep your back straight until it is almost parallel to the floor. Tip: Make sure that you keep the head up. The weights should hang directly in front of you as your arms hang perpendicular to the floor and your torso. This is your starting position.",
+        "While keeping the torso stationary, lift the dumbbells to your side (as you breathe out), keeping the elbows close to the body (do not exert any force with the forearm other than holding the weights). On the top contracted position, squeeze the back muscles and hold for a second.",
+        "Slowly lower the weight again to the starting position as you inhale.",
+        "Repeat for the recommended amount of repetitions."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Cable Row",
+      "slug": "cable-row",
+      "imageId": "Seated_Cable_Rows",
+      "imageFile": "cable-row.jpg",
+      "equipment": "cable",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "middle back"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "lats",
+        "shoulders"
+      ],
+      "summary": "Cable Row is a strength movement that primarily targets the middle back.",
+      "steps": [
+        "For this exercise you will need access to a low pulley row machine with a V-bar. Note: The V-bar will enable you to have a neutral grip where the palms of your hands face each other. To get into the starting position, first sit down on the machine and place your feet on the front platform or crossbar provided making sure that your knees are slightly bent and not locked.",
+        "Lean over as you keep the natural alignment of your back and grab the V-bar handles.",
+        "With your arms extended pull back until your torso is at a 90-degree angle from your legs. Your back should be slightly arched and your chest should be sticking out. You should be feeling a nice stretch on your lats as you hold the bar in front of you. This is the starting position of the exercise.",
+        "Keeping the torso stationary, pull the handles back towards your torso while keeping the arms close to it until you touch the abdominals. Breathe out as you perform that movement. At that point you should be squeezing your back muscles hard. Hold that contraction for a second and slowly go back to the original position while breathing in.",
+        "Repeat for the recommended amount of repetitions."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Resistance Band Row",
+      "slug": "resistance-band-row",
+      "imageId": "Seated_Cable_Rows",
+      "imageFile": "resistance-band-row.jpg",
+      "equipment": "cable",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "middle back"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "lats",
+        "shoulders"
+      ],
+      "summary": "Resistance Band Row is a strength movement that primarily targets the middle back.",
+      "steps": [
+        "For this exercise you will need access to a low pulley row machine with a V-bar. Note: The V-bar will enable you to have a neutral grip where the palms of your hands face each other. To get into the starting position, first sit down on the machine and place your feet on the front platform or crossbar provided making sure that your knees are slightly bent and not locked.",
+        "Lean over as you keep the natural alignment of your back and grab the V-bar handles.",
+        "With your arms extended pull back until your torso is at a 90-degree angle from your legs. Your back should be slightly arched and your chest should be sticking out. You should be feeling a nice stretch on your lats as you hold the bar in front of you. This is the starting position of the exercise.",
+        "Keeping the torso stationary, pull the handles back towards your torso while keeping the arms close to it until you touch the abdominals. Breathe out as you perform that movement. At that point you should be squeezing your back muscles hard. Hold that contraction for a second and slowly go back to the original position while breathing in.",
+        "Repeat for the recommended amount of repetitions."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Chest-Supported Row",
+      "slug": "chest-supported-row",
+      "imageId": "Dumbbell_Incline_Row",
+      "imageFile": "chest-supported-row.jpg",
+      "equipment": "dumbbell",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "middle back"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "forearms",
+        "lats",
+        "shoulders"
+      ],
+      "summary": "A chest-supported rowing pattern that trains the mid-back with less lower-back strain.",
+      "steps": [
+        "Set an incline bench and lie chest-down with dumbbells hanging below you.",
+        "Pull elbows toward your hips while squeezing your shoulder blades.",
+        "Lower under control without rounding your upper back.",
+        "Repeat for the prescribed reps."
+      ],
+      "tips": [
+        "Lead with elbows, not wrists.",
+        "Pause briefly at the top squeeze."
+      ]
+    },
+    {
+      "name": "Inverted Row",
+      "slug": "inverted-row",
+      "imageId": "Inverted_Row",
+      "imageFile": "inverted-row.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "middle back"
+      ],
+      "secondaryMuscles": [
+        "lats"
+      ],
+      "summary": "Inverted Row is a strength movement that primarily targets the middle back.",
+      "steps": [
+        "Position a bar in a rack to about waist height. You can also use a smith machine.",
+        "Take a wider than shoulder width grip on the bar and position yourself hanging underneath the bar. Your body should be straight with your heels on the ground with your arms fully extended. This will be your starting position.",
+        "Begin by flexing the elbow, pulling your chest towards the bar. Retract your shoulder blades as you perform the movement.",
+        "Pause at the top of the motion, and return yourself to the start position.",
+        "Repeat for the desired number of repetitions."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Overhead Press",
+      "slug": "overhead-press",
+      "imageId": "Barbell_Shoulder_Press",
+      "imageFile": "overhead-press.jpg",
+      "equipment": "barbell",
+      "level": "intermediate",
+      "category": "strength",
+      "primaryMuscles": [
+        "shoulders"
+      ],
+      "secondaryMuscles": [
+        "chest",
+        "triceps"
+      ],
+      "summary": "Overhead Press is a strength movement that primarily targets the shoulders.",
+      "steps": [
+        "Sit on a bench with back support in a squat rack. Position a barbell at a height that is just above your head. Grab the barbell with a pronated grip (palms facing forward).",
+        "Once you pick up the barbell with the correct grip width, lift the bar up over your head by locking your arms. Hold at about shoulder level and slightly in front of your head. This is your starting position.",
+        "Lower the bar down to the shoulders slowly as you inhale.",
+        "Lift the bar back up to the starting position as you exhale.",
+        "Repeat for the recommended amount of repetitions."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Landmine Press",
+      "slug": "landmine-press",
+      "imageId": "Landmine_Linear_Jammer",
+      "imageFile": "landmine-press.jpg",
+      "equipment": "barbell",
+      "level": "intermediate",
+      "category": "strength",
+      "primaryMuscles": [
+        "shoulders"
+      ],
+      "secondaryMuscles": [
+        "abdominals",
+        "calves",
+        "chest",
+        "hamstrings",
+        "quadriceps",
+        "triceps"
+      ],
+      "summary": "Landmine Press is a strength movement that primarily targets the shoulders.",
+      "steps": [
+        "Position a bar into landmine or, lacking one, securely anchor it in a corner. Load the bar to an appropriate weight and position the handle attachment on the bar.",
+        "Raise the bar from the floor, taking the handles to your shoulders. This will be your starting position.",
+        "In an athletic stance, squat by flexing your hips and setting your hips back, keeping your arms flexed.",
+        "Reverse the motion by powerfully extending through the hips, knees, and ankles, while also extending the elbows to straighten the arms. This movement should be done explosively, coming out of the squat to full extension as powerfully as possible.",
+        "Return to the starting position."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Arnold Press",
+      "slug": "arnold-press",
+      "imageId": "Arnold_Dumbbell_Press",
+      "imageFile": "arnold-press.jpg",
+      "equipment": "dumbbell",
+      "level": "intermediate",
+      "category": "strength",
+      "primaryMuscles": [
+        "shoulders"
+      ],
+      "secondaryMuscles": [
+        "triceps"
+      ],
+      "summary": "Arnold Press is a strength movement that primarily targets the shoulders.",
+      "steps": [
+        "Sit on an exercise bench with back support and hold two dumbbells in front of you at about upper chest level with your palms facing your body and your elbows bent. Tip: Your arms should be next to your torso. The starting position should look like the contracted portion of a dumbbell curl.",
+        "Now to perform the movement, raise the dumbbells as you rotate the palms of your hands until they are facing forward.",
+        "Continue lifting the dumbbells until your arms are extended above you in straight arm position. Breathe out as you perform this portion of the movement.",
+        "After a second pause at the top, begin to lower the dumbbells to the original position by rotating the palms of your hands towards you. Tip: The left arm will be rotated in a counter clockwise manner while the right one will be rotated clockwise. Breathe in as you perform this portion of the movement.",
+        "Repeat for the recommended amount of repetitions."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Pike Push-ups",
+      "slug": "pike-push-ups",
+      "imageId": "Handstand_Push-Ups",
+      "imageFile": "pike-push-ups.jpg",
+      "equipment": "body only",
+      "level": "expert",
+      "category": "strength",
+      "primaryMuscles": [
+        "shoulders"
+      ],
+      "secondaryMuscles": [
+        "triceps"
+      ],
+      "summary": "Pike Push-ups is a strength movement that primarily targets the shoulders.",
+      "steps": [
+        "With your back to the wall bend at the waist and place both hands on the floor at shoulder width.",
+        "Kick yourself up against the wall with your arms straight. Your body should be upside down with the arms and legs fully extended. Keep your whole body as straight as possible. Tip: If doing this for the first time, have a spotter help you. Also, make sure that you keep facing the wall with your head, rather than looking down.",
+        "Slowly lower yourself to the ground as you inhale until your head almost touches the floor. Tip: It is of utmost importance that you come down slow in order to avoid head injury.",
+        "Push yourself back up slowly as you exhale until your elbows are nearly locked.",
+        "Repeat for the recommended amount of repetitions."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Seated Dumbbell Press",
+      "slug": "seated-dumbbell-press",
+      "imageId": "Seated_Dumbbell_Press",
+      "imageFile": "seated-dumbbell-press.jpg",
+      "equipment": "dumbbell",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "shoulders"
+      ],
+      "secondaryMuscles": [
+        "triceps"
+      ],
+      "summary": "Seated Dumbbell Press is a strength movement that primarily targets the shoulders.",
+      "steps": [
+        "Grab a couple of dumbbells and sit on a military press bench or a utility bench that has a back support on it as you place the dumbbells upright on top of your thighs.",
+        "Clean the dumbbells up one at a time by using your thighs to bring the dumbbells up to shoulder height at each side.",
+        "Rotate the wrists so that the palms of your hands are facing forward. This is your starting position.",
+        "As you exhale, push the dumbbells up until they touch at the top.",
+        "After a second pause, slowly come down back to the starting position as you inhale.",
+        "Repeat for the recommended amount of repetitions."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Lat Pulldown",
+      "slug": "lat-pulldown",
+      "imageId": "Wide-Grip_Lat_Pulldown",
+      "imageFile": "lat-pulldown.jpg",
+      "equipment": "cable",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "lats"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "middle back",
+        "shoulders"
+      ],
+      "summary": "Lat Pulldown is a strength movement that primarily targets the lats.",
+      "steps": [
+        "Sit down on a pull-down machine with a wide bar attached to the top pulley. Make sure that you adjust the knee pad of the machine to fit your height. These pads will prevent your body from being raised by the resistance attached to the bar.",
+        "Grab the bar with the palms facing forward using the prescribed grip. Note on grips: For a wide grip, your hands need to be spaced out at a distance wider than shoulder width. For a medium grip, your hands need to be spaced out at a distance equal to your shoulder width and for a close grip at a distance smaller than your shoulder width.",
+        "As you have both arms extended in front of you holding the bar at the chosen grip width, bring your torso back around 30 degrees or so while creating a curvature on your lower back and sticking your chest out. This is your starting position.",
+        "As you breathe out, bring the bar down until it touches your upper chest by drawing the shoulders and the upper arms down and back. Tip: Concentrate on squeezing the back muscles once you reach the full contracted position. The upper torso should remain stationary and only the arms should move. The forearms should do no other work except for holding the bar; therefore do not try to pull down the bar using the forearms.",
+        "After a second at the contracted position squeezing your shoulder blades together, slowly raise the bar back to the starting position when your arms are fully extended and the lats are fully stretched. Inhale during this portion of the movement.",
+        "Repeat this motion for the prescribed amount of repetitions."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Assisted Pull-ups",
+      "slug": "assisted-pull-ups",
+      "imageId": "Band_Assisted_Pull-Up",
+      "imageFile": "assisted-pull-ups.jpg",
+      "equipment": "other",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "lats"
+      ],
+      "secondaryMuscles": [
+        "abdominals",
+        "forearms",
+        "middle back"
+      ],
+      "summary": "Assisted Pull-ups is a strength movement that primarily targets the lats.",
+      "steps": [
+        "Choke the band around the center of the pullup bar. You can use different bands to provide varying levels of assistance.",
+        "Pull the end of the band down, and place one bent knee into the loop, ensuring it won't slip out. Take a medium to wide grip on the bar. This will be your starting position.",
+        "Pull yourself upward by contracting the lats as you flex the elbow. The elbow should be driven to your side. Pull to the front, attempting to get your chin over the bar. Avoid swinging or jerking movements.",
+        "After a brief pause, return to the starting position."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Band Pulldown",
+      "slug": "band-pulldown",
+      "imageId": "Underhand_Cable_Pulldowns",
+      "imageFile": "band-pulldown.jpg",
+      "equipment": "cable",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "lats"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "middle back",
+        "shoulders"
+      ],
+      "summary": "Band Pulldown is a strength movement that primarily targets the lats.",
+      "steps": [
+        "Sit down on a pull-down machine with a wide bar attached to the top pulley. Adjust the knee pad of the machine to fit your height. These pads will prevent your body from being raised by the resistance attached to the bar.",
+        "Grab the pull-down bar with the palms facing your torso (a supinated grip). Make sure that the hands are placed closer than the shoulder width.",
+        "As you have both arms extended in front of you holding the bar at the chosen grip width, bring your torso back around 30 degrees or so while creating a curvature on your lower back and sticking your chest out. This is your starting position.",
+        "As you breathe out, pull the bar down until it touches your upper chest by drawing the shoulders and the upper arms down and back. Tip: Concentrate on squeezing the back muscles once you reach the fully contracted position and keep the elbows close to your body. The upper torso should remain stationary as your bring the bar to you and only the arms should move. The forearms should do no other work other than hold the bar.",
+        "After a second on the contracted position, while breathing in, slowly bring the bar back to the starting position when your arms are fully extended and the lats are fully stretched.",
+        "Repeat this motion for the prescribed amount of repetitions."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Dumbbell Pullover",
+      "slug": "dumbbell-pullover",
+      "imageId": "Bent-Arm_Dumbbell_Pullover",
+      "imageFile": "dumbbell-pullover.jpg",
+      "equipment": "dumbbell",
+      "level": "intermediate",
+      "category": "strength",
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "lats",
+        "shoulders",
+        "triceps"
+      ],
+      "summary": "Dumbbell Pullover is a strength movement that primarily targets the chest.",
+      "steps": [
+        "Place a dumbbell standing up on a flat bench.",
+        "Ensuring that the dumbbell stays securely placed at the top of the bench, lie perpendicular to the bench (torso across it as in forming a cross) with only your shoulders lying on the surface. Hips should be below the bench and legs bent with feet firmly on the floor. The head will be off the bench as well.",
+        "Grasp the dumbbell with both hands and hold it straight over your chest with a bend in your arms. Both palms should be pressing against the underside one of the sides of the dumbbell. This will be your starting position. Caution: Always ensure that the dumbbell used for this exercise is secure. Using a dumbbell with loose plates can result in the dumbbell falling apart and falling on your face.",
+        "While keeping your arms locked in the bent arm position, lower the weight slowly in an arc behind your head while breathing in until you feel a stretch on the chest.",
+        "At that point, bring the dumbbell back to the starting position using the arc through which the weight was lowered and exhale as you perform this movement.",
+        "Hold the weight on the initial position for a second and repeat the motion for the prescribed number of repetitions."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Bodyweight Squats",
+      "slug": "bodyweight-squats",
+      "imageId": "Bodyweight_Squat",
+      "imageFile": "bodyweight-squats.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "glutes",
+        "hamstrings"
+      ],
+      "summary": "Bodyweight Squats is a strength movement that primarily targets the quadriceps.",
+      "steps": [
+        "Stand with your feet shoulder width apart. You can place your hands behind your head. This will be your starting position.",
+        "Begin the movement by flexing your knees and hips, sitting back with your hips.",
+        "Continue down to full depth if you are able,and quickly reverse the motion until you return to the starting position. As you squat, keep your head and chest up and push your knees out."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Chair Squats",
+      "slug": "chair-squats",
+      "imageId": "Chair_Squat",
+      "imageFile": "chair-squats.jpg",
+      "equipment": "machine",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings"
+      ],
+      "summary": "Chair Squats is a strength movement that primarily targets the quadriceps.",
+      "steps": [
+        "To begin, first set the bar to a position that best matches your height. Once the bar is loaded, step under it and position it across the back of your shoulders.",
+        "Take the bar with your hands facing forward, unlock it and lift it off the rack by extending your legs.",
+        "Move your feet forward about 18 inches in front of the bar. Position your legs using a shoulder width stance with the toes slightly pointed out. Look forward at all times and maintain a neutral or slightly arched spine. This will be your starting position.",
+        "Slowly lower the bar by bending the knees as you maintain a straight posture with the head up. Continue down until the angle between the upper and lower leg breaks 90 degrees.",
+        "Begin to raise the bar as you exhale by pushing the floor with the heels of your feet, extending the knees and returning to the starting position.",
+        "Repeat for the recommended amount of repetitions."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Step-ups",
+      "slug": "step-ups",
+      "imageId": "Step-up_with_Knee_Raise",
+      "imageFile": "step-ups.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "glutes"
+      ],
+      "secondaryMuscles": [
+        "hamstrings",
+        "quadriceps"
+      ],
+      "summary": "Step-ups is a strength movement that primarily targets the glutes.",
+      "steps": [
+        "Stand facing a box or bench of an appropriate height with your feet together. This will be your starting position.",
+        "Begin the movement by stepping up, putting your left foot on the top of the bench. Extend through the hip and knee of your front leg to stand up on the box. As you stand on the box with your left leg, flex your right knee and hip, bringing your knee as high as you can.",
+        "Reverse this motion to step down off the box, and then repeat the sequence on the opposite leg."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Walking Lunges",
+      "slug": "walking-lunges",
+      "imageId": "Bodyweight_Walking_Lunge",
+      "imageFile": "walking-lunges.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings"
+      ],
+      "summary": "Walking Lunges is a strength movement that primarily targets the quadriceps.",
+      "steps": [
+        "Begin standing with your feet shoulder width apart and your hands on your hips.",
+        "Step forward with one leg, flexing the knees to drop your hips. Descend until your rear knee nearly touches the ground. Your posture should remain upright, and your front knee should stay above the front foot.",
+        "Drive through the heel of your lead foot and extend both knees to raise yourself back up.",
+        "Step forward with your rear foot, repeating the lunge on the opposite leg."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Stationary Lunges",
+      "slug": "stationary-lunges",
+      "imageId": "Dumbbell_Lunges",
+      "imageFile": "stationary-lunges.jpg",
+      "equipment": "dumbbell",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings"
+      ],
+      "summary": "Stationary Lunges is a strength movement that primarily targets the quadriceps.",
+      "steps": [
+        "Stand with your torso upright holding two dumbbells in your hands by your sides. This will be your starting position.",
+        "Step forward with your right leg around 2 feet or so from the foot being left stationary behind and lower your upper body down, while keeping the torso upright and maintaining balance. Inhale as you go down. Note: As in the other exercises, do not allow your knee to go forward beyond your toes as you come down, as this will put undue stress on the knee joint. Make sure that you keep your front shin perpendicular to the ground.",
+        "Using mainly the heel of your foot, push up and go back to the starting position as you exhale.",
+        "Repeat the movement for the recommended amount of repetitions and then perform with the left leg."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Reverse Lunges",
+      "slug": "reverse-lunges",
+      "imageId": "Crossover_Reverse_Lunge",
+      "imageFile": "reverse-lunges.jpg",
+      "equipment": "body only",
+      "level": "intermediate",
+      "category": "stretching",
+      "primaryMuscles": [
+        "lower back"
+      ],
+      "secondaryMuscles": [
+        "abdominals",
+        "abductors",
+        "glutes",
+        "hamstrings",
+        "quadriceps"
+      ],
+      "summary": "Reverse Lunges is a stretching movement that primarily targets the lower back.",
+      "steps": [
+        "Stand with your feet shoulder width apart. This will be your starting position.",
+        "Perform a rear lunge by stepping back with one foot and flexing the hips and front knee. As you do so, rotate your torso across the front leg.",
+        "After a brief pause, return to the starting position and repeat on the other side, continuing in an alternating fashion."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Bulgarian Split Squat",
+      "slug": "bulgarian-split-squat",
+      "imageId": "Split_Squats",
+      "imageFile": "bulgarian-split-squat.jpg",
+      "equipment": "body only",
+      "level": "intermediate",
+      "category": "stretching",
+      "primaryMuscles": [
+        "hamstrings"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "quadriceps"
+      ],
+      "summary": "Bulgarian Split Squat is a stretching movement that primarily targets the hamstrings.",
+      "steps": [
+        "Being in a standing position. Jump into a split leg position, with one leg forward and one leg back, flexing the knees and lowering your hips slightly as you do so.",
+        "As you descend, immediately reverse direction, standing back up and jumping, reversing the position of your legs. Repeat 5-10 times on each leg."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Incline Push-ups",
+      "slug": "incline-push-ups",
+      "imageId": "Incline_Push-Up",
+      "imageFile": "incline-push-ups.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "shoulders",
+        "triceps"
+      ],
+      "summary": "Incline Push-ups is a strength movement that primarily targets the chest.",
+      "steps": [
+        "Stand facing bench or sturdy elevated platform. Place hands on edge of bench or platform, slightly wider than shoulder width.",
+        "Position forefoot back from bench or platform with arms and body straight. Arms should be perpendicular to body. Keeping body straight, lower chest to edge of box or platform by bending arms.",
+        "Push body up until arms are extended. Repeat."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Knee Push-ups",
+      "slug": "knee-push-ups",
+      "imageId": "Pushups",
+      "imageFile": "knee-push-ups.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "shoulders",
+        "triceps"
+      ],
+      "summary": "Knee Push-ups is a strength movement that primarily targets the chest.",
+      "steps": [
+        "Lie on the floor face down and place your hands about 36 inches apart while holding your torso up at arms length.",
+        "Next, lower yourself downward until your chest almost touches the floor as you inhale.",
+        "Now breathe out and press your upper body back up to the starting position while squeezing your chest.",
+        "After a brief pause at the top contracted position, you can begin to lower yourself downward again for as many repetitions as needed."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Plank Hold",
+      "slug": "plank-hold",
+      "imageId": "Plank",
+      "imageFile": "plank-hold.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "abdominals"
+      ],
+      "secondaryMuscles": [],
+      "summary": "Plank Hold is a strength movement that primarily targets the abdominals.",
+      "steps": [
+        "Get into a prone position on the floor, supporting your weight on your toes and your forearms. Your arms are bent and directly below the shoulder.",
+        "Keep your body straight at all times, and hold this position as long as possible. To increase difficulty, an arm or leg can be raised."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Plank",
+      "slug": "plank",
+      "imageId": "Plank",
+      "imageFile": "plank.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "abdominals"
+      ],
+      "secondaryMuscles": [],
+      "summary": "Plank is a strength movement that primarily targets the abdominals.",
+      "steps": [
+        "Get into a prone position on the floor, supporting your weight on your toes and your forearms. Your arms are bent and directly below the shoulder.",
+        "Keep your body straight at all times, and hold this position as long as possible. To increase difficulty, an arm or leg can be raised."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Dead Bug",
+      "slug": "dead-bug",
+      "imageId": "Dead_Bug",
+      "imageFile": "dead-bug.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "abdominals"
+      ],
+      "secondaryMuscles": [],
+      "summary": "Dead Bug is a strength movement that primarily targets the abdominals.",
+      "steps": [
+        "Begin lying on your back with your hands extended above you toward the ceiling.",
+        "Bring your feet, knees, and hips up to 90 degrees.",
+        "Exhale hard to bring your ribcage down and flatten your back onto the floor, rotating your pelvis up and squeezing your glutes. Hold this position throughout the movement. This will be your starting position.",
+        "Initiate the exercise by extending one leg, straightening the knee and hip to bring the leg just above the ground.",
+        "Maintain the position of your lumbar and pelvis as you perform the movement, as your back is going to want to arch.",
+        "Stay tight and return the working leg to the starting position.",
+        "Repeat on the opposite side, alternating until the set is complete."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Bird Dog",
+      "slug": "bird-dog",
+      "imageId": "Superman",
+      "imageFile": "bird-dog.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "stretching",
+      "primaryMuscles": [
+        "lower back"
+      ],
+      "secondaryMuscles": [
+        "glutes",
+        "hamstrings"
+      ],
+      "summary": "A core stability drill that teaches opposite-arm and opposite-leg coordination.",
+      "steps": [
+        "Start on all fours with a neutral spine.",
+        "Extend one arm forward and the opposite leg back without rotating your hips.",
+        "Hold briefly, then return and switch sides.",
+        "Keep ribs down and move slowly."
+      ],
+      "tips": [
+        "Imagine balancing a glass of water on your lower back.",
+        "Small range with control beats big wobbly reps."
+      ]
+    },
+    {
+      "name": "Side Plank",
+      "slug": "side-plank",
+      "imageId": "Side_Bridge",
+      "imageFile": "side-plank.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "abdominals"
+      ],
+      "secondaryMuscles": [
+        "shoulders"
+      ],
+      "summary": "Side Plank is a strength movement that primarily targets the abdominals.",
+      "steps": [
+        "Perform Side Plank with controlled form for the prescribed sets and reps."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Wall Plank",
+      "slug": "wall-plank",
+      "imageId": "Plank",
+      "imageFile": "wall-plank.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "abdominals"
+      ],
+      "secondaryMuscles": [],
+      "summary": "Wall Plank is a strength movement that primarily targets the abdominals.",
+      "steps": [
+        "Get into a prone position on the floor, supporting your weight on your toes and your forearms. Your arms are bent and directly below the shoulder.",
+        "Keep your body straight at all times, and hold this position as long as possible. To increase difficulty, an arm or leg can be raised."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Arm Circles",
+      "slug": "arm-circles",
+      "imageId": "Arm_Circles",
+      "imageFile": "arm-circles.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "stretching",
+      "primaryMuscles": [
+        "shoulders"
+      ],
+      "secondaryMuscles": [
+        "traps"
+      ],
+      "summary": "Arm Circles is a stretching movement that primarily targets the shoulders.",
+      "steps": [
+        "Stand up and extend your arms straight out by the sides. The arms should be parallel to the floor and perpendicular (90-degree angle) to your torso. This will be your starting position.",
+        "Slowly start to make circles of about 1 foot in diameter with each outstretched arm. Breathe normally as you perform the movement.",
+        "Continue the circular motion of the outstretched arms for about ten seconds. Then reverse the movement, going the opposite direction."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Arm circles + leg swings",
+      "slug": "arm-circles-leg-swings",
+      "imageId": "Arm_Circles",
+      "imageFile": "arm-circles-leg-swings.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "stretching",
+      "primaryMuscles": [
+        "shoulders"
+      ],
+      "secondaryMuscles": [
+        "traps"
+      ],
+      "summary": "Arm circles + leg swings is a stretching movement that primarily targets the shoulders.",
+      "steps": [
+        "Stand up and extend your arms straight out by the sides. The arms should be parallel to the floor and perpendicular (90-degree angle) to your torso. This will be your starting position.",
+        "Slowly start to make circles of about 1 foot in diameter with each outstretched arm. Breathe normally as you perform the movement.",
+        "Continue the circular motion of the outstretched arms for about ten seconds. Then reverse the movement, going the opposite direction."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Cat-cow",
+      "slug": "cat-cow",
+      "imageId": "Cat_Stretch",
+      "imageFile": "cat-cow.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "stretching",
+      "primaryMuscles": [
+        "lower back"
+      ],
+      "secondaryMuscles": [
+        "middle back",
+        "traps"
+      ],
+      "summary": "Cat-cow is a stretching movement that primarily targets the lower back.",
+      "steps": [
+        "Position yourself on the floor on your hands and knees.",
+        "Pull your belly in and round your spine, lower back, shoulders, and neck, letting your head drop.",
+        "Hold for 15 seconds."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Hip openers",
+      "slug": "hip-openers",
+      "imageId": "Standing_Hip_Circles",
+      "imageFile": "hip-openers.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "stretching",
+      "primaryMuscles": [
+        "abductors"
+      ],
+      "secondaryMuscles": [
+        "adductors"
+      ],
+      "summary": "Hip openers is a stretching movement that primarily targets the abductors.",
+      "steps": [
+        "Begin standing on one leg, holding to a vertical support.",
+        "Raise the unsupported knee to 90 degrees. This will be your starting position.",
+        "Open the hip as far as possible, attempting to make a big circle with your knee.",
+        "Perform this movement slowly for a number of repetitions, and repeat on the other side."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Band pull-aparts",
+      "slug": "band-pull-aparts",
+      "imageId": "Band_Pull_Apart",
+      "imageFile": "band-pull-aparts.jpg",
+      "equipment": "bands",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "shoulders"
+      ],
+      "secondaryMuscles": [
+        "middle back",
+        "traps"
+      ],
+      "summary": "Band pull-aparts is a strength movement that primarily targets the shoulders.",
+      "steps": [
+        "Begin with your arms extended straight out in front of you, holding the band with both hands.",
+        "Initiate the movement by performing a reverse fly motion, moving your hands out laterally to your sides.",
+        "Keep your elbows extended as you perform the movement, bringing the band to your chest. Ensure that you keep your shoulders back during the exercise.",
+        "Pause as you complete the movement, returning to the starting position under control."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Jumping jacks (low impact)",
+      "slug": "jumping-jacks-low-impact",
+      "imageId": "Fast_Skipping",
+      "imageFile": "jumping-jacks-low-impact.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "plyometrics",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "abductors",
+        "adductors",
+        "calves",
+        "glutes",
+        "hamstrings"
+      ],
+      "summary": "Jumping jacks (low impact) is a plyometrics movement that primarily targets the quadriceps.",
+      "steps": [
+        "Start in a relaxed position with one leg slightly forward. This will be your starting position.",
+        "Skip by executing a step-hop pattern of right-right-step to left-left-step, and so on, alternating back and forth.",
+        "Perform fast skips by maintaining close contact with the ground and reduce air time, moving as quickly as possible."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "March in place",
+      "slug": "march-in-place",
+      "imageId": "Walking_Treadmill",
+      "imageFile": "march-in-place.jpg",
+      "equipment": "machine",
+      "level": "beginner",
+      "category": "cardio",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings"
+      ],
+      "summary": "March in place is a cardio movement that primarily targets the quadriceps.",
+      "steps": [
+        "To begin, step onto the treadmill and select the desired option from the menu. Most treadmills have a manual setting, or you can select a program to run. Typically, you can enter your age and weight to estimate the amount of calories burned during exercise. Elevation can be adjusted to change the intensity of the workout.",
+        "Treadmills offer convenience, cardiovascular benefits, and usually have less impact than walking outside. When walking, you should move at a moderate to fast pace, not a leisurely one. Being an activity of lower intensity, walking doesn't burn as many calories as some other activities, but still provides great benefit. A 150 lb person will burn about 175 calories walking 4 miles per hour for 30 minutes, compared to 450 calories running twice as fast. Maintain proper posture as you walk, and only hold onto the handles when necessary, such as when dismounting or checking your heart rate."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Dynamic Warm-up Circuit",
+      "slug": "dynamic-warm-up-circuit",
+      "imageId": "Arm_Circles",
+      "imageFile": "dynamic-warm-up-circuit.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "stretching",
+      "primaryMuscles": [
+        "shoulders"
+      ],
+      "secondaryMuscles": [
+        "traps"
+      ],
+      "summary": "A short pulse-raiser that warms joints and prepares you for loaded training.",
+      "steps": [
+        "Start with easy marching or light skipping for 1–2 minutes.",
+        "Add arm circles, leg swings, and hip openers through a pain-free range.",
+        "Finish with a few bodyweight squat or hinge reps to groove the pattern.",
+        "Transition into your first working set while still warm."
+      ],
+      "tips": [
+        "Keep it easy — this is not the workout.",
+        "Skip any motion that aggravates an injury."
+      ]
+    },
+    {
+      "name": "Joint Mobility Flow",
+      "slug": "joint-mobility-flow",
+      "imageId": "Standing_Hip_Circles",
+      "imageFile": "joint-mobility-flow.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "stretching",
+      "primaryMuscles": [
+        "abductors"
+      ],
+      "secondaryMuscles": [
+        "adductors"
+      ],
+      "summary": "Gentle joint circles and openers to improve comfortable range before loading.",
+      "steps": [
+        "Move slowly through neck, shoulder, hip, and ankle circles.",
+        "Spend extra time on joints you flagged in your assessment.",
+        "Breathe steadily and stay out of sharp pain.",
+        "Finish feeling looser, not fatigued."
+      ],
+      "tips": [
+        "Quality over depth.",
+        "If a joint complains, reduce range immediately."
+      ]
+    },
+    {
+      "name": "Activation Drills",
+      "slug": "activation-drills",
+      "imageId": "Band_Pull_Apart",
+      "imageFile": "activation-drills.jpg",
+      "equipment": "bands",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "shoulders"
+      ],
+      "secondaryMuscles": [
+        "middle back",
+        "traps"
+      ],
+      "summary": "Light activation sets that wake up glutes, core, and upper-back before main lifts.",
+      "steps": [
+        "Pick 2–3 low-load moves like glute bridges, band pull-aparts, or dead bugs.",
+        "Perform crisp reps with a 1-second squeeze at the top.",
+        "Rest briefly between moves.",
+        "Stop once muscles feel awake — do not chase fatigue."
+      ],
+      "tips": [
+        "Use bands or bodyweight only.",
+        "Keep reps smooth and controlled."
+      ]
+    },
+    {
+      "name": "Easy Recovery Walk / Cycle",
+      "slug": "easy-recovery-walk-cycle",
+      "imageId": "Walking_Treadmill",
+      "imageFile": "easy-recovery-walk-cycle.jpg",
+      "equipment": "machine",
+      "level": "beginner",
+      "category": "cardio",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings"
+      ],
+      "summary": "Very easy movement to promote blood flow on recovery days.",
+      "steps": [
+        "Walk outdoors or cycle at a gentle pace.",
+        "Stay relaxed in the shoulders and jaw.",
+        "Continue for 8–12 minutes.",
+        "Hydrate and stretch lightly afterward."
+      ],
+      "tips": [
+        "If it feels hard, slow down.",
+        "Consistency matters more than intensity here."
+      ]
+    },
+    {
+      "name": "Brisk walk",
+      "slug": "brisk-walk",
+      "imageId": "Walking_Treadmill",
+      "imageFile": "brisk-walk.jpg",
+      "equipment": "machine",
+      "level": "beginner",
+      "category": "cardio",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings"
+      ],
+      "summary": "Brisk walk is a cardio movement that primarily targets the quadriceps.",
+      "steps": [
+        "To begin, step onto the treadmill and select the desired option from the menu. Most treadmills have a manual setting, or you can select a program to run. Typically, you can enter your age and weight to estimate the amount of calories burned during exercise. Elevation can be adjusted to change the intensity of the workout.",
+        "Treadmills offer convenience, cardiovascular benefits, and usually have less impact than walking outside. When walking, you should move at a moderate to fast pace, not a leisurely one. Being an activity of lower intensity, walking doesn't burn as many calories as some other activities, but still provides great benefit. A 150 lb person will burn about 175 calories walking 4 miles per hour for 30 minutes, compared to 450 calories running twice as fast. Maintain proper posture as you walk, and only hold onto the handles when necessary, such as when dismounting or checking your heart rate."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Stationary bike",
+      "slug": "stationary-bike",
+      "imageId": "Recumbent_Bike",
+      "imageFile": "stationary-bike.jpg",
+      "equipment": "machine",
+      "level": "beginner",
+      "category": "cardio",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings"
+      ],
+      "summary": "Stationary bike is a cardio movement that primarily targets the quadriceps.",
+      "steps": [
+        "To begin, seat yourself on the bike and adjust the seat to your height.",
+        "Select the desired option from the menu. You may have to start pedaling to turn it on. You can use the manual setting, or you can select a program to use. Typically, you can enter your age and weight to estimate the amount of calories burned during exercise. The level of resistance can be changed throughout the workout. The handles can be used to monitor your heart rate to help you stay at an appropriate intensity.",
+        "Recumbent bikes offer convenience, cardiovascular benefits, and have less impact than other activities. A 150 lb person will burn about 230 calories cycling at a moderate rate for 30 minutes, compared to 450 calories or more running."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Light elliptical",
+      "slug": "light-elliptical",
+      "imageId": "Elliptical_Trainer",
+      "imageFile": "light-elliptical.jpg",
+      "equipment": "machine",
+      "level": "intermediate",
+      "category": "cardio",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings"
+      ],
+      "summary": "Light elliptical is a cardio movement that primarily targets the quadriceps.",
+      "steps": [
+        "To begin, step onto the elliptical and select the desired option from the menu. Most ellipticals have a manual setting, or you can select a program to run. Typically, you can enter your age and weight to estimate the amount of calories burned during exercise. Elevation can be adjusted to change the intensity of the workout.",
+        "The handles can be used to monitor your heart rate to help you stay at an appropriate intensity."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Steady-State Cardio (Easy)",
+      "slug": "steady-state-cardio-easy",
+      "imageId": "Jogging_Treadmill",
+      "imageFile": "steady-state-cardio-easy.jpg",
+      "equipment": "machine",
+      "level": "beginner",
+      "category": "cardio",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "glutes",
+        "hamstrings"
+      ],
+      "summary": "Easy aerobic work used on deload or recovery days.",
+      "steps": [
+        "Choose walking, easy cycling, or light elliptical.",
+        "Keep conversation pace for the full duration.",
+        "Breathe through the nose when possible.",
+        "Finish feeling refreshed, not drained."
+      ],
+      "tips": [
+        "Heart rate should stay comfortable.",
+        "This supports recovery — do not race."
+      ]
+    },
+    {
+      "name": "Cardio Finisher",
+      "slug": "cardio-finisher",
+      "imageId": "Jogging_Treadmill",
+      "imageFile": "cardio-finisher.jpg",
+      "equipment": "machine",
+      "level": "beginner",
+      "category": "cardio",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "glutes",
+        "hamstrings"
+      ],
+      "summary": "Short moderate cardio after lifting to improve conditioning and calorie burn.",
+      "steps": [
+        "Choose treadmill incline walk, bike, row, or similar.",
+        "Work at a pace where you can still speak in short sentences.",
+        "Maintain steady effort for the prescribed time.",
+        "Cool down with 1–2 easy minutes before stretching."
+      ],
+      "tips": [
+        "Stop for dizziness or sharp pain.",
+        "Hydrate if you are sweating heavily."
+      ]
+    },
+    {
+      "name": "Treadmill incline walk",
+      "slug": "treadmill-incline-walk",
+      "imageId": "Walking_Treadmill",
+      "imageFile": "treadmill-incline-walk.jpg",
+      "equipment": "machine",
+      "level": "beginner",
+      "category": "cardio",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings"
+      ],
+      "summary": "Treadmill incline walk is a cardio movement that primarily targets the quadriceps.",
+      "steps": [
+        "To begin, step onto the treadmill and select the desired option from the menu. Most treadmills have a manual setting, or you can select a program to run. Typically, you can enter your age and weight to estimate the amount of calories burned during exercise. Elevation can be adjusted to change the intensity of the workout.",
+        "Treadmills offer convenience, cardiovascular benefits, and usually have less impact than walking outside. When walking, you should move at a moderate to fast pace, not a leisurely one. Being an activity of lower intensity, walking doesn't burn as many calories as some other activities, but still provides great benefit. A 150 lb person will burn about 175 calories walking 4 miles per hour for 30 minutes, compared to 450 calories running twice as fast. Maintain proper posture as you walk, and only hold onto the handles when necessary, such as when dismounting or checking your heart rate."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Cycling",
+      "slug": "cycling",
+      "imageId": "Recumbent_Bike",
+      "imageFile": "cycling.jpg",
+      "equipment": "machine",
+      "level": "beginner",
+      "category": "cardio",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings"
+      ],
+      "summary": "Cycling is a cardio movement that primarily targets the quadriceps.",
+      "steps": [
+        "To begin, seat yourself on the bike and adjust the seat to your height.",
+        "Select the desired option from the menu. You may have to start pedaling to turn it on. You can use the manual setting, or you can select a program to use. Typically, you can enter your age and weight to estimate the amount of calories burned during exercise. The level of resistance can be changed throughout the workout. The handles can be used to monitor your heart rate to help you stay at an appropriate intensity.",
+        "Recumbent bikes offer convenience, cardiovascular benefits, and have less impact than other activities. A 150 lb person will burn about 230 calories cycling at a moderate rate for 30 minutes, compared to 450 calories or more running."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Rowing",
+      "slug": "rowing",
+      "imageId": "Rowing_Stationary",
+      "imageFile": "rowing.jpg",
+      "equipment": "machine",
+      "level": "intermediate",
+      "category": "cardio",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "calves",
+        "glutes",
+        "hamstrings",
+        "lower back",
+        "middle back"
+      ],
+      "summary": "Rowing is a cardio movement that primarily targets the quadriceps.",
+      "steps": [
+        "To begin, seat yourself on the rower. Make sure that your heels are resting comfortably against the base of the foot pedals and that the straps are secured. Select the program that you wish to use, if applicable. Sit up straight and bend forward at the hips.",
+        "There are three phases of movement when using a rower. The first phase is when you come forward on the rower. Your knees are bent and against your chest. Your upper body is leaning slightly forward while still maintaining good posture. Next, push against the foot pedals and extend your legs while bringing your hands to your upper abdominal area, squeezing your shoulders back as you do so. To avoid straining your back, use primarily your leg and hip muscles.",
+        "The recovery phase simply involves straightening your arms, bending the knees, and bringing your body forward again as you transition back into the first phase."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Shadow boxing",
+      "slug": "shadow-boxing",
+      "imageId": "Mountain_Climbers",
+      "imageFile": "shadow-boxing.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "plyometrics",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "chest",
+        "hamstrings",
+        "shoulders"
+      ],
+      "summary": "Light standing punches and footwork to raise heart rate without heavy impact.",
+      "steps": [
+        "Stand in a athletic stance with soft knees and hands up near your cheeks.",
+        "Throw controlled jabs and crosses while staying light on your feet.",
+        "Keep breathing rhythmical and avoid fully locking elbows.",
+        "Continue for the prescribed interval, then rest."
+      ],
+      "tips": [
+        "Stay relaxed in the shoulders.",
+        "Scale intensity so you can still speak in short phrases."
+      ]
+    },
+    {
+      "name": "Conditioning Burst",
+      "slug": "conditioning-burst",
+      "imageId": "Air_Bike",
+      "imageFile": "conditioning-burst.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "abdominals"
+      ],
+      "secondaryMuscles": [],
+      "summary": "Interval-style conditioning to raise fitness without wrecking recovery.",
+      "steps": [
+        "Pick bike intervals, skipping, or shuttle walks.",
+        "Work hard for 30 seconds, then recover for 30 seconds.",
+        "Repeat for the prescribed rounds.",
+        "Keep form clean — slow down if technique breaks."
+      ],
+      "tips": [
+        "Quality intervals beat sloppy all-out efforts.",
+        "Scale intensity on deload weeks."
+      ]
+    },
+    {
+      "name": "Bike intervals",
+      "slug": "bike-intervals",
+      "imageId": "Air_Bike",
+      "imageFile": "bike-intervals.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "strength",
+      "primaryMuscles": [
+        "abdominals"
+      ],
+      "secondaryMuscles": [],
+      "summary": "Bike intervals is a strength movement that primarily targets the abdominals.",
+      "steps": [
+        "Lie flat on the floor with your lower back pressed to the ground. For this exercise, you will need to put your hands beside your head. Be careful however to not strain with the neck as you perform it. Now lift your shoulders into the crunch position.",
+        "Bring knees up to where they are perpendicular to the floor, with your lower legs parallel to the floor. This will be your starting position.",
+        "Now simultaneously, slowly go through a cycle pedal motion kicking forward with the right leg and bringing in the knee of the left leg. Bring your right elbow close to your left knee by crunching to the side, as you breathe out.",
+        "Go back to the initial position as you breathe in.",
+        "Crunch to the opposite side as you cycle your legs and bring closer your left elbow to your right knee and exhale.",
+        "Continue alternating in this manner until all of the recommended repetitions for each side have been completed."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Skipping (or high knees)",
+      "slug": "skipping-or-high-knees",
+      "imageId": "Fast_Skipping",
+      "imageFile": "skipping-or-high-knees.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "plyometrics",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "abductors",
+        "adductors",
+        "calves",
+        "glutes",
+        "hamstrings"
+      ],
+      "summary": "Skipping (or high knees) is a plyometrics movement that primarily targets the quadriceps.",
+      "steps": [
+        "Start in a relaxed position with one leg slightly forward. This will be your starting position.",
+        "Skip by executing a step-hop pattern of right-right-step to left-left-step, and so on, alternating back and forth.",
+        "Perform fast skips by maintaining close contact with the ground and reduce air time, moving as quickly as possible."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Shuttle walks",
+      "slug": "shuttle-walks",
+      "imageId": "Walking_Treadmill",
+      "imageFile": "shuttle-walks.jpg",
+      "equipment": "machine",
+      "level": "beginner",
+      "category": "cardio",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings"
+      ],
+      "summary": "Shuttle walks is a cardio movement that primarily targets the quadriceps.",
+      "steps": [
+        "To begin, step onto the treadmill and select the desired option from the menu. Most treadmills have a manual setting, or you can select a program to run. Typically, you can enter your age and weight to estimate the amount of calories burned during exercise. Elevation can be adjusted to change the intensity of the workout.",
+        "Treadmills offer convenience, cardiovascular benefits, and usually have less impact than walking outside. When walking, you should move at a moderate to fast pace, not a leisurely one. Being an activity of lower intensity, walking doesn't burn as many calories as some other activities, but still provides great benefit. A 150 lb person will burn about 175 calories walking 4 miles per hour for 30 minutes, compared to 450 calories running twice as fast. Maintain proper posture as you walk, and only hold onto the handles when necessary, such as when dismounting or checking your heart rate."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Hip & Hamstring Stretch Series",
+      "slug": "hip-hamstring-stretch-series",
+      "imageId": "Hamstring_Stretch",
+      "imageFile": "hip-hamstring-stretch-series.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "stretching",
+      "primaryMuscles": [
+        "hamstrings"
+      ],
+      "secondaryMuscles": [],
+      "summary": "A cool-down series targeting hips and hamstrings after lower-body work.",
+      "steps": [
+        "Move into a hamstring stretch and hold 45–60 seconds per side.",
+        "Add a figure-4 or hip opener on each side.",
+        "Finish with a gentle child's pose or kneeling hip flexor stretch.",
+        "Breathe slowly and avoid bouncing."
+      ],
+      "tips": [
+        "Mild tension only — never force into pain.",
+        "Keep the stretched leg mostly soft, not locked hard."
+      ]
+    },
+    {
+      "name": "Full-Body Cool-down Stretches",
+      "slug": "full-body-cool-down-stretches",
+      "imageId": "Worlds_Greatest_Stretch",
+      "imageFile": "full-body-cool-down-stretches.jpg",
+      "equipment": "body only",
+      "level": "intermediate",
+      "category": "stretching",
+      "primaryMuscles": [
+        "hamstrings"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "quadriceps"
+      ],
+      "summary": "A full-body stretch sequence to restore range after training.",
+      "steps": [
+        "Flow through world's greatest stretch or a similar hip opener.",
+        "Stretch chest, quads, and hamstrings for 45–60 seconds each.",
+        "Finish in child's pose or a relaxed forward fold.",
+        "Stand up slowly when done."
+      ],
+      "tips": [
+        "Exhale into each stretch.",
+        "Skip positions that aggravate an injury."
+      ]
+    },
+    {
+      "name": "World's greatest stretch",
+      "slug": "worlds-greatest-stretch",
+      "imageId": "Worlds_Greatest_Stretch",
+      "imageFile": "worlds-greatest-stretch.jpg",
+      "equipment": "body only",
+      "level": "intermediate",
+      "category": "stretching",
+      "primaryMuscles": [
+        "hamstrings"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "quadriceps"
+      ],
+      "summary": "World's greatest stretch is a stretching movement that primarily targets the hamstrings.",
+      "steps": [
+        "This is a three-part stretch. Begin by lunging forward, with your front foot flat on the ground and on the toes of your back foot. With your knees bent, squat down until your knee is almost touching the ground. Keep your torso erect, and hold this position for 10-20 seconds.",
+        "Now, place the arm on the same side as your front leg on the ground, with the elbow next to the foot. Your other hand should be placed on the ground, parallel to your lead leg, to help support you during this portion of the stretch.",
+        "After 10-20 seconds, place your hands on either side of your front foot. Raise the toes of the front foot off of the ground, and straighten your leg. You may need to reposition your rear leg to do so. Hold for 10-20 seconds, and then repeat the entire sequence for the other side."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Figure-4 stretch",
+      "slug": "figure-4-stretch",
+      "imageId": "Lying_Glute",
+      "imageFile": "figure-4-stretch.jpg",
+      "equipment": "body only",
+      "level": "expert",
+      "category": "stretching",
+      "primaryMuscles": [
+        "glutes"
+      ],
+      "secondaryMuscles": [
+        "abductors"
+      ],
+      "summary": "Figure-4 stretch is a stretching movement that primarily targets the glutes.",
+      "steps": [
+        "Lie on your back with your partner kneeling beside you.",
+        "Flex the hip of one leg, raising it off of the floor. Rotate the leg so the foot is over the opposite hip, the lower leg perpendicular to your body. Your partner should hold the knee and ankle in place. This will be your starting position.",
+        "Attempt to push your leg towards your partner, who should be preventing any actual movement of the leg.",
+        "After 10-20 seconds, completely relax as your partner gently pushes the ankle and knee towards your chest. Be sure to inform your helper when the stretch is adequate to prevent injury or overstretching."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Couch stretch",
+      "slug": "couch-stretch",
+      "imageId": "All_Fours_Quad_Stretch",
+      "imageFile": "couch-stretch.jpg",
+      "equipment": "body only",
+      "level": "intermediate",
+      "category": "stretching",
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "quadriceps"
+      ],
+      "summary": "Couch stretch is a stretching movement that primarily targets the quadriceps.",
+      "steps": [
+        "Start off on your hands and knees, then lift your leg off the floor and hold the foot with your hand.",
+        "Use your hand to hold the foot or ankle, keeping the knee fully flexed, stretching the quadriceps and hip flexors.",
+        "Focus on extending your hips, thrusting them towards the floor. Hold for 10-20 seconds and then switch sides."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Child's pose",
+      "slug": "childs-pose",
+      "imageId": "Childs_Pose",
+      "imageFile": "childs-pose.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "stretching",
+      "primaryMuscles": [
+        "lower back"
+      ],
+      "secondaryMuscles": [
+        "glutes",
+        "middle back"
+      ],
+      "summary": "Child's pose is a stretching movement that primarily targets the lower back.",
+      "steps": [
+        "Get on your hands and knees, walk your hands in front of you.",
+        "Lower your buttocks down to sit on your heels. Let your arms drag along the floor as you sit back to stretch your entire spine.",
+        "Once you settle onto your heels, bring your hands next to your feet and relax. \"breathe\" into your back. Rest your forehead on the floor. Avoid this position if you have knee problems."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Breathing Reset",
+      "slug": "breathing-reset",
+      "imageId": "Childs_Pose",
+      "imageFile": "breathing-reset.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "stretching",
+      "primaryMuscles": [
+        "lower back"
+      ],
+      "secondaryMuscles": [
+        "glutes",
+        "middle back"
+      ],
+      "summary": "A short breathing practice to downshift after training and support recovery.",
+      "steps": [
+        "Lie on your back or sit tall with one hand on your belly.",
+        "Inhale through the nose for about 4 seconds, feeling the belly rise.",
+        "Exhale slowly through the mouth for 4–6 seconds.",
+        "Continue for 2–3 minutes until your heart rate settles."
+      ],
+      "tips": [
+        "Keep shoulders relaxed.",
+        "If dizzy, return to normal breathing."
+      ]
+    },
+    {
+      "name": "Box breathing 4-4-4-4",
+      "slug": "box-breathing-4-4-4-4",
+      "imageId": "Childs_Pose",
+      "imageFile": "box-breathing-4-4-4-4.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "stretching",
+      "primaryMuscles": [
+        "lower back"
+      ],
+      "secondaryMuscles": [
+        "glutes",
+        "middle back"
+      ],
+      "summary": "Box breathing 4-4-4-4 is a stretching movement that primarily targets the lower back.",
+      "steps": [
+        "Get on your hands and knees, walk your hands in front of you.",
+        "Lower your buttocks down to sit on your heels. Let your arms drag along the floor as you sit back to stretch your entire spine.",
+        "Once you settle onto your heels, bring your hands next to your feet and relax. \"breathe\" into your back. Rest your forehead on the floor. Avoid this position if you have knee problems."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Diaphragmatic breathing",
+      "slug": "diaphragmatic-breathing",
+      "imageId": "Childs_Pose",
+      "imageFile": "diaphragmatic-breathing.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "stretching",
+      "primaryMuscles": [
+        "lower back"
+      ],
+      "secondaryMuscles": [
+        "glutes",
+        "middle back"
+      ],
+      "summary": "Diaphragmatic breathing is a stretching movement that primarily targets the lower back.",
+      "steps": [
+        "Get on your hands and knees, walk your hands in front of you.",
+        "Lower your buttocks down to sit on your heels. Let your arms drag along the floor as you sit back to stretch your entire spine.",
+        "Once you settle onto your heels, bring your hands next to your feet and relax. \"breathe\" into your back. Rest your forehead on the floor. Avoid this position if you have knee problems."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    },
+    {
+      "name": "Lying knees-to-chest",
+      "slug": "lying-knees-to-chest",
+      "imageId": "Hug_Knees_To_Chest",
+      "imageFile": "lying-knees-to-chest.jpg",
+      "equipment": "body only",
+      "level": "beginner",
+      "category": "stretching",
+      "primaryMuscles": [
+        "lower back"
+      ],
+      "secondaryMuscles": [
+        "glutes"
+      ],
+      "summary": "Lying knees-to-chest is a stretching movement that primarily targets the lower back.",
+      "steps": [
+        "Lie down on your back and pull both knees up to your chest.",
+        "Hold your arms under the knees, not over (that would put to much pressure on your knee joints).",
+        "Slowly pull the knees toward your shoulders. This also stretches your buttocks muscles."
+      ],
+      "tips": [
+        "Use a full pain-free range of motion.",
+        "Stop if you feel sharp joint pain.",
+        "Prioritise form over adding load."
+      ]
+    }
+  ]
+}
