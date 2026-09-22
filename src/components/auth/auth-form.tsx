@@ -9,6 +9,7 @@ import { z } from "zod";
 import { Loader2 } from "lucide-react";
 import { useAuthStore } from "@/lib/store/auth-store";
 import { useAssessmentStore } from "@/lib/store/assessment-store";
+import { useAppHydrated } from "@/lib/hooks/use-app-hydrated";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { GlassCard } from "@/components/ui/glass-card";
@@ -49,7 +50,7 @@ function useAuthRedirect() {
       saveUserPlan(assessment, generatedPlan);
       router.push("/dashboard");
     } else {
-      router.push("/profile");
+      router.push(fromAssessment ? "/dashboard" : "/profile");
     }
   };
 }
@@ -57,6 +58,7 @@ function useAuthRedirect() {
 function LoginForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const hydrated = useAppHydrated();
   const { login } = useAuthStore();
   const redirect = useAuthRedirect();
 
@@ -71,13 +73,18 @@ function LoginForm() {
   const onSubmit = async (data: LoginData) => {
     setError("");
     setLoading(true);
-    const result = login(data.email, data.password);
-    if (!result.success) {
-      setError(result.error ?? "Login failed");
+    try {
+      const result = await login(data.email, data.password);
+      if (!result.success) {
+        setError(result.error ?? "Login failed");
+        return;
+      }
+      redirect();
+    } catch {
+      setError("Could not log in. Please try again.");
+    } finally {
       setLoading(false);
-      return;
     }
-    redirect();
   };
 
   return (
@@ -85,6 +92,7 @@ function LoginForm() {
       <Input
         label="Email"
         type="email"
+        autoComplete="email"
         placeholder="you@example.com"
         error={errors.email?.message}
         {...register("email")}
@@ -92,6 +100,7 @@ function LoginForm() {
       <Input
         label="Password"
         type="password"
+        autoComplete="current-password"
         placeholder="••••••••"
         error={errors.password?.message}
         {...register("password")}
@@ -99,8 +108,8 @@ function LoginForm() {
       {error && (
         <p className="rounded-lg bg-red-500/10 px-3 py-2 text-sm text-red-400">{error}</p>
       )}
-      <Button type="submit" className="w-full" disabled={loading}>
-        {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Log In"}
+      <Button type="submit" className="w-full min-h-11" disabled={loading || !hydrated}>
+        {loading || !hydrated ? <Loader2 className="h-4 w-4 animate-spin" /> : "Log In"}
       </Button>
     </form>
   );
@@ -109,6 +118,7 @@ function LoginForm() {
 function SignupForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const hydrated = useAppHydrated();
   const { signup } = useAuthStore();
   const { assessment } = useAssessmentStore();
   const redirect = useAuthRedirect();
@@ -125,19 +135,25 @@ function SignupForm() {
   const onSubmit = async (data: SignupData) => {
     setError("");
     setLoading(true);
-    const result = signup(data.email, data.password, data.name);
-    if (!result.success) {
-      setError(result.error ?? "Signup failed");
+    try {
+      const result = await signup(data.email, data.password, data.name);
+      if (!result.success) {
+        setError(result.error ?? "Signup failed");
+        return;
+      }
+      redirect();
+    } catch {
+      setError("Could not create account. Please try again.");
+    } finally {
       setLoading(false);
-      return;
     }
-    redirect();
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <Input
         label="Full Name"
+        autoComplete="name"
         placeholder="Your name"
         error={errors.name?.message}
         {...register("name")}
@@ -145,6 +161,7 @@ function SignupForm() {
       <Input
         label="Email"
         type="email"
+        autoComplete="email"
         placeholder="you@example.com"
         error={errors.email?.message}
         {...register("email")}
@@ -152,6 +169,7 @@ function SignupForm() {
       <Input
         label="Password"
         type="password"
+        autoComplete="new-password"
         placeholder="••••••••"
         error={errors.password?.message}
         {...register("password")}
@@ -159,6 +177,7 @@ function SignupForm() {
       <Input
         label="Confirm Password"
         type="password"
+        autoComplete="new-password"
         placeholder="••••••••"
         error={errors.confirmPassword?.message}
         {...register("confirmPassword")}
@@ -166,8 +185,8 @@ function SignupForm() {
       {error && (
         <p className="rounded-lg bg-red-500/10 px-3 py-2 text-sm text-red-400">{error}</p>
       )}
-      <Button type="submit" className="w-full" disabled={loading}>
-        {loading ? (
+      <Button type="submit" className="w-full min-h-11" disabled={loading || !hydrated}>
+        {loading || !hydrated ? (
           <Loader2 className="h-4 w-4 animate-spin" />
         ) : (
           "Create Account & Save Plan"
@@ -191,8 +210,8 @@ export function AuthForm({ mode }: AuthFormProps) {
           {fromAssessment
             ? "Save your personalised plan and start tracking your progress"
             : mode === "login"
-              ? "Log in to access your plan and track workouts"
-              : "Start for free. No payment required."}
+              ? "Log in from any device to access your plan and track workouts"
+              : "Start for free. Your account works on any phone or computer."}
         </p>
       </div>
 

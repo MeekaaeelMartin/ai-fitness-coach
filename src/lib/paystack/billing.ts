@@ -224,6 +224,8 @@ export function preserveServerBilling(
   const preserved: RegistryUser = {
     ...incoming,
     createdAt,
+    // Credentials are server-owned — never take a password hash from client sync
+    passwordHash: existing?.passwordHash,
     subscriptionStatus: "trial",
     subscribedAt: undefined,
     currentPeriodEnd: undefined,

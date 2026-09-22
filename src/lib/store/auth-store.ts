@@ -16,30 +16,64 @@ import type { ServerBilling } from "@/lib/paystack/types";
 import { toDateKey } from "@/lib/utils/date";
 import { POINTS } from "@/lib/utils/gamification";
 import { normalizeUser } from "@/lib/utils/normalize-user";
-import { syncUserToRegistry } from "@/lib/registry/sync-client";
+import {
+  loginOnServer,
+  signupOnServer,
+  syncUserToRegistry,
+} from "@/lib/registry/sync-client";
+import type { AccountSnapshot } from "@/lib/auth/types";
 
 function syncUser(get: () => { getCurrentUser: () => UserAccount | null }) {
   const user = get().getCurrentUser();
   if (user) syncUserToRegistry(user);
 }
 
-function hashPassword(password: string): string {
-  return btoa(password);
-}
-
-function verifyPassword(password: string, hash: string): boolean {
-  return hashPassword(password) === hash;
-}
-
 function awardPoints(user: UserAccount, amount: number): number {
   return user.points + amount;
+}
+
+function accountFromSnapshot(
+  snapshot: AccountSnapshot,
+  billing?: ServerBilling | null
+): UserAccount {
+  const base: UserAccount = {
+    id: snapshot.id,
+    email: snapshot.email,
+    passwordHash: "",
+    name: snapshot.name,
+    createdAt: snapshot.createdAt,
+    assessment: snapshot.assessment ?? null,
+    generatedPlan: snapshot.generatedPlan ?? null,
+    progress: snapshot.progress ?? createDefaultProgress(),
+    subscription: snapshot.subscription ?? createTrialSubscription(),
+    points: snapshot.points ?? 0,
+    exerciseSelections: snapshot.exerciseSelections ?? {},
+  };
+  const normalized = normalizeUser(base);
+  if (billing) {
+    return {
+      ...normalized,
+      subscription: applyBillingToSubscription(normalized.subscription, billing),
+    };
+  }
+  return {
+    ...normalized,
+    subscription: demoteUnverifiedSubscription(normalized.subscription),
+  };
 }
 
 interface AuthStore {
   users: Record<string, UserAccount>;
   currentUserId: string | null;
-  signup: (email: string, password: string, name: string) => { success: boolean; error?: string };
-  login: (email: string, password: string) => { success: boolean; error?: string };
+  signup: (
+    email: string,
+    password: string,
+    name: string
+  ) => Promise<{ success: boolean; error?: string }>;
+  login: (
+    email: string,
+    password: string
+  ) => Promise<{ success: boolean; error?: string }>;
   logout: () => void;
   getCurrentUser: () => UserAccount | null;
   saveUserPlan: (assessment: AssessmentData, plan: GeneratedPlan) => void;
@@ -80,42 +114,112 @@ export const useAuthStore = create<AuthStore>()(
       users: {},
       currentUserId: null,
 
-      signup: (email, password, name) => {
+      signup: async (email, password, name) => {
         const normalizedEmail = email.trim().toLowerCase();
-        const existing = Object.values(get().users).find((u) => u.email === normalizedEmail);
-        if (existing) return { success: false, error: "An account with this email already exists" };
-        if (password.length < 6) return { success: false, error: "Password must be at least 6 characters" };
+        if (password.length < 6) {
+          return { success: false, error: "Password must be at least 6 characters" };
+        }
 
-        const id = crypto.randomUUID();
-        const user: UserAccount = {
-          id,
-          email: normalizedEmail,
-          passwordHash: hashPassword(password),
-          name: name.trim(),
-          createdAt: new Date().toISOString(),
-          assessment: null,
-          generatedPlan: null,
-          progress: createDefaultProgress(),
-          subscription: createTrialSubscription(),
-          points: 0,
-          exerciseSelections: {},
-        };
+        const localExisting = Object.values(get().users).find(
+          (u) => u.email === normalizedEmail
+        );
 
+        const result = await signupOnServer(
+          normalizedEmail,
+          password,
+          name.trim(),
+          localExisting
+            ? {
+                id: localExisting.id,
+                assessment: localExisting.assessment,
+                generatedPlan: localExisting.generatedPlan,
+                progress: localExisting.progress,
+                subscription: localExisting.subscription,
+                points: localExisting.points,
+                exerciseSelections: localExisting.exerciseSelections,
+              }
+            : undefined
+        );
+
+        if (!result.ok || !result.user) {
+          return { success: false, error: result.error ?? "Could not create account" };
+        }
+
+        const user = accountFromSnapshot(result.user, result.billing);
         set((state) => ({
-          users: { ...state.users, [id]: user },
-          currentUserId: id,
+          users: { ...state.users, [user.id]: user },
+          currentUserId: user.id,
         }));
         syncUser(get);
         return { success: true };
       },
 
-      login: (email, password) => {
+      login: async (email, password) => {
         const normalizedEmail = email.trim().toLowerCase();
-        const user = Object.values(get().users).find((u) => u.email === normalizedEmail);
-        if (!user || !verifyPassword(password, user.passwordHash)) {
-          return { success: false, error: "Invalid email or password" };
+        let result = await loginOnServer(normalizedEmail, password);
+
+        // Migrate legacy browser-only accounts onto the server so login works everywhere
+        if (!result.ok) {
+          const localUser = Object.values(get().users).find((u) => u.email === normalizedEmail);
+          const legacyHash =
+            typeof window !== "undefined" && localUser?.passwordHash
+              ? (() => {
+                  try {
+                    return btoa(password) === localUser.passwordHash;
+                  } catch {
+                    return false;
+                  }
+                })()
+              : false;
+
+          if (localUser && legacyHash) {
+            const migrated = await signupOnServer(
+              normalizedEmail,
+              password,
+              localUser.name,
+              {
+                id: localUser.id,
+                assessment: localUser.assessment,
+                generatedPlan: localUser.generatedPlan,
+                progress: localUser.progress,
+                subscription: localUser.subscription,
+                points: localUser.points,
+                exerciseSelections: localUser.exerciseSelections,
+              }
+            );
+            if (migrated.ok && migrated.user) {
+              result = migrated;
+            }
+          }
         }
-        set({ currentUserId: user.id });
+
+        if (!result.ok || !result.user) {
+          return { success: false, error: result.error ?? "Invalid email or password" };
+        }
+
+        const remote = accountFromSnapshot(result.user, result.billing);
+        const existingLocal = get().users[remote.id];
+        const merged: UserAccount = existingLocal
+          ? normalizeUser({
+              ...remote,
+              assessment: remote.assessment ?? existingLocal.assessment,
+              generatedPlan: remote.generatedPlan ?? existingLocal.generatedPlan,
+              progress:
+                Object.keys(remote.progress?.byDate ?? {}).length > 0
+                  ? remote.progress
+                  : existingLocal.progress,
+              exerciseSelections: {
+                ...existingLocal.exerciseSelections,
+                ...remote.exerciseSelections,
+              },
+              points: Math.max(remote.points ?? 0, existingLocal.points ?? 0),
+            })
+          : remote;
+
+        set((state) => ({
+          users: { ...state.users, [merged.id]: merged },
+          currentUserId: merged.id,
+        }));
         syncUser(get);
         return { success: true };
       },

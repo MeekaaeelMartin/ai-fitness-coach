@@ -23,8 +23,15 @@ export async function GET(request: Request) {
 
   try {
     const registry = await loadRegistry();
-    const stats = computeStats(registry);
-    return NextResponse.json({ registry, stats });
+    const users = Object.fromEntries(
+      Object.entries(registry.users).map(([id, user]) => {
+        const { passwordHash: _secret, ...safe } = user;
+        return [id, safe];
+      })
+    );
+    const safeRegistry = { ...registry, users };
+    const stats = computeStats(safeRegistry);
+    return NextResponse.json({ registry: safeRegistry, stats });
   } catch {
     return NextResponse.json({ error: "Failed to load registry" }, { status: 500 });
   }

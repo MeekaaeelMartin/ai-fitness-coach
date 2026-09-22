@@ -5,6 +5,8 @@ export interface RegistryUser {
   email: string;
   name: string;
   createdAt: string;
+  /** Server-only scrypt hash. Never accept from client sync; never return to browsers. */
+  passwordHash?: string;
   subscriptionStatus: "trial" | "active" | "expired";
   subscribedAt?: string;
   trialEndsAt?: string;
