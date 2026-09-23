@@ -1,9 +1,12 @@
 import { NextResponse } from "next/server";
-import { initializeSubscriptionCheckout } from "@/lib/paystack/api";
-import { isPaystackConfigured } from "@/lib/paystack/config";
+import { buildPaymentPageCheckoutUrl, isPaystackConfigured } from "@/lib/paystack/config";
 
 export const runtime = "nodejs";
 
+/**
+ * Starts checkout by sending the member to the hosted Paystack payment page.
+ * Pro access is unlocked via webhook (and optional verify) matched to account email.
+ */
 export async function POST(request: Request) {
   if (!isPaystackConfigured()) {
     return NextResponse.json(
@@ -26,22 +29,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "userId and email are required" }, { status: 400 });
     }
 
-    const result = await initializeSubscriptionCheckout({
-      userId,
-      email,
-      name: body.name?.trim(),
-    });
-
-    if (!result.status || !result.data?.authorization_url) {
-      return NextResponse.json(
-        { error: result.message ?? "Could not start checkout" },
-        { status: 502 }
-      );
-    }
-
     return NextResponse.json({
-      authorizationUrl: result.data.authorization_url,
-      reference: result.data.reference,
+      authorizationUrl: buildPaymentPageCheckoutUrl(email),
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Checkout failed";

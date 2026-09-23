@@ -146,16 +146,22 @@ export async function handlePaystackWebhookEvent(
 }
 
 async function handleChargeSuccess(data: Record<string, unknown>): Promise<void> {
-  const userId = userIdFromPaystackPayload(data);
   const email = emailFromPaystackPayload(data);
-  if (!userId || !email) return;
+  if (!email) return;
+
+  const metadataUserId = userIdFromPaystackPayload(data);
+  const registryUser = await findRegistryUser(metadataUserId, email);
+  if (!registryUser) return;
 
   try {
-    const payment = assertSuccessfulPayment(data, { userId, email });
+    const payment = assertSuccessfulPayment(data, {
+      userId: registryUser.id,
+      email: registryUser.email,
+    });
 
     await activateUserBilling({
       userId: payment.userId,
-      email,
+      email: registryUser.email,
       paystackCustomerCode: payment.customerCode,
       subscribedAt: payment.paidAt,
       currentPeriodEnd: addOneMonth(payment.paidAt),

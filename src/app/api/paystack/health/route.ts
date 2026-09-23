@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
-import { getPaystackSecretKey, isPaystackConfigured } from "@/lib/paystack/config";
+import {
+  getPaystackPaymentPageUrl,
+  getPaystackSecretKey,
+  isPaystackConfigured,
+} from "@/lib/paystack/config";
 
 export const runtime = "nodejs";
 
@@ -16,5 +20,7 @@ export async function GET() {
     ok: true,
     paystackConfigured: isPaystackConfigured(),
     mode,
+    checkout: "payment_page",
+    paymentPageConfigured: Boolean(getPaystackPaymentPageUrl()),
   });
 }

@@ -69,10 +69,12 @@ export function assertSuccessfulPayment(
 
   const metadata = asRecord(data.metadata) ?? {};
   const metadataUserId = readString(metadata.userId);
-  if (!metadataUserId) {
+  // Payment-page checkouts often have no custom metadata — bind by logged-in account + email.
+  const userId = metadataUserId ?? expected.userId;
+  if (!userId) {
     throw new PaymentValidationError("Payment is missing account metadata");
   }
-  if (metadataUserId !== expected.userId) {
+  if (metadataUserId && metadataUserId !== expected.userId) {
     throw new PaymentValidationError("Payment does not match this account");
   }
 
@@ -100,7 +102,9 @@ export function assertSuccessfulPayment(
   const paidPlan =
     readString(plan?.plan_code) ??
     (typeof data.plan === "string" ? data.plan : undefined);
-  if (expectedPlan && paidPlan && paidPlan !== expectedPlan) {
+  // Only enforce plan match when both sides have a plan code (API checkout).
+  // Hosted payment pages may use a different product slug.
+  if (expectedPlan && paidPlan && metadataUserId && paidPlan !== expectedPlan) {
     throw new PaymentValidationError("Payment plan does not match this product");
   }
 
@@ -111,7 +115,7 @@ export function assertSuccessfulPayment(
     currency,
     customerCode,
     customerEmail,
-    userId: metadataUserId,
+    userId,
     planCode: paidPlan,
   };
 }

@@ -21,6 +21,15 @@ export function getPaystackPlanCode(): string | undefined {
   return cleanEnv(process.env.PAYSTACK_PLAN_CODE);
 }
 
+/** Hosted Paystack payment page (shop link). Preferred over API plan checkout. */
+export function getPaystackPaymentPageUrl(): string {
+  return (
+    cleanEnv(process.env.NEXT_PUBLIC_PAYSTACK_PAYMENT_PAGE_URL) ??
+    cleanEnv(process.env.PAYSTACK_PAYMENT_PAGE_URL) ??
+    "https://paystack.shop/pay/znz8s4i5yd"
+  );
+}
+
 /** Paystack signs webhooks with the secret key (not a separate whsec). */
 export function getPaystackWebhookSecret(): string | undefined {
   return cleanEnv(process.env.PAYSTACK_WEBHOOK_SECRET) ?? getPaystackSecretKey();
@@ -32,14 +41,15 @@ export function getSiteUrl(): string {
 }
 
 export function isPaystackConfigured(): boolean {
-  return Boolean(getPaystackSecretKey() && getPaystackPlanCode());
+  // Payment-page checkout works with the shop URL alone; webhooks still need the secret key.
+  return Boolean(getPaystackPaymentPageUrl());
 }
 
 export function getPaystackDiagnostics() {
   const key = getPaystackSecretKey();
   const plan = getPaystackPlanCode();
   return {
-    configured: Boolean(key && plan),
+    configured: isPaystackConfigured(),
     keyMode: key?.startsWith("sk_live_")
       ? "live"
       : key?.startsWith("sk_test_")
@@ -49,6 +59,7 @@ export function getPaystackDiagnostics() {
           : "missing",
     keyPrefix: key ? `${key.slice(0, 8)}…` : null,
     planCode: plan ?? null,
+    paymentPage: getPaystackPaymentPageUrl(),
     siteUrl: getSiteUrl(),
   };
 }
@@ -56,4 +67,17 @@ export function getPaystackDiagnostics() {
 /** Paystack amounts for ZAR are in cents (e.g. R100 → 10000). */
 export function monthlyAmountInCents(): number {
   return MONTHLY_PRICE * 100;
+}
+
+/** Build checkout URL with the member email prefilled when possible. */
+export function buildPaymentPageCheckoutUrl(email?: string): string {
+  const base = getPaystackPaymentPageUrl();
+  if (!email?.trim()) return base;
+  try {
+    const url = new URL(base);
+    url.searchParams.set("email", email.trim().toLowerCase());
+    return url.toString();
+  } catch {
+    return base;
+  }
 }
