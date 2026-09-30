@@ -19,7 +19,7 @@ function getRegistryPath(): string {
 
 async function readLocalRegistry(): Promise<UserRegistry> {
   try {
-    const raw = await fs.readFile(getRegistryPath(), "utf-8");
+    const raw = await fs.readFile(/*turbopackIgnore: true*/ getRegistryPath(), "utf-8");
     return JSON.parse(raw) as UserRegistry;
   } catch {
     return emptyRegistry();
@@ -28,8 +28,8 @@ async function readLocalRegistry(): Promise<UserRegistry> {
 
 async function writeLocalRegistry(registry: UserRegistry): Promise<void> {
   const filePath = getRegistryPath();
-  await fs.mkdir(path.dirname(filePath), { recursive: true });
-  await fs.writeFile(filePath, JSON.stringify(registry, null, 2), "utf-8");
+  await fs.mkdir(/*turbopackIgnore: true*/ path.dirname(filePath), { recursive: true });
+  await fs.writeFile(/*turbopackIgnore: true*/ filePath, JSON.stringify(registry, null, 2), "utf-8");
 }
 
 export async function loadRegistry(): Promise<UserRegistry> {

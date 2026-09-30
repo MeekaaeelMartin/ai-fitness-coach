@@ -34,7 +34,8 @@ function awardPoints(user: UserAccount, amount: number): number {
 
 function accountFromSnapshot(
   snapshot: AccountSnapshot,
-  billing?: ServerBilling | null
+  billing?: ServerBilling | null,
+  accountToken?: string | null
 ): UserAccount {
   const base: UserAccount = {
     id: snapshot.id,
@@ -48,17 +49,20 @@ function accountFromSnapshot(
     subscription: snapshot.subscription ?? createTrialSubscription(),
     points: snapshot.points ?? 0,
     exerciseSelections: snapshot.exerciseSelections ?? {},
+    accountToken: accountToken ?? snapshot.accountToken,
   };
   const normalized = normalizeUser(base);
   if (billing) {
     return {
       ...normalized,
       subscription: applyBillingToSubscription(normalized.subscription, billing),
+      accountToken: base.accountToken,
     };
   }
   return {
     ...normalized,
     subscription: demoteUnverifiedSubscription(normalized.subscription),
+    accountToken: base.accountToken,
   };
 }
 
@@ -68,7 +72,8 @@ interface AuthStore {
   signup: (
     email: string,
     password: string,
-    name: string
+    name: string,
+    seedAccount?: Partial<UserAccount>
   ) => Promise<{ success: boolean; error?: string }>;
   login: (
     email: string,
@@ -114,7 +119,7 @@ export const useAuthStore = create<AuthStore>()(
       users: {},
       currentUserId: null,
 
-      signup: async (email, password, name) => {
+      signup: async (email, password, name, seedAccount) => {
         const normalizedEmail = email.trim().toLowerCase();
         if (password.length < 6) {
           return { success: false, error: "Password must be at least 6 characters" };
@@ -128,24 +133,23 @@ export const useAuthStore = create<AuthStore>()(
           normalizedEmail,
           password,
           name.trim(),
-          localExisting
-            ? {
-                id: localExisting.id,
-                assessment: localExisting.assessment,
-                generatedPlan: localExisting.generatedPlan,
-                progress: localExisting.progress,
-                subscription: localExisting.subscription,
-                points: localExisting.points,
-                exerciseSelections: localExisting.exerciseSelections,
-              }
-            : undefined
+          {
+            id: seedAccount?.id ?? localExisting?.id,
+            assessment: seedAccount?.assessment ?? localExisting?.assessment,
+            generatedPlan: seedAccount?.generatedPlan ?? localExisting?.generatedPlan,
+            progress: seedAccount?.progress ?? localExisting?.progress,
+            subscription: seedAccount?.subscription ?? localExisting?.subscription,
+            points: seedAccount?.points ?? localExisting?.points,
+            exerciseSelections:
+              seedAccount?.exerciseSelections ?? localExisting?.exerciseSelections,
+          }
         );
 
         if (!result.ok || !result.user) {
           return { success: false, error: result.error ?? "Could not create account" };
         }
 
-        const user = accountFromSnapshot(result.user, result.billing);
+        const user = accountFromSnapshot(result.user, result.billing, result.accountToken);
         set((state) => ({
           users: { ...state.users, [user.id]: user },
           currentUserId: user.id,
@@ -197,7 +201,7 @@ export const useAuthStore = create<AuthStore>()(
           return { success: false, error: result.error ?? "Invalid email or password" };
         }
 
-        const remote = accountFromSnapshot(result.user, result.billing);
+        const remote = accountFromSnapshot(result.user, result.billing, result.accountToken);
         const existingLocal = get().users[remote.id];
         const merged: UserAccount = existingLocal
           ? normalizeUser({

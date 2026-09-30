@@ -41,13 +41,13 @@ export function toAccountSnapshot(user: UserAccount): AccountSnapshot {
 export async function saveAccountSnapshot(user: UserAccount): Promise<void> {
   const snapshot = toAccountSnapshot(user);
   const filePath = accountPath(user.id);
-  await fs.mkdir(path.dirname(filePath), { recursive: true });
-  await fs.writeFile(filePath, JSON.stringify(snapshot), "utf-8");
+  await fs.mkdir(/*turbopackIgnore: true*/ path.dirname(filePath), { recursive: true });
+  await fs.writeFile(/*turbopackIgnore: true*/ filePath, JSON.stringify(snapshot), "utf-8");
 }
 
 export async function loadAccountSnapshot(userId: string): Promise<AccountSnapshot | null> {
   try {
-    const raw = await fs.readFile(accountPath(userId), "utf-8");
+    const raw = await fs.readFile(/*turbopackIgnore: true*/ accountPath(userId), "utf-8");
     const data = JSON.parse(raw) as AccountSnapshot;
     if (!data?.id || !data?.email) return null;
     return data;

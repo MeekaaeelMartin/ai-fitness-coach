@@ -10,7 +10,6 @@ import {
   assertSuccessfulPayment,
   emailFromPaystackPayload,
   PaymentValidationError,
-  userIdFromPaystackPayload,
 } from "./validate-payment";
 
 function addOneMonth(isoDate?: string): string {
@@ -80,7 +79,8 @@ export async function activateUserBilling(params: {
     return null;
   }
 
-  const existing = await findRegistryUser(params.userId, params.email);
+  const existing = await findRegistryUser(undefined, params.email) ??
+    (params.userId ? await findRegistryUser(params.userId) : null);
   const createdAt = existing?.createdAt ?? new Date().toISOString();
   const base: RegistryUser =
     existing ??
@@ -149,8 +149,8 @@ async function handleChargeSuccess(data: Record<string, unknown>): Promise<void>
   const email = emailFromPaystackPayload(data);
   if (!email) return;
 
-  const metadataUserId = userIdFromPaystackPayload(data);
-  const registryUser = await findRegistryUser(metadataUserId, email);
+  // Always bind by paid email so a payment page checkout unlocks the right account.
+  const registryUser = await findRegistryUser(undefined, email);
   if (!registryUser) return;
 
   try {
@@ -160,7 +160,7 @@ async function handleChargeSuccess(data: Record<string, unknown>): Promise<void>
     });
 
     await activateUserBilling({
-      userId: payment.userId,
+      userId: registryUser.id,
       email: registryUser.email,
       paystackCustomerCode: payment.customerCode,
       subscribedAt: payment.paidAt,

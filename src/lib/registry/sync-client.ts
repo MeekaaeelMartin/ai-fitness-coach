@@ -6,6 +6,7 @@ import type { AccountSnapshot } from "@/lib/auth/types";
 export interface AuthApiResult {
   ok: boolean;
   user?: AccountSnapshot;
+  accountToken?: string | null;
   billing?: ServerBilling | null;
   error?: string;
 }
@@ -18,7 +19,10 @@ export async function syncUserToRegistry(
     const response = await fetch("/api/registry/sync", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(entry),
+      body: JSON.stringify({
+        ...entry,
+        accountToken: user.accountToken,
+      }),
     });
     if (!response.ok) return null;
     const data = (await response.json()) as { billing?: ServerBilling };
@@ -26,7 +30,10 @@ export async function syncUserToRegistry(
     void fetch("/api/auth/snapshot", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ user }),
+      body: JSON.stringify({
+        user: { ...user, accountToken: undefined },
+        accountToken: user.accountToken,
+      }),
     }).catch(() => null);
     return data.billing ?? null;
   } catch {
@@ -50,7 +57,12 @@ export async function signupOnServer(
     if (!response.ok) {
       return { ok: false, error: data.error ?? "Could not create account" };
     }
-    return { ok: true, user: data.user, billing: data.billing };
+    return {
+      ok: true,
+      user: data.user,
+      accountToken: data.accountToken,
+      billing: data.billing,
+    };
   } catch {
     return { ok: false, error: "Could not reach the server. Check your connection." };
   }
@@ -70,7 +82,12 @@ export async function loginOnServer(
     if (!response.ok) {
       return { ok: false, error: data.error ?? "Invalid email or password" };
     }
-    return { ok: true, user: data.user, billing: data.billing };
+    return {
+      ok: true,
+      user: data.user,
+      accountToken: data.accountToken,
+      billing: data.billing,
+    };
   } catch {
     return { ok: false, error: "Could not reach the server. Check your connection." };
   }

@@ -59,6 +59,7 @@ export function AssessmentForm() {
   const saveUserPlan = useAuthStore((state) => state.saveUserPlan);
 
   const [direction, setDirection] = useState(1);
+  const [generateError, setGenerateError] = useState("");
 
   useEffect(() => {
     setIsGenerating(false);
@@ -158,6 +159,7 @@ export function AssessmentForm() {
   const onSubmit = async (data: AssessmentFormData) => {
     setAssessment(data);
     setIsGenerating(true);
+    setGenerateError("");
 
     try {
       const plan = await generatePlan(data);
@@ -172,6 +174,7 @@ export function AssessmentForm() {
       }
     } catch {
       setIsGenerating(false);
+      setGenerateError("Could not build your plan. Please try again.");
     }
   };
 
@@ -536,6 +539,12 @@ export function AssessmentForm() {
             )}
           </motion.div>
         </AnimatePresence>
+
+        {generateError && (
+          <p className="mt-6 rounded-lg bg-red-500/10 px-3 py-2 text-sm text-red-400">
+            {generateError}
+          </p>
+        )}
 
         <div className="sticky bottom-0 z-30 -mx-6 mt-8 flex items-center justify-between gap-3 border-t border-white/10 bg-background/95 px-6 py-4 backdrop-blur-xl sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:pt-6 sm:backdrop-blur-none">
           <Button

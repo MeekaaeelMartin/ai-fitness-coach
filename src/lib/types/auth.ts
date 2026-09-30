@@ -43,6 +43,8 @@ export interface UserAccount {
   subscription: Subscription;
   points: number;
   exerciseSelections: Record<string, string>;
+  /** Client-held proof from server login/signup — required for cloud snapshot sync. */
+  accountToken?: string;
 }
 
 export function createDefaultProgress(): UserProgress {

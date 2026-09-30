@@ -45,6 +45,7 @@ export default function SubscribeCallbackPage() {
             userId: user!.id,
             email: user!.email,
             name: user!.name,
+            accountToken: user!.accountToken,
           }),
         });
 

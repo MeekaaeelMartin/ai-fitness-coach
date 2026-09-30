@@ -5,6 +5,7 @@ import {
   snapshotToUserAccount,
   toAccountSnapshot,
 } from "@/lib/auth/account-store";
+import { issueAccountToken } from "@/lib/auth/account-token";
 import {
   createDefaultProgress,
   createTrialSubscription,
@@ -63,15 +64,16 @@ export async function POST(request: Request) {
           exerciseSelections: {},
         };
 
-    // Keep profile fields fresh from registry
     user.id = registryUser.id;
     user.email = registryUser.email;
     user.name = registryUser.name || user.name;
     user.createdAt = registryUser.createdAt || user.createdAt;
 
+    const accountToken = issueAccountToken(registryUser.id, registryUser.email);
     return NextResponse.json({
       ok: true,
-      user: toAccountSnapshot(user),
+      user: { ...toAccountSnapshot(user), accountToken: accountToken ?? undefined },
+      accountToken,
       billing: registryUserToBilling(registryUser),
     });
   } catch {

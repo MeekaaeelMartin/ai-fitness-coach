@@ -15,4 +15,5 @@ export interface AccountSnapshot {
   subscription: Subscription;
   points: number;
   exerciseSelections: Record<string, string>;
+  accountToken?: string;
 }

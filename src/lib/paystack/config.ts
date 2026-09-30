@@ -41,8 +41,7 @@ export function getSiteUrl(): string {
 }
 
 export function isPaystackConfigured(): boolean {
-  // Payment-page checkout works with the shop URL alone; webhooks still need the secret key.
-  return Boolean(getPaystackPaymentPageUrl());
+  return Boolean(getPaystackSecretKey() && getPaystackPaymentPageUrl());
 }
 
 export function getPaystackDiagnostics() {

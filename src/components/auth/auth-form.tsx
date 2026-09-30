@@ -120,7 +120,7 @@ function SignupForm() {
   const [loading, setLoading] = useState(false);
   const hydrated = useAppHydrated();
   const { signup } = useAuthStore();
-  const { assessment } = useAssessmentStore();
+  const { assessment, generatedPlan } = useAssessmentStore();
   const redirect = useAuthRedirect();
 
   const {
@@ -136,7 +136,10 @@ function SignupForm() {
     setError("");
     setLoading(true);
     try {
-      const result = await signup(data.email, data.password, data.name);
+      const result = await signup(data.email, data.password, data.name, {
+        assessment: assessment?.name ? assessment : undefined,
+        generatedPlan: generatedPlan ?? undefined,
+      });
       if (!result.success) {
         setError(result.error ?? "Signup failed");
         return;

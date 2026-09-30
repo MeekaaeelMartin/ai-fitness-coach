@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import { hashPassword } from "@/lib/auth/password";
 import { saveAccountSnapshot, toAccountSnapshot } from "@/lib/auth/account-store";
+import { issueAccountToken } from "@/lib/auth/account-token";
 import {
   createDefaultProgress,
   createTrialSubscription,
@@ -98,9 +99,11 @@ export async function POST(request: Request) {
     await saveAccountSnapshot(user);
 
     const saved = registry.users[id];
+    const accountToken = issueAccountToken(id, email);
     return NextResponse.json({
       ok: true,
-      user: toAccountSnapshot(user),
+      user: { ...toAccountSnapshot(user), accountToken: accountToken ?? undefined },
+      accountToken,
       billing: {
         subscriptionStatus: saved.subscriptionStatus,
         subscribedAt: saved.subscribedAt,

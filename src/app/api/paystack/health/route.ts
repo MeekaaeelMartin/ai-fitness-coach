@@ -16,11 +16,16 @@ export async function GET() {
       ? "test"
       : "none";
 
+  const registryPersistent = Boolean(process.env.REGISTRY_DATA_PATH?.trim());
+
   return NextResponse.json({
     ok: true,
     paystackConfigured: isPaystackConfigured(),
     mode,
     checkout: "payment_page",
     paymentPageConfigured: Boolean(getPaystackPaymentPageUrl()),
+    secretConfigured: Boolean(key),
+    registryPersistent,
+    launchReady: isPaystackConfigured() && registryPersistent && mode === "live",
   });
 }

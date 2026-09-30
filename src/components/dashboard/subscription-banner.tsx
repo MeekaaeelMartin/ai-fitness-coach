@@ -1,10 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { Crown, Clock, Zap } from "lucide-react";
 import type { Subscription } from "@/lib/types/auth";
 import { getSubscriptionAccess, MONTHLY_PRICE } from "@/lib/utils/subscription";
 import { formatZARPerMonth } from "@/lib/utils/currency";
 import { useSubscribe } from "@/lib/hooks/use-subscribe";
+import { useAuthStore } from "@/lib/store/auth-store";
 import { Button } from "@/components/ui/button";
 import { GlassCard } from "@/components/ui/glass-card";
 
@@ -14,7 +16,15 @@ interface SubscriptionBannerProps {
 
 export function SubscriptionBanner({ subscription }: SubscriptionBannerProps) {
   const { startSubscribe, loading, error } = useSubscribe();
+  const syncBillingFromServer = useAuthStore((state) => state.syncBillingFromServer);
+  const [refreshing, setRefreshing] = useState(false);
   const access = getSubscriptionAccess(subscription);
+
+  const refreshBilling = async () => {
+    setRefreshing(true);
+    await syncBillingFromServer();
+    setRefreshing(false);
+  };
 
   if (access.status === "active") {
     return (
@@ -45,15 +55,25 @@ export function SubscriptionBanner({ subscription }: SubscriptionBannerProps) {
               </p>
             </div>
           </div>
-          <Button
-            size="sm"
-            onClick={() => startSubscribe()}
-            disabled={loading}
-            className="w-full min-h-11 sm:w-auto"
-          >
-            <Zap className="h-3.5 w-3.5" />
-            Subscribe at {formatZARPerMonth(MONTHLY_PRICE)}
-          </Button>
+          <div className="flex w-full flex-col gap-2 sm:w-auto">
+            <Button
+              size="sm"
+              onClick={() => startSubscribe()}
+              disabled={loading}
+              className="w-full min-h-11 sm:w-auto"
+            >
+              <Zap className="h-3.5 w-3.5" />
+              Subscribe at {formatZARPerMonth(MONTHLY_PRICE)}
+            </Button>
+            <button
+              type="button"
+              onClick={refreshBilling}
+              disabled={refreshing}
+              className="text-xs text-foreground/50 underline-offset-2 hover:text-emerald-400 hover:underline"
+            >
+              {refreshing ? "Checking payment…" : "Already paid? Refresh access"}
+            </button>
+          </div>
         </div>
         {error && <p className="mt-2 text-xs text-red-400">{error}</p>}
       </GlassCard>
@@ -70,10 +90,20 @@ export function SubscriptionBanner({ subscription }: SubscriptionBannerProps) {
             your workout and meal plan, plus full tracking and exports.
           </p>
         </div>
-        <Button onClick={() => startSubscribe()} disabled={loading} className="shrink-0">
-          <Crown className="h-4 w-4" />
-          Subscribe at {formatZARPerMonth(MONTHLY_PRICE)}
-        </Button>
+        <div className="flex w-full flex-col gap-2 sm:w-auto">
+          <Button onClick={() => startSubscribe()} disabled={loading} className="w-full shrink-0">
+            <Crown className="h-4 w-4" />
+            Subscribe at {formatZARPerMonth(MONTHLY_PRICE)}
+          </Button>
+          <button
+            type="button"
+            onClick={refreshBilling}
+            disabled={refreshing}
+            className="text-xs text-foreground/50 underline-offset-2 hover:text-amber-300 hover:underline"
+          >
+            {refreshing ? "Checking payment…" : "Already paid? Refresh access"}
+          </button>
+        </div>
       </div>
       {error && (
         <p className="mt-3 text-xs text-red-400">{error}</p>
