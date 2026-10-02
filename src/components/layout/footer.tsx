@@ -75,6 +75,11 @@ export function Footer() {
                   FAQ
                 </a>
               </li>
+              <li>
+                <a href="/#contact" className="hover:text-emerald-400">
+                  Contact
+                </a>
+              </li>
             </ul>
           </div>
         </div>

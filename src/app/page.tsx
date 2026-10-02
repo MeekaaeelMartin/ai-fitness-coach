@@ -8,6 +8,7 @@ import { PricingValue } from "@/components/landing/pricing-value";
 import { Testimonials } from "@/components/landing/testimonials";
 import { FinalCta } from "@/components/landing/final-cta";
 import { FAQ } from "@/components/landing/faq";
+import { ContactFormSection } from "@/components/landing/contact-form";
 import { StickyCta } from "@/components/landing/sticky-cta";
 import { HomeJsonLd } from "@/components/seo/json-ld";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/seo/site";
@@ -38,6 +39,7 @@ export default function HomePage() {
       <Testimonials />
       <FinalCta />
       <FAQ />
+      <ContactFormSection />
       <StickyCta />
     </>
   );
